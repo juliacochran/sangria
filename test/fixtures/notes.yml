@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  board_id: 1
+  title: MyString
+  details: MyText
+  remind_date: 2015-09-08
+
+two:
+  board_id: 1
+  title: MyString
+  details: MyText
+  remind_date: 2015-09-08

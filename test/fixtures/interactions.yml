@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  application_id: 1
+  title: MyString
+  type: 1
+  date: 2015-09-08
+  contact_id: 1
+  details: MyText
+
+two:
+  application_id: 1
+  title: MyString
+  type: 1
+  date: 2015-09-08
+  contact_id: 1
+  details: MyText

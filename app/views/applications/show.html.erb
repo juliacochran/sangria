@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @application.company_id %>
+</p>
+
+<p>
+  <strong>Board:</strong>
+  <%= @application.board_id %>
+</p>
+
+<p>
+  <strong>Job:</strong>
+  <%= @application.job_id %>
+</p>
+
+<p>
+  <strong>Stage:</strong>
+  <%= @application.stage %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @application.type %>
+</p>
+
+<p>
+  <strong>Settings:</strong>
+  <%= @application.settings %>
+</p>
+
+<%= link_to 'Edit', edit_application_path(@application) %> |
+<%= link_to 'Back', applications_path %>

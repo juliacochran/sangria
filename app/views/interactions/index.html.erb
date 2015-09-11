@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Interactions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Application</th>
+      <th>Title</th>
+      <th>Type</th>
+      <th>Date</th>
+      <th>Contact</th>
+      <th>Details</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @interactions.each do |interaction| %>
+      <tr>
+        <td><%= interaction.application_id %></td>
+        <td><%= interaction.title %></td>
+        <td><%= interaction.type %></td>
+        <td><%= interaction.date %></td>
+        <td><%= interaction.contact_id %></td>
+        <td><%= interaction.details %></td>
+        <td><%= link_to 'Show', interaction %></td>
+        <td><%= link_to 'Edit', edit_interaction_path(interaction) %></td>
+        <td><%= link_to 'Destroy', interaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Interaction', new_interaction_path %>

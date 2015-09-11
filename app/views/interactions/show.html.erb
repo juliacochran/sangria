@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Application:</strong>
+  <%= @interaction.application_id %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @interaction.title %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @interaction.type %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @interaction.date %>
+</p>
+
+<p>
+  <strong>Contact:</strong>
+  <%= @interaction.contact_id %>
+</p>
+
+<p>
+  <strong>Details:</strong>
+  <%= @interaction.details %>
+</p>
+
+<%= link_to 'Edit', edit_interaction_path(@interaction) %> |
+<%= link_to 'Back', interactions_path %>
