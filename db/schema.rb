@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150909004213) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "applications", force: :cascade do |t|
     t.integer  "company_id"
     t.integer  "board_id"
