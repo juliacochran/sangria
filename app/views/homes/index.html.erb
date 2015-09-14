@@ -1,2 +1,14 @@
 <h1>Homes#index</h1>
 <p>Find me in app/views/homes/index.html.erb</p>
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id" content="86395741144-kuud9m0qe39cpppfrt0j1e9h947257iq.apps.googleusercontent.com">
+<%= javascript_include_tag('homes.js') %>
+
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+</fb:login-button>
+
+<div id="status">
+</div>
