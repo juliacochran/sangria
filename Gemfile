@@ -30,6 +30,9 @@ gem 'rails_12factor', group: :production
 # LinkedIn wrapper gem. Read more: https://github.com/hexgnu/linkedin
 gem "linkedin-oauth2", "~> 1.0"
 
+#Materialize CSS framework
+gem 'materialize-sass'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
