@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  require 'users_helper'
+
 
   # GET /users
   # GET /users.json
@@ -10,6 +12,10 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    accessToken = params[:accessToken]
+    respond_to do |format|
+      format.json { render json: UsersHelper::getUserId(accessToken) }
+    end
   end
 
   # GET /users/new
