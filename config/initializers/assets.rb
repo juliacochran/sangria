@@ -13,6 +13,6 @@ Rails.application.config.assets.precompile += %w( homes.js )
 
 # Something with Bower to make Materialize and Heroku work
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'bower_components')  
+
+
 Rails.application.config.assets.precompile << /materialize\/font\/.+\.(?:svg|eot|woff|woff2|ttf)\z/  
-Rails.application.config.assets.non_digested_assets ||= []  
-Rails.application.config.assets.non_digested_assets << 'materialize/font/**/*' 
