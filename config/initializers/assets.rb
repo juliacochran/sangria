@@ -15,4 +15,4 @@ Rails.application.config.assets.precompile += %w( homes.js )
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'bower_components')  
 
 
-Rails.application.config.assets.precompile << /materialize\/font\/.+\.(?:svg|eot|woff|woff2|ttf)\z/  
+Rails.application.config.assets.precompile << /materialize/
