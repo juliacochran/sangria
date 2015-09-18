@@ -30,7 +30,6 @@ gem 'rails_12factor', group: :production
 # LinkedIn wrapper gem. Read more: https://github.com/hexgnu/linkedin
 gem "linkedin-oauth2", "~> 1.0"
 
-gem 'sprockets_better_errors'
 #Materialize CSS framework
 gem 'materialize-sass'
 
