@@ -1,28 +1,29 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project is built on ruby version 2.2.2 (check with <tt>ruby -v</tt>) and rails version 4.2.4 (check with <tt>rails -v</tt>). Check out https://coderwall.com/p/4imsra/upgrading-ruby-to-2-1-0-and-above-in-mavericks for help getting ruby, rails, and rvm, just change the versions to the ones listed here.
 
-Things you may want to cover:
+There are two ways of viewing the project, the first is to visit the site at http://sangria.herokuapp.com/ which may be an older version of the code, and the second is to download the latest version and run locally with the instructions below (the instructions were written for Mac, as no one on the team runs Windows or Linux).
 
-* Ruby version
+* Clone the repo with <tt>git clone https://github.gatech.edu/jcochran31/sangria.git</tt>
 
-* System dependencies
+* Open the sangria directory with <tt>cd sangria</tt>
 
-* Configuration
+* Run <tt>ruby -v</tt> and ensure it's 2.2.2
 
-* Database creation
+** If your ruby version is wrong, run <tt>rvm --default use 2.2.2</tt>
 
-* Database initialization
+** If you get <tt>-bash: rvm: command not found</tt>, you may need to source into rvm with <tt>source ~/.rvm/scripts/rvm</tt>
 
-* How to run the test suite
+* Run <tt>rails -v</tt> and ensure it's 4.2.4
 
-* Services (job queues, cache servers, search engines, etc.)
+** If you get something like <tt>Your Ruby version is x.x.x, but your Gemfile specified 2.2.2</tt>, you may need to source into rvm with <tt>source ~/.rvm/scripts/rvm</tt>
 
-* Deployment instructions
+** If your rails version is wrong, run <tt>gem install rails -v 4.2.4</tt>
 
-* ...
+* Run <tt>bundle install</tt> to update any libraries used, if bundle is not found, run <tt>gem install bundle</tt> to get it
 
+* Download Postgres App (http://postgresapp.com/). Move it to <tt>/Applications</tt> and run it. Hit "Open psql".
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* Run <tt>rake db:migrate</tt>
+
+* Run <tt>rails s</tt> to start a local server, then open your browser and go to <tt>localhost:3000</tt>
