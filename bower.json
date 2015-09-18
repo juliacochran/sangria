@@ -1,0 +1,20 @@
+{
+  "name": "sangria",
+  "version": "0.0.0",
+  "authors": [
+    "Julia Cochran <juliacochran7@gmail.com>"
+  ],
+  "description": "Applications made easy",
+  "license": "MIT",
+  "homepage": "sangria.herokuapp.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Materialize": "materialize#~0.97.1"
+  }
+}
