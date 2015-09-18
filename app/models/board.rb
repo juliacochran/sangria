@@ -3,6 +3,4 @@ class Board < ActiveRecord::Base
   has_many :applications
   has_many :notes
   has_many :interactions
-
-  title :string
 end

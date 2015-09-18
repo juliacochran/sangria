@@ -3,9 +3,4 @@ class Interaction < ActiveRecord::Base
   #not sure how to associate contacts to interactions
   #I guess a contact can be separate from interaction but many of them can be tied to one
   has_many :contacts
-
-  title :string
-  type :integer
-  details :text
-  date :datetime
 end
