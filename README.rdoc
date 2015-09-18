@@ -10,15 +10,15 @@ There are two ways of viewing the project, the first is to visit the site at htt
 
 * Run <tt>ruby -v</tt> and ensure it's 2.2.2
 
-** If your ruby version is wrong, run <tt>rvm --default use 2.2.2</tt>
+ * If your ruby version is wrong, run <tt>rvm --default use 2.2.2</tt>
 
-** If you get <tt>-bash: rvm: command not found</tt>, you may need to source into rvm with <tt>source ~/.rvm/scripts/rvm</tt>
+ * If you get <tt>-bash: rvm: command not found</tt>, you may need to source into rvm with <tt>source ~/.rvm/scripts/rvm</tt>
 
 * Run <tt>rails -v</tt> and ensure it's 4.2.4
 
-** If you get something like <tt>Your Ruby version is x.x.x, but your Gemfile specified 2.2.2</tt>, you may need to source into rvm with <tt>source ~/.rvm/scripts/rvm</tt>
+ * If you get something like <tt>Your Ruby version is x.x.x, but your Gemfile specified 2.2.2</tt>, you may need to source into rvm with <tt>source ~/.rvm/scripts/rvm</tt>
 
-** If your rails version is wrong, run <tt>gem install rails -v 4.2.4</tt>
+ * If your rails version is wrong, run <tt>gem install rails -v 4.2.4</tt>
 
 * Run <tt>bundle install</tt> to update any libraries used, if bundle is not found, run <tt>gem install bundle</tt> to get it
 
