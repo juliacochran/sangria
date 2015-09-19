@@ -30,6 +30,11 @@ gem 'rails_12factor', group: :production
 # LinkedIn wrapper gem. Read more: https://github.com/hexgnu/linkedin
 gem "linkedin-oauth2", "~> 1.0"
 
+# Google gem for sign on
+gem "omniauth-google-oauth2"
+gem "omniauth"
+gem "devise"
+
 #Materialize CSS framework
 gem 'materialize-sass'
 
@@ -54,6 +59,7 @@ group :development, :test do
   gem 'rspec-retry'
   gem "netrc"
   gem "git"
+  gem "better_errors"
 end
 
 group :development do

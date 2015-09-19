@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
+  root to: 'homes#index'
+  resources :sessions, only: :index
+  get "/auth/:provider/callback" => 'sessions#create'
   get 'homes/index'
+  delete '/logout' => 'sessions#destroy'
+
 
   resources :contacts
   resources :jobs
@@ -9,11 +14,16 @@ Rails.application.routes.draw do
   resources :applications
   resources :boards
   resources :users
+
+  # resources :sessions, only: :index
+  # get "/auth/:provider/callback" => 'sessions#create'
+
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'homes#index'
+  # root 'homes#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

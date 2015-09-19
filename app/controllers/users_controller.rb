@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   require 'users_helper'
 
-
   # GET /users
   # GET /users.json
   def index
