@@ -50,6 +50,7 @@ GEM
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (6.0.2)
+    certified (1.0.0)
     coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -110,9 +111,9 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    materialize-sass (0.97.0)
+    materialize-sass (0.97.1)
       sass (~> 3.3)
-    mime-types (2.6.1)
+    mime-types (2.6.2)
     mini_portile (0.6.2)
     minitest (5.8.0)
     multi_json (1.11.2)
@@ -138,9 +139,9 @@ GEM
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
     parallel (1.6.1)
-    parallel_tests (1.6.2)
+    parallel_tests (1.7.0)
       parallel
-    pg (0.17.1)
+    pg (0.18.3)
     progress (2.4.0)
     rack (1.6.4)
     rack-test (0.6.3)
@@ -176,7 +177,6 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
     rdoc (4.2.0)
-      json (~> 1.4)
     repl_runner (0.0.3)
       activesupport
     responders (2.1.0)
@@ -191,7 +191,7 @@ GEM
     rspec-expectations (3.3.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.3.0)
-    rspec-retry (0.4.3)
+    rspec-retry (0.4.4)
       rspec-core
     rspec-support (3.3.0)
     sass (3.4.18)
@@ -204,7 +204,7 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    spring (1.3.6)
+    spring (1.4.0)
     sprockets (3.3.4)
       rack (~> 1.0)
     sprockets-rails (2.3.3)
@@ -239,6 +239,7 @@ PLATFORMS
 DEPENDENCIES
   better_errors
   byebug
+  certified
   coffee-rails (~> 4.1.0)
   devise
   excon
@@ -249,7 +250,7 @@ DEPENDENCIES
   linkedin-oauth2 (~> 1.0)
   materialize-sass
   netrc
-  omniauth
+  omniauth (~> 1.2.2)
   omniauth-google-oauth2
   parallel_tests
   pg
