@@ -1,8 +1,30 @@
-@import "materialize/components/color";
-$primary-color: color("red", "lighten-2") !default;
 @import 'materialize';
 
 /*
     *= require_self
     *= require_tree .
 */
+
+.transparent{
+	opacity: 0.5;
+}
+
+.banner{
+    // background-image: url("/Users/Yasasvi/Downloads/seniordesign/sangria/app/assets/images/background.png");
+    background: image-url('background2.png') no-repeat center center;
+    // background-color: #1D5479;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 35em;
+    width: 100%;
+    background-position: 50% 100%;
+}
+
+body{
+    background: transparent;
+    margin:0;
+    padding:0;
+    height: 100%;
+}
