@@ -1,37 +1,26 @@
 
 
 <p id="notice"><%= notice %></p>
+<div class="row">
+<%= link_to '<i class="material-icons">add</i>'.html_safe, new_board_path, :class => "btn-large waves-effect waves-light"%>
+</div>
+<div class="row">
 
-<h1>Welcome to the Sangria app</h1>
+<% @boards.each do |board| %>
+  <div class="col s12 m6">
+    <div class="card blue-grey darken-1">
+      <div class="card-content white-text">
+      <span class="card-title"><%=board.title%></span>
+        <p><%=board.user_id%></p>
+        </div>
+        <div class="card-action">
+          <%= link_to 'Show', board %>
+          <%= link_to 'Edit', edit_board_path(board) %>
+          <%= link_to 'Destroy', board, method: :delete, data: { confirm: 'Are you sure?' }%>
+        </div>
+      </div>
+  </div>
 
+<% end %>
+</div>
 
-
-
-
-<h2> Listing boards </h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Title</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @boards.each do |board| %>
-      <tr>
-        <td><%= board.user_id %></td>
-        <td><%= board.title %></td>
-        <td><%= link_to 'Show', board %></td>
-        <td><%= link_to 'Edit', edit_board_path(board) %></td>
-        <td><%= link_to 'Destroy', board, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Board', new_board_path %>
