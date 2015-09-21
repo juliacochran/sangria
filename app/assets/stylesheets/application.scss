@@ -10,8 +10,7 @@
 }
 
 .banner{
-    // background-image: url("/Users/Yasasvi/Downloads/seniordesign/sangria/app/assets/images/background.png");
-    background: image-url('background2.png') no-repeat center center;
+    background: url(image_path('background2.png')) no-repeat center center;
     // background-color: #1D5479;
     -webkit-background-size: cover;
     -moz-background-size: cover;
