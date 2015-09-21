@@ -1,8 +1,5 @@
 source 'https://rubygems.org'
 
-#certification
-gem 'certified'
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 
