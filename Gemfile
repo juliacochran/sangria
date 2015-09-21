@@ -34,8 +34,9 @@ gem "linkedin-oauth2", "~> 1.0"
 
 # Google gem for sign on
 gem "omniauth-google-oauth2"
-gem "omniauth"
+gem "omniauth", '~> 1.2.2'
 gem "devise"
+gem 'certified'
 
 #Materialize CSS framework
 gem 'materialize-sass'
