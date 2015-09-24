@@ -54,6 +54,22 @@ class BoardsController < ApplicationController
   # DELETE /boards/1
   # DELETE /boards/1.json
   def destroy
+    @applications = Application.where('board_id': params[:id])
+    @applications.each do |application|
+      @interactions = Interaction.where('application_id': application.id)
+      @interactions.each do |interaction|
+        interaction.destroy
+      end
+      application.destroy
+    end
+    @interactions = Interaction.where('board_id': params[:id])
+    @interactions.each do |interaction|
+      interaction.destroy
+    end
+    @notes = Note.where('board_id': params[:id])
+    @notes.each do |note|
+      note.destroy
+    end
     @board.destroy
     respond_to do |format|
       format.html { redirect_to boards_url, notice: 'Board was successfully destroyed.' }

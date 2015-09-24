@@ -24,7 +24,16 @@ class ContactsController < ApplicationController
   # POST /contacts
   # POST /contacts.json
   def create
-    @contact = Contact.new(contact_params)
+
+    # contact_params seems mutable or is doing something strange with hashes so
+    # I'm just making a copy and editing the phone_number in that one
+    new_params = {}
+    contact_params.each do |key, value|
+      new_params[key] = value
+    end
+    new_params['phone_number'] = new_params['phone_number'].gsub(/[^0-9x]/, "")
+
+    @contact = Contact.new(new_params)
 
     respond_to do |format|
       if @contact.save

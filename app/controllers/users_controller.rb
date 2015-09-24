@@ -58,7 +58,29 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   # DELETE /users/1.json
+  # deletes a user and all their boards, and all applications and interactions and notes for that board
+  # we'll need to remove all contacts and companies once we figure out glassdoor etc.
   def destroy
+    @boards = Board.where('user_id': params[:id])
+    @boards.each do |board|
+      @applications = Application.where('board_id': board.id)
+      @applications.each do |application|
+        @interactions = Interaction.where('application_id': application.id)
+        @interactions.each do |interaction|
+          interaction.destroy
+        end
+        application.destroy
+      end
+      @notes = Note.where('board_id': board.id)
+      @notes.each do |note|
+        note.destroy
+      end
+      board.destroy
+    end
+    @jobs = Job.where('user_id': params[:id])
+    @jobs.each do |job|
+      job.destroy
+    end
     @user.destroy
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
