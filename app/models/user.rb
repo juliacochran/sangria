@@ -1,15 +1,20 @@
 class User < ActiveRecord::Base
   validates_format_of :name, with: /\A([a-zA-Z0-9\.\' ]+)\z/i, on: :create
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create
+  #validates_uniqueness_of :email, on: :create
 
- class << self
-	 def from_omniauth(auth_hash)
-	    user = find_or_create_by(uid: auth_hash['uid'], provider: auth_hash['provider'])
-	    user.name = auth_hash['info']['name']
-	    user.email = auth_hash['info']['email']
-	    user.oauth_token = auth_hash['token']
-	    user.save!
+	def self.from_omniauth(auth_hash)
+		user = User.find_or_create_by(email: auth_hash['info']['email'])
+
+		if auth_hash[:provider] == 'facebook' and user.facebook_id.blank?
+			user.facebook_id = auth_hash['uid']
+			user.name = auth_hash['info']['name']
+			user.save!
+		elsif auth_hash[:provider] == 'google_oauth2' and user.google_id.blank?
+			user.google_id = auth_hash['uid']
+			user.name = auth_hash['info']['name']
+			user.save!
+		end
 	    user
-	  end
-  end
+	end
 end

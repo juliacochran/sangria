@@ -6,3 +6,9 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   prompt: 'select_account',
   access_type: 'online'
 end
+
+Rails.application.config.middleware.use OmniAuth::Builder do
+	provider :facebook, ENV['FACEBOOK_ID'], ENV['FACEBOOK_SECRET'],
+	scope: ['public_profile', 'email'],
+	info_fields: 'id,name, email'
+end

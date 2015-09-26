@@ -35,6 +35,9 @@ gem "omniauth", '~> 1.2.2'
 gem "devise"
 gem 'certified'
 
+# Facebook gem for sign on
+gem 'omniauth-facebook'
+
 #Materialize CSS framework
 gem 'materialize-sass'
 
