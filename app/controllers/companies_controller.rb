@@ -1,5 +1,6 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
+  require 'companies_helper'
 
   # GET /companies
   # GET /companies.json
@@ -10,11 +11,18 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
+    response = CompaniesHelper::getCompanyInfo("google",request.remote_ip, request.env['HTTP_USER_AGENT'])
+    logger.info(response)
+    respond_to do |format|
+      format.json { render json: response}
+    end
   end
 
   # GET /companies/new
   def new
-    @company = Company.new
+    
+
+     @company = Company.new
   end
 
   # GET /companies/1/edit
