@@ -32,7 +32,7 @@
       <li><%= link_to "Log out", logout_path, method: :delete %></li>
     </ul>
     
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Appliq</a>
+    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Appliq</a>
       <ul class="right hide-on-med-and-down">
         <li><%= link_to 'Home', homes_index_path %></li>
         <li><%= link_to 'Boards', boards_path %></li>
@@ -44,6 +44,7 @@
             <li><a class="dropdown-button" href="#!" data-activates="profile_options"><%= current_user.name %><i class="material-icons right">arrow_drop_down</i></a></li>
         <% else %>
             <li><%= link_to "Login with Google", "/auth/google_oauth2" %></li>
+            <li><%= link_to "Login with Facebook", "/auth/facebook" %></li>
         <% end %>
       </ul>
       <ul id="nav-mobile" class="side-nav">
@@ -56,17 +57,6 @@
 
 <%= yield %>
 
-
-
-<!-- something is weird with this code...-->
-<div class="section">
-<div class="g-signin2" data-onsuccess="onSignIn"></div>
-
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
-
-<div id="status"></div>
-</div>
 
   <footer class="page-footer light-blue lighten-2">
     <div class="container">

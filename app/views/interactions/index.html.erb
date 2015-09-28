@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>ID</th>
       <th>Application</th>
       <th>Title</th>
       <th>Type</th>
@@ -18,6 +19,7 @@
   <tbody>
     <% @interactions.each do |interaction| %>
       <tr>
+        <td><%= interaction.id %></td>
         <td><%= interaction.application_id %></td>
         <td><%= interaction.title %></td>
         <td><%= interaction.type %></td>

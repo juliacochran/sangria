@@ -7,4 +7,5 @@ module UsersHelper
 		result = Net::HTTP.get(URI.parse('https://graph.facebook.com/me?fields=id&access_token=' + accessToken))
 		return JSON.parse(result)["id"]
 	end
+
 end

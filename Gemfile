@@ -1,8 +1,5 @@
 source 'https://rubygems.org'
 
-#certification
-gem 'certified'
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 
@@ -34,8 +31,12 @@ gem "linkedin-oauth2", "~> 1.0"
 
 # Google gem for sign on
 gem "omniauth-google-oauth2"
-gem "omniauth"
+gem "omniauth", '~> 1.2.2'
 gem "devise"
+gem 'certified'
+
+# Facebook gem for sign on
+gem 'omniauth-facebook'
 
 #Materialize CSS framework
 gem 'materialize-sass'

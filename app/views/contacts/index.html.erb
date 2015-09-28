@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>ID</th>
       <th>Company</th>
       <th>Name</th>
       <th>Email</th>
@@ -17,6 +18,7 @@
   <tbody>
     <% @contacts.each do |contact| %>
       <tr>
+        <td><%= contact.id %></td>
         <td><%= contact.company_id %></td>
         <td><%= contact.name %></td>
         <td><%= contact.email %></td>

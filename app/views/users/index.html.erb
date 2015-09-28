@@ -5,10 +5,13 @@
 <table>
   <thead>
     <tr>
+      <th>ID</th>
       <th>Name</th>
       <th>Email</th>
       <th>Seeking</th>
       <th>Settings</th>
+      <th>Facebook Id</th>
+      <th>Google Id</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,10 +19,13 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
+        <td><%= user.id %></td>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
         <td><%= user.seeking %></td>
         <td><%= user.settings %></td>
+        <td><%= user.facebook_id %></td>
+        <td><%= user.google_id %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>

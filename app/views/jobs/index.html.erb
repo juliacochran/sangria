@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>ID</th>
       <th>User</th>
       <th>Title</th>
       <th>Type</th>
@@ -15,6 +16,7 @@
   <tbody>
     <% @jobs.each do |job| %>
       <tr>
+        <td><%= job.id %></td>
         <td><%= job.user_id %></td>
         <td><%= job.title %></td>
         <td><%= job.type %></td>
