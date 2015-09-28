@@ -3,7 +3,7 @@ class CreateJobs < ActiveRecord::Migration
     create_table :jobs do |t|
       t.integer :user_id
       t.string :title
-      t.integer :type
+      t.integer :category
 
       t.timestamps null: false
     end

@@ -1,5 +1,6 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
+  before_filter :logged_in?
   require 'companies_helper'
 
   # GET /companies

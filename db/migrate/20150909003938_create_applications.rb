@@ -5,7 +5,7 @@ class CreateApplications < ActiveRecord::Migration
       t.integer :board_id
       t.integer :job_id
       t.integer :stage
-      t.integer :type
+      t.integer :category
       t.binary :settings
 
       t.timestamps null: false

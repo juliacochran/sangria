@@ -1,15 +1,23 @@
 class BoardsController < ApplicationController
   before_action :set_board, only: [:show, :edit, :update, :destroy]
+  before_filter :logged_in?
 
   # GET /boards
   # GET /boards.json
   def index
-    @boards = Board.all
+    @user = current_user
+    @boards = @user.boards
   end
 
   # GET /boards/1
   # GET /boards/1.json
   def show
+    @stages = Array["Applied", "Interviewing", "Waiting", "Offered", "Discontinued"]
+    all_apps = Application.where('board_id': params[:id])
+    @applications = Array.new(@stages.size)
+    @stages.each_with_index do |stage, index|
+      @applications[index] = all_apps.where('stage': index+1)
+    end
   end
 
   # GET /boards/new
@@ -24,7 +32,8 @@ class BoardsController < ApplicationController
   # POST /boards
   # POST /boards.json
   def create
-    @board = Board.new(board_params)
+    @user = current_user
+    @board = @user.boards.create(board_params)
 
     respond_to do |format|
       if @board.save
