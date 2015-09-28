@@ -11,7 +11,12 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
-    response = CompaniesHelper::getCompanyInfo("google",request.remote_ip, request.env['HTTP_USER_AGENT'])
+
+  end
+
+  def search
+    company_query = params[:q]
+    response = CompaniesHelper::getCompanyInfo(company_query,request.remote_ip, request.env['HTTP_USER_AGENT'])
     logger.info(response)
     respond_to do |format|
       format.json { render json: response}
@@ -20,9 +25,8 @@ class CompaniesController < ApplicationController
 
   # GET /companies/new
   def new
-    
-
-     @company = Company.new
+    @companies = Company.pluck(:name)
+    @company = Company.new
   end
 
   # GET /companies/1/edit
