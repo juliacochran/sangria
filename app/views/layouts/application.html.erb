@@ -6,7 +6,7 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 
-    
+
     <script src="https://apis.google.com/js/platform.js" async defer></script>
   <meta name="google-signin-client_id" content="86395741144-kuud9m0qe39cpppfrt0j1e9h947257iq.apps.googleusercontent.com">
 
@@ -22,17 +22,17 @@
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script type="text/javascript" src="js/materialize.min.js"></script>
-    
+
 <body>
 <nav class="blue lighten-1" role="navigation">
     <!-- Dropdown Structure for profile options -->
-    
+
     <ul id="profile_options" class="dropdown-content">
       <li><a href="#!">Settings</a></li>
       <li class="divider"></li>
       <li><%= link_to "Log out", logout_path, method: :delete %></li>
     </ul>
-    
+
     <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Appliq</a>
       <ul class="right hide-on-med-and-down">
         <% if current_user %>
@@ -53,49 +53,12 @@
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
-    
+
   </nav>
 
 <%= yield %>
 
 
-  <footer class="page-footer light-blue lighten-2">
-    <div class="container">
-      <div class="row">
-        <div class="col l6 s12">
-          <h5 class="white-text">Appliq Bio</h5>
-          <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
-
-
-        </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Settings</h5>
-          <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
-          </ul>
-        </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Connect</h5>
-          <ul>
-            <li><a class="white-text" href="#!">Julia</a></li>
-            <li><a class="white-text" href="#!">Wataru</a></li>
-            <li><a class="white-text" href="#!">Hillary</a></li>
-            <li><a class="white-text" href="#!">Bradley</a></li>
-            <li><a class="white-text" href="#!">Shez</a></li>
-
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="footer-copyright">
-      <div class="container">
-      Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-      </div>
-    </div>
-  </footer>
 
 </body>
 </html>

@@ -11,6 +11,12 @@ class BoardsController < ApplicationController
   # GET /boards/1
   # GET /boards/1.json
   def show
+    @stages = Array["Applied", "Interviewing", "Waiting", "Offered", "Discontinued"]
+    all_apps = Application.where('board_id': params[:id])
+    @applications = Array.new(@stages.size)
+    @stages.each_with_index do |stage, index|
+      @applications[index] = all_apps.where('stage': index+1)
+    end
   end
 
   # GET /boards/new

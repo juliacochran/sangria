@@ -25,6 +25,9 @@ class ApplicationsController < ApplicationController
   # POST /applications
   # POST /applications.json
   def create
+    puts "=============================="
+    puts application_params
+    puts "=============================="
     @application = Application.new(application_params)
 
     respond_to do |format|
@@ -70,6 +73,6 @@ class ApplicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def application_params
-      params.require(:application).permit(:company_id, :board_id, :job_id, :stage, :type, :settings)
+      params.require(:application).permit(:company_id, :board_id, :job_id, :stage, :category, :settings)
     end
 end

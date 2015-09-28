@@ -11,20 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150926231738) do
+ActiveRecord::Schema.define(version: 20150928200911) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "applications", force: :cascade do |t|
     t.integer  "stage"
-    t.integer  "type"
     t.binary   "settings"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "board_id"
     t.integer  "company_id"
     t.integer  "job_id"
+    t.integer  "category"
   end
 
   add_index "applications", ["board_id"], name: "index_applications_on_board_id", using: :btree
@@ -61,22 +61,22 @@ ActiveRecord::Schema.define(version: 20150926231738) do
 
   create_table "interactions", force: :cascade do |t|
     t.string   "title"
-    t.integer  "type"
     t.date     "date"
     t.text     "details"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "application_id"
+    t.integer  "category"
   end
 
   add_index "interactions", ["application_id"], name: "index_interactions_on_application_id", using: :btree
 
   create_table "jobs", force: :cascade do |t|
     t.string   "title"
-    t.integer  "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
+    t.integer  "category"
   end
 
   add_index "jobs", ["user_id"], name: "index_jobs_on_user_id", using: :btree
