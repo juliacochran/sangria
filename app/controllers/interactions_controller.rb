@@ -1,5 +1,6 @@
 class InteractionsController < ApplicationController
   before_action :set_interaction, only: [:show, :edit, :update, :destroy]
+  before_filter :logged_in?
 
   # GET /interactions
   # GET /interactions.json

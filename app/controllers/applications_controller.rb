@@ -1,5 +1,6 @@
 class ApplicationsController < ApplicationController
   before_action :set_application, only: [:show, :edit, :update, :destroy]
+  before_filter :logged_in?
 
   # GET /applications
   # GET /applications.json

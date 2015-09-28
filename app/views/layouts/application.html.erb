@@ -35,12 +35,12 @@
     
     <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Appliq</a>
       <ul class="right hide-on-med-and-down">
-        <li><%= link_to 'Home', homes_index_path %></li>
-        <li><%= link_to 'Boards', boards_path %></li>
-        <li><%= link_to 'Applications', applications_path %></li>
-        <li><%= link_to 'Companies', companies_path %></li>
-        <li><%= link_to 'Contacts', contacts_path %></li>
         <% if current_user %>
+          <li><%= link_to 'Home', homes_index_path %></li>
+          <li><%= link_to 'Boards', boards_path %></li>
+          <li><%= link_to 'Applications', applications_path %></li>
+          <li><%= link_to 'Companies', companies_path %></li>
+          <li><%= link_to 'Contacts', contacts_path %></li>
             <!-- Dropdown Trigger -->
             <li><a class="dropdown-button" href="#!" data-activates="profile_options"><%= current_user.name %><i class="material-icons right">arrow_drop_down</i></a></li>
         <% else %>
