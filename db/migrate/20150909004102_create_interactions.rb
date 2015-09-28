@@ -3,7 +3,7 @@ class CreateInteractions < ActiveRecord::Migration
     create_table :interactions do |t|
       t.integer :application_id
       t.string :title
-      t.integer :type
+      t.integer :category
       t.date :date
       t.integer :contact_id
       t.text :details

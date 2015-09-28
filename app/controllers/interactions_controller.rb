@@ -69,6 +69,6 @@ class InteractionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def interaction_params
-      params.require(:interaction).permit(:application_id, :title, :type, :date, :contact_id, :details)
+      params.require(:interaction).permit(:application_id, :title, :category, :date, :contact_id, :details)
     end
 end
