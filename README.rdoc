@@ -4,7 +4,7 @@ This project is built on ruby version 2.2.2 (check with <tt>ruby -v</tt>) and ra
 
 There are two ways of viewing the project, the first is to visit the site at http://sangria.herokuapp.com/ which may be an older version of the code, and the second is to download the latest version and run locally with the instructions below (the instructions were written for Mac, as no one on the team runs Windows or Linux).
 
-* Clone the repo with <tt>git clone https://github.gatech.edu/jcochran31/sangria.git</tt>
+* Clone the repo with <tt>git clone https://github.com/juliacochran/sangria</tt>
 
 * Open the sangria directory with <tt>cd sangria</tt>
 
