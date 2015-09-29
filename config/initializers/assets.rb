@@ -11,5 +11,7 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 Rails.application.config.assets.precompile += %w( homes.js )
 
+
+
 # Something with Bower to make Materialize and Heroku work
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'bower_components')   
