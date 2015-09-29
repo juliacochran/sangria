@@ -9,9 +9,4 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
-Rails.application.config.assets.precompile += %w( homes.js )
-
-
-
-# Something with Bower to make Materialize and Heroku work
-Rails.application.config.assets.paths << Rails.root.join('vendor', 'bower_components')   
+Rails.application.config.assets.precompile << "#{Rails.root}/app/public/assets"
