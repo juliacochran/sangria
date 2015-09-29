@@ -1,38 +1,35 @@
 <p id="notice"><%= notice %></p>
 
-<div class="center">
+<div class="content container">
 	<h3><%= @board.title %></h3>
-</div>
 
 
-<div class="row">
-	<% @applications.each_with_index do |app, index| %>
-	<div class="col s12 m2 <%= (index == 0) ? "offset-m1" : "" %>">
-		<div class="card blue-grey darken-1">
-			<div class="card-content white-text" style="padding: 5px 20px">
-				<span class="card-title"><%= @stages[index] %></span>
-				<a href="/applications/new"><i class="material-icons">add</i></a>
+	<div class="row">
+		<% @applications.each_with_index do |app, index| %>
+		<div class="col s3">
+			<div class="card blue-grey darken-1">
+				<div class="card-content white-text" style="padding: 5px 20px">
+					<span class="card-title"><%= @stages[index] %></span>
+					<a href="/applications/new"><i class="material-icons card-title card-title-add">add</i></a>
+				</div>
 			</div>
-		</div>
 
-		<% app.each_with_index do |staged_app, index| %>
-		<div class="card blue-grey darken-1">
-			<div class="card-content white-text">
-				<span class="card-title"><%= "staged_app.company_name" %></span>
-				<p>Location</p>
+			<% app.each_with_index do |staged_app, index| %>
+			<div class="card blue-grey darken-1">
+				<div class="card-content white-text">
+					<span class="card-title"><%= staged_app.company.name %></span>
+					<p><%= staged_app.company.location %></p>
+				</div>
+				<div class="card-action">
+					<a><i class="material-icons">add</i></a>
+				</div>
 			</div>
-			<div class="card-action">
-				<a><i class="material-icons">add</i></a>
-			</div>
+			<% end %>
 		</div>
 		<% end %>
 	</div>
-	<% end %>
 
-
-
-</div>
+	<%= link_to 'Edit', edit_board_path(@board) %> |
+	<%= link_to 'Back', boards_path %>
 </div>
 
-<%= link_to 'Edit', edit_board_path(@board) %> |
-<%= link_to 'Back', boards_path %>

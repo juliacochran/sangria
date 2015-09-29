@@ -12,11 +12,13 @@ class BoardsController < ApplicationController
   # GET /boards/1
   # GET /boards/1.json
   def show
-    @stages = Array["Applied", "Interviewing", "Waiting", "Offered", "Discontinued"]
-    all_apps = Application.where('board_id': params[:id])
+    @user = current_user
+    @board = @user.boards.find(params[:id])
+    @stages = Array["Applied", "Interviewing", "Waiting", "Offered"]#, "Discontinued"]
     @applications = Array.new(@stages.size)
+    apps_for_board = @board.applications
     @stages.each_with_index do |stage, index|
-      @applications[index] = all_apps.where('stage': index+1)
+      @applications[index] = apps_for_board.where('stage': index+1)
     end
   end
 
@@ -63,22 +65,6 @@ class BoardsController < ApplicationController
   # DELETE /boards/1
   # DELETE /boards/1.json
   def destroy
-    @applications = Application.where('board_id': params[:id])
-    @applications.each do |application|
-      @interactions = Interaction.where('application_id': application.id)
-      @interactions.each do |interaction|
-        interaction.destroy
-      end
-      application.destroy
-    end
-    @interactions = Interaction.where('board_id': params[:id])
-    @interactions.each do |interaction|
-      interaction.destroy
-    end
-    @notes = Note.where('board_id': params[:id])
-    @notes.each do |note|
-      note.destroy
-    end
     @board.destroy
     respond_to do |format|
       format.html { redirect_to boards_url, notice: 'Board was successfully destroyed.' }

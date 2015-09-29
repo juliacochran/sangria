@@ -1,5 +1,5 @@
 class Contact < ActiveRecord::Base
-  belongs_to :company
+  belongs_to :company, dependent: :destroy
   validates_presence_of :company
 
   validates_format_of :name, with: /\A([a-zA-Z0-9\.\' ]+)\z/i, on: :create

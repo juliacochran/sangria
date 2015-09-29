@@ -25,9 +25,6 @@ class ApplicationsController < ApplicationController
   # POST /applications
   # POST /applications.json
   def create
-    puts "=============================="
-    puts application_params
-    puts "=============================="
     @application = Application.new(application_params)
 
     respond_to do |format|
