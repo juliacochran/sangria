@@ -27,10 +27,12 @@ body{
     height: 100%;
 }
 
-.board-switch {
-    display:none;
-}
+h3 input[type=text] {
+    font-size: 2.92rem;
+    border: none;
 
-.title-icons {
-    display: none;
+    &:focus {
+        border: none !important;
+        box-shadow: none !important;
+    }
 }

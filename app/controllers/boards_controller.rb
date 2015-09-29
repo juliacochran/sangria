@@ -13,7 +13,8 @@ class BoardsController < ApplicationController
   # GET /boards/1.json
   def show
     @user = current_user
-    @board = @user.boards.find(params[:id])
+    @boards = @user.boards
+    @board = @boards.find(params[:id])
     @stages = Array["Applied", "Interviewing", "Waiting", "Offered"]#, "Discontinued"]
     @applications = Array.new(@stages.size)
     apps_for_board = @board.applications
