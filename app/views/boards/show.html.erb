@@ -1,18 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 
-<h3 class="header-board">
-	<div class="title-icons right">
-		<%= link_to 'add', "#board-new-modal", :class => "material-icons board-new-modal-trigger" %>
-		<%= link_to 'more_vert', "#board-change-modal", :class => "material-icons board-change-modal-trigger" %>
-		<%= link_to 'delete', @board, method: :delete, data: { confirm: 'Are you sure?' }, :class => "material-icons" %>
-	</div>
-	<div class="title-board">
-		<%= form_for @board do |f| %>
-			<%= f.text_field :title %>
-		<% end %>
-	</div>
-</h3>
+
 
 <div class="row">
 	<% @applications.each_with_index do |app, index| %>
@@ -25,18 +14,32 @@
 		</div>
 
 		<% app.each do |staged_app| %>
-		<div class="card blue-grey darken-1">
+		<div class="card teal">
 			<div class="card-content white-text">
 				<span class="card-title"><%= staged_app.company.name %></span>
 				<p><%= staged_app.company.location %></p>
-			</div>
-			<div class="card-action">
-				<a><i class="material-icons">add</i></a>
+				<a class="right"><i class="material-icons white-text">add</i></a>
 			</div>
 		</div>
 		<% end %>
 	</div>
 	<% end %>
+</div>
+
+<div class="header-board">
+	<div class="row">
+		
+		<h4 class="col s4 white-text">
+			<%= form_for @board do |f| %>
+				<%= f.text_field :title %>
+			<% end %>
+		</h4>
+		<div class="col s2 offset-s6">
+			<%= link_to 'add', "#board-new-modal", :class => "material-icons board-new-modal-trigger" %>
+			<%= link_to 'more_vert', "#board-change-modal", :class => "material-icons board-change-modal-trigger" %>
+			<%= link_to 'delete', @board, method: :delete, data: { confirm: 'Are you sure?' }, :class => "material-icons" %>
+		</div>
+	</div>
 </div>
 
 <div id="board-change-modal" class="modal modal-fixed-footer">
