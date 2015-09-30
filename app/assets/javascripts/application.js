@@ -14,6 +14,12 @@ $(document).ready(function() {
   }, function() {
     var $this = $(this);
     $this.find("span").hide();
+  $(".board-change-modal-trigger").leanModal({
+    in_duration: 200,
+    out_duration: 200
+  });
+  $(".board-new-modal-trigger").leanModal({
+    in_duration: 200,
+    out_duration: 200
   });
 });
-
