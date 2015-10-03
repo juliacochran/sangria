@@ -25,7 +25,8 @@ class InteractionsController < ApplicationController
   # POST /interactions
   # POST /interactions.json
   def create
-    @interaction = Interaction.new(interaction_params)
+    @application = Application.find(interaction_params[:application_id])
+    @interaction = @application.interactions.create(interaction_params)
 
     respond_to do |format|
       if @interaction.save

@@ -11,10 +11,7 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :application_id %><br>
-    <%= f.number_field :application_id %>
-  </div>
+  <%= f.hidden_field :application_id, :value => params[:application_id] %>
   <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>

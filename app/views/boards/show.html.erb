@@ -21,6 +21,7 @@
 				<p><%= staged_app.company.location %></p>
 				<a class="right"><i class="material-icons white-text">add</i></a>
 			</div>
+			<%= link_to "Add interaction", new_interaction_path(application_id: staged_app.id) %>
 		</div>
 		<% end %>
 	</div>
