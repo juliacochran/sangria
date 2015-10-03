@@ -1,41 +1,17 @@
-<%= form_for(@application) do |f| %>
-  <% if @application.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@application.errors.count, "error") %> prohibited this application from being saved:</h2>
-
-      <ul>
-      <% @application.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<%= form_for(Application.new) do |f| %>
+  <div class="row">
+    <div class="input-field col s12">
+      <%= f.hidden_field :stage %>
+      <%= f.hidden_field :board_id, :value => @board.id %>
+      Company_id #: <%= f.text_field :company_id %>
+      Job_id #: <%= f.text_field :job_id %>
+      Category: <%= f.text_field :category %>
+      Settings: <%= f.text_field :settings %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :company_id %><br>
-    <%= f.number_field :company_id %>
   </div>
-  <div class="field">
-    <%= f.label :board_id %><br>
-    <%= f.number_field :board_id %>
-  </div>
-  <div class="field">
-    <%= f.label :job_id %><br>
-    <%= f.number_field :job_id %>
-  </div>
-  <div class="field">
-    <%= f.label :stage %><br>
-    <%= f.number_field :stage %>
-  </div>
-  <div class="field">
-    <%= f.label :category %><br>
-    <%= f.number_field :category %>
-  </div>
-  <div class="field">
-    <%= f.label :settings %><br>
-    <%= f.text_field :settings %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="modal-footer">
+    <a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">
+      <%= f.submit %>
+    </a>
   </div>
 <% end %>

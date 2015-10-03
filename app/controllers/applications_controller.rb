@@ -25,12 +25,13 @@ class ApplicationsController < ApplicationController
   # POST /applications
   # POST /applications.json
   def create
-    @application = Application.new(application_params)
+    @board = Board.find(application_params[:board_id])
+    @application = @board.applications.create(application_params)
 
     respond_to do |format|
       if @application.save
-        format.html { redirect_to @application, notice: 'Application was successfully created.' }
-        format.json { render :show, status: :created, location: @application }
+        format.html { redirect_to @board, notice: 'Application was successfully created.' }
+        format.json { render :show, status: :created, location: @board }
       else
         format.html { render :new }
         format.json { render json: @application.errors, status: :unprocessable_entity }
@@ -55,6 +56,7 @@ class ApplicationsController < ApplicationController
   # DELETE /applications/1
   # DELETE /applications/1.json
   def destroy
+    #TODO: destroy method destroys user and board too. What's going on?
     @application.destroy
     respond_to do |format|
       format.html { redirect_to applications_url, notice: 'Application was successfully destroyed.' }

@@ -55,26 +55,7 @@
 </div>
 
 <div id="application-new-modal" class="modal modal-fixed-footer">
-	<%= form_for Application.new do |f| %>
-	<div class="modal-content">
-		<h4>Create New "<span id="application-stage-modal-title"></span>" Application</h4>
-		<div class="row">
-			<div class="input-field col s12">
-				<%= f.hidden_field :stage %>
-				<%= f.hidden_field :board_id, :value => @board.id %>
-				Company_id #: <%= f.text_field :company_id %>
-				Job_id #: <%= f.text_field :job_id %>
-				Category: <%= f.text_field :category %>
-				Settings: <%= f.text_field :settings %>
-			</div>
-		</div>
-	</div>
-	<div class="modal-footer">
-		<a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">
-			<%= f.submit %>
-		</a>
-	</div>
-	<% end %>
+	<%= render 'applications/new' %>
 </div>
 
 <div id="board-new-modal" class="modal modal-fixed-footer">
