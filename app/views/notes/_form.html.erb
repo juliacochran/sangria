@@ -10,11 +10,7 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :board_id %><br>
-    <%= f.number_field :board_id %>
-  </div>
+  <%= f.hidden_field :board_id, :value => params[:board_id] %>
   <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
