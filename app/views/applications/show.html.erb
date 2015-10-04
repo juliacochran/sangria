@@ -2,12 +2,12 @@
 
 <p>
   <strong>Company:</strong>
-  <%= @application.company_id %>
+  <%= @company.name %>
 </p>
 
 <p>
   <strong>Board:</strong>
-  <%= @application.board_id %>
+  <%= @board.title %>
 </p>
 
 <p>
@@ -28,6 +28,13 @@
 <p>
   <strong>Settings:</strong>
   <%= @application.settings %>
+</p>
+
+<p>
+  <strong>Interactions:</strong>
+  <% @interactions.each do |interaction| %>
+    <%= interaction.title %> </br>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_application_path(@application) %> |

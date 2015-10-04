@@ -16,6 +16,7 @@ class ContactsController < ApplicationController
   # GET /contacts/new
   def new
     @contact = Contact.new
+    @companies = Company.all
   end
 
   # GET /contacts/1/edit

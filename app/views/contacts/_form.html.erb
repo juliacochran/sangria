@@ -11,10 +11,18 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :company_id %><br>
-    <%= f.number_field :company_id %>
-  </div>
+  <!-- Dropdown Trigger -->
+  <a class='dropdown-button btn' href='#' data-activates='company_list'>Company</a>
+
+  <!-- Dropdown Structure -->
+  <!-- TODO: not fully functional. needs more javascript associated with it  and something with material select-->
+  <ul id='company_list' class='dropdown-content'>
+  <% @companies.each do |company| %>
+    <li><a href="#!"> <%= company.name %> </a></li>
+  <% end %>
+  </ul>
+
+  
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>

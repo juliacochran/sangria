@@ -11,6 +11,9 @@ class ApplicationsController < ApplicationController
   # GET /applications/1
   # GET /applications/1.json
   def show
+    @board = Board.find(@application.board_id)
+    @interactions = @application.interactions
+    @company = Company.find(@application.company_id)
   end
 
   # GET /applications/new
