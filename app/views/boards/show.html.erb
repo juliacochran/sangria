@@ -17,9 +17,9 @@
 			<div class="card-content white-text">
 				<span class="card-title"><%= staged_app.company.name %></span>
 				<p><%= staged_app.company.location %></p>
-				<a class="right"><i class="material-icons white-text">add</i></a>
+				<!-- <a class="right"><i class="material-icons white-text">add</i></a> -->
+				<a href="#interaction-new-modal" class="interaction-new-modal-trigger"><i class="material-icons card-title right">add</i></a>
 			</div>
-			<%= link_to "Add interaction", new_interaction_path(application_id: staged_app.id) %>
 		</div>
 		<% end %>
 	</div>
@@ -74,4 +74,8 @@
 		</a>
 	</div>
 	<% end %>
+</div>
+
+<div id="interaction-new-modal" class="modal modal-fixed-footer">
+	<%= render 'interactions/form' %>
 </div>
