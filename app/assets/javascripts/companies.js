@@ -8,7 +8,7 @@ function inputChanged(e){
 		clearTimeout(icTO);
 		icTO = window.setTimeout(function(){
 			updateList(e);
-		}, 100);
+		}, 200);
 	}else{
 		// console.log("about to update..");
 	}
