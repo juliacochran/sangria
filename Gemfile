@@ -35,6 +35,9 @@ gem "omniauth", '~> 1.2.2'
 gem "devise"
 gem 'certified'
 
+#to help with env vars
+gem "figaro"
+
 # Facebook gem for sign on
 gem 'omniauth-facebook'
 

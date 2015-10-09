@@ -1,2 +1,11 @@
+# For sending Sangria notificaiton emails
 gmail_username: 'sangrianotify@gmail.com'
 gmail_password: 'Sangria1!'
+
+# For Google Auth setup
+google_app_id: '219363091234-8nfbprlbq016b7p7bf1tnloqehmrc8bd.apps.googleusercontent.com'
+google_app_secret: 'QoCw9i_-N-NUQO8DmX3o7EV6'
+
+# For Facebook Auth setup
+facebook_app_id: '852880288136003'
+facebook_app_secret: '0b79c6e329419952ab7b511b4d77eb41'
