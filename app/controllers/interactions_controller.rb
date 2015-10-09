@@ -16,6 +16,8 @@ class InteractionsController < ApplicationController
   # GET /interactions/new
   def new
     @interaction = Interaction.new
+    @user = current_user
+    @contacts = @user.contacts
   end
 
   # GET /interactions/1/edit

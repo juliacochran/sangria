@@ -16,7 +16,7 @@ class ContactsController < ApplicationController
   # GET /contacts/new
   def new
     @contact = Contact.new
-    @companies = Company.all
+    @companies = Company.where(user_id: [@user.id, 'glassdoor'])
   end
 
   # GET /contacts/1/edit

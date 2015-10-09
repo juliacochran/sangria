@@ -15,7 +15,7 @@
 		<% app.each do |staged_app| %>
 		<div class="card teal">
 			<div class="card-content white-text">
-				<span class="card-title"><%= staged_app.company.name %></span>
+				<span class="card-title white-text"><%= link_to staged_app.company.name, staged_app %></span>
 				<p><%= staged_app.company.location %></p>
 				<!-- <a class="right"><i class="material-icons white-text">add</i></a> -->
 				<a href="#interaction-new-modal" class="interaction-new-modal-trigger"><i class="material-icons card-title right">add</i></a>
