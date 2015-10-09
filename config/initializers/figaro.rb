@@ -1,0 +1,1 @@
+Figaro.require_keys("google_app_id", "google_app_secret", "facebook_app_id", "facebook_app_secret", "gmail_username", "gmail_password")
