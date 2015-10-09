@@ -19,6 +19,11 @@ class ApplicationsController < ApplicationController
   # GET /applications/new
   def new
     @application = Application.new
+    @user = current_user
+    @jobs = @user.jobs
+    @companies = Company.where(user_id: [@user.id, 'glassdoor'])
+    @categories = Application.categories
+
   end
 
   # GET /applications/1/edit
