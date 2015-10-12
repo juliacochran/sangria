@@ -2,9 +2,9 @@
  <div class="row">
     <div class="input-field col s12">
   <%= f.hidden_field :application_id, :value => params[:application_id] %>
-  Title: <%= f.text_field :title %>
+  Title: <%= f.text_field :title %> 
   Category: <%= f.number_field :category %>
-  Date: <%= f.date_select :date %>
+  Date: <%= date_field :interaction, :date %>
   Details: <%= f.text_area :details %>
   <div class="modal-footer">
     <a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">
