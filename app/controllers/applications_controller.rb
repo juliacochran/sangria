@@ -13,7 +13,6 @@ class ApplicationsController < ApplicationController
   def show
     @board = Board.find(@application.board_id)
     @interactions = @application.interactions
-    @company = Company.find(@application.company_id)
   end
 
   # GET /applications/new
@@ -80,6 +79,6 @@ class ApplicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def application_params
-      params.require(:application).permit(:company_id, :board_id, :job_id, :stage, :category, :settings)
+      params.require(:application).permit(:company_id, :board_id, :job_id, :stage, :category, :settings, :applied_date)
     end
 end
