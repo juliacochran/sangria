@@ -15,6 +15,7 @@ $(document).ready(function() {
     $("#application-new-modal-title").text($this.data("stage"));
     $("#application_stage").val($this.data("stage_num"));
   });
+
   $(".application-edit-modal-trigger").leanModal({
     in_duration: 200,
     out_duration: 200
@@ -42,6 +43,7 @@ $(document).ready(function() {
       alert( "error" );
     });
   });
+
   $(".interaction-edit-modal-trigger").leanModal({
     in_duration: 200,
     out_duration: 200
