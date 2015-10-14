@@ -19,8 +19,8 @@
 			<div class="card-content white-text">
 				<span class="card-title white-text"><%= link_to application.company.name, application %></span>
 				<p><%= application.company.location %></p>
-				<!-- <a class="right"><i class="material-icons white-text">add</i></a> -->
 				<div class="right">
+					<%= link_to 'delete', application, method: :delete, data: { confirm: 'Are you sure?' }, :class => "material-icons" %>
 					<a href="#application-edit-modal" class="application-edit-modal-trigger" data-application_id="<%= application.id %>"><i class="material-icons card-title">edit</i></a>
 					<a href="#interaction-new-modal" class="interaction-new-modal-trigger" data-application_id="<%= application.id %>"><i class="material-icons card-title">add</i></a>
 				</div>
