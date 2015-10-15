@@ -31,7 +31,7 @@
 		<% stage.each do |application| %>
 		<div class="card teal">
 			<div class="card-content white-text">
-				<span class="card-title white-text"><%= link_to application.company.name, application %></span>
+				<span class="card-title white-text"><a href="#application-show-modal" class="application-show-modal-trigger" data-application_id="<%= application.id %>"><%= application.company.name %></a></span>
 				<p class="teal-text text-darken-4"><%= application.company.location %></p>
 				<% if application.interactions.length > 0 %>
 					<hr />
@@ -66,17 +66,29 @@
 </div>
 
 <div id="application-new-modal" class="modal modal-fixed-footer">
-	<%= render 'applications/new' %>
+	<%= render 'applications/form_new' %>
 </div>
 
 <div id="application-edit-modal" class="modal modal-fixed-footer">
-	<%= render 'applications/edit' %>
+  <%= render 'applications/form_edit' %>
+</div>
+
+<div id="application-show-modal" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <h4 id="application-show-modal-title">Company Name</h4>
+    <p>Status: <span id="application-show-modal-stage">Stage</span></p>
+    <p>Category: <span id="application-show-modal-category">Category</span></p>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Exit</a>
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Edit</a>
+  </div>
 </div>
 
 <div id="interaction-new-modal" class="modal modal-fixed-footer">
-	<%= render 'interactions/new' %>
+	<%= render 'interactions/form_new' %>
 </div>
 
 <div id="board-new-modal" class="modal modal-fixed-footer">
-	<%= render 'boards/new' %>
+	<%= render 'boards/form_new' %>
 </div>

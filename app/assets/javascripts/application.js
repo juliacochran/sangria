@@ -27,7 +27,7 @@ $(document).ready(function() {
     })
     .done(function(data) {
       // pretty hacky obviously but it works for now
-      $("#application-edit-modal-title").text(data.company_id);
+      $("#application-edit-modal-title").text(data.company.name);
       $("#application_edit #application_application_id").val(data.id);
       $("#application_edit #application_board_id").val(data.board_id);
       $("#application_edit #application_stage").val(data.stage);
@@ -37,6 +37,27 @@ $(document).ready(function() {
       $("#application_edit #application_category").val(data.category);
       $("#application_edit #application_settings").val(data.settings);
       $("#application_edit").attr("action", "/applications/" + data.id);
+      console.log(data)
+    })
+    .fail(function() {
+      alert( "error" );
+    });
+  });
+
+  $(".application-show-modal-trigger").leanModal({
+    in_duration: 200,
+    out_duration: 200
+  }).on("click", function() {
+    var $this = $(this);
+    $.ajax({
+      method: "GET",
+      url: "/applications/" + $this.data("application_id") + ".json"
+    })
+    .done(function(data) {
+      // pretty hacky obviously but it works for now
+      $("#application-show-modal-title").text(data.company.name);
+      $("#application-show-modal-stage").text(data.stage);
+      $("#application-show-modal-category").text(data.category);
       console.log(data)
     })
     .fail(function() {

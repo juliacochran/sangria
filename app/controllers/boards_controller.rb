@@ -15,7 +15,7 @@ class BoardsController < ApplicationController
     @user = current_user
     @boards = @user.boards
     @board = @boards.find(params[:id])
-    @stages = Array["Applied", "Interviewing", "Waiting", "Offered"]#, "Discontinued"]
+    @stages = Board.stages
     @applications = Array.new(@stages.size)
     apps_for_board = @board.applications
     @stages.each_with_index do |stage, index|
