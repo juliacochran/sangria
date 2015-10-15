@@ -5,6 +5,12 @@
     *= require_tree .
 */
 
+/* Make sure to fix this properly later, hack to make links white */
+/* I'm not racist I just can't read shit */
+a {
+    color: #ffffff !important;
+}
+
 .transparent{
 	opacity: 0.5;
 }

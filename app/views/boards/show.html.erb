@@ -18,7 +18,15 @@
 		<div class="card teal">
 			<div class="card-content white-text">
 				<span class="card-title white-text"><%= link_to application.company.name, application %></span>
-				<p><%= application.company.location %></p>
+				<p class="teal-text text-darken-4"><%= application.company.location %></p>
+				<% if application.interactions.length > 0 %>
+					<hr />
+					<h6>Interactions</h6>
+					<% application.interactions.each do |interaction| %>
+						<a href="/interactions/<%= interaction.id %>"><%= interaction.title %></a>
+						<p class="teal-text text-darken-4"><%= truncate(interaction.details, length: 50, separator: " ") %></p>
+					<% end %>
+				<% end %>
 				<div class="right">
 					<%= link_to 'delete', application, method: :delete, data: { confirm: 'Are you sure?' }, :class => "material-icons" %>
 					<a href="#application-edit-modal" class="application-edit-modal-trigger" data-application_id="<%= application.id %>"><i class="material-icons card-title">edit</i></a>
