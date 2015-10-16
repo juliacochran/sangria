@@ -1,14 +1,41 @@
-<%= form_for(Interaction.new) do |f| %>
- <div class="row">
-    <div class="input-field col s12">
-  <%= f.hidden_field :application_id, :value => params[:application_id] %>
-  Title: <%= f.text_field :title %> 
-  Category: <%= f.number_field :category %>
-  Date: <%= date_field :interaction, :date %>
-  Details: <%= f.text_area :details %>
-  <div class="modal-footer">
-    <a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">
-      <%= f.submit %>
-    </a>
+<%= form_for(@interaction) do |f| %>
+  <% if @interaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@interaction.errors.count, "error") %> prohibited this interaction from being saved:</h2>
+
+      <ul>
+      <% @interaction.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :application_id %><br>
+    <%= f.number_field :application_id %>
+  </div>
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :type %><br>
+    <%= f.number_field :type %>
+  </div>
+  <div class="field">
+    <%= f.label :date %><br>
+    <%= f.date_select :date %>
+  </div>
+  <div class="field">
+    <%= f.label :contact_id %><br>
+    <%= f.number_field :contact_id %>
+  </div>
+  <div class="field">
+    <%= f.label :details %><br>
+    <%= f.text_area :details %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
   </div>
 <% end %>

@@ -1,0 +1,15 @@
+<%= form_for(Board.new) do |f| %>
+  <div class="modal-content">
+    <h4>Create New Board</h4>
+    <div class="row">
+      <div class="input-field col s12">
+          Title: <%= f.text_field :title %>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">
+      <%= f.submit %>
+    </a>
+  </div>
+<% end %>

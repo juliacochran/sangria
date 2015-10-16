@@ -1,0 +1,19 @@
+<%= form_for(Interaction.new) do |f| %>
+  <div class="modal-content">
+    <h4>Create New Interaction</h4>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= f.hidden_field :application_id %>
+        Title: <%= f.text_field :title %>
+        Category: <%= f.number_field :category %>
+        Date: <%= date_field :interaction, :date %>
+        Details: <%= f.text_area :details %>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">
+      <%= f.submit %>
+    </a>
+  </div>
+<% end %>

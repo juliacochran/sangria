@@ -15,7 +15,7 @@ class BoardsController < ApplicationController
     @user = current_user
     @boards = @user.boards
     @board = @boards.find(params[:id])
-    @stages = Array["Applied", "Interviewing", "Waiting", "Offered"]#, "Discontinued"]
+    @stages = Board.stages
     @applications = Array.new(@stages.size)
     apps_for_board = @board.applications
     @stages.each_with_index do |stage, index|
@@ -44,7 +44,7 @@ class BoardsController < ApplicationController
 
     respond_to do |format|
       if @board.save
-        format.html { redirect_to @board, notice: 'Board was successfully created.' }
+        format.html { redirect_to @board }
         format.json { render :show, status: :created, location: @board }
       else
         format.html { render :new }
@@ -58,7 +58,7 @@ class BoardsController < ApplicationController
   def update
     respond_to do |format|
       if @board.update(board_params)
-        format.html { redirect_to @board, notice: 'Board was successfully updated.' }
+        format.html { redirect_to :back }
         format.json { render :show, status: :ok, location: @board }
       else
         format.html { render :edit }
