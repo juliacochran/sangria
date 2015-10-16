@@ -1,0 +1,18 @@
+<%= form_for(Application.new) do |f| %>
+  <div class="row">
+    <div class="input-field col s12">
+      Board id: <%= f.text_field :board_id, :value => '4' %>
+      <!-- I think this is supposed to be date_select, but I couldn't get that to work -->
+      Applied Date: <%= date_field :application, :applied_date %> <br>
+      Company_id #: <%= f.text_field :company_id %>
+      Job_id #: <%= f.text_field :job_id %>
+      Category: <%= f.text_field :category %>
+      Settings: <%= f.text_field :settings %>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">
+      <%= f.submit %>
+    </a>
+  </div>
+<% end %>

@@ -22,6 +22,7 @@ class ApplicationsController < ApplicationController
     @jobs = @user.jobs
     @companies = Company.where(user_id: [@user.id, 'glassdoor'])
     @categories = Application.categories
+    render 'test_form'
 
   end
 
