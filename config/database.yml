@@ -25,6 +25,6 @@ test:
 production:
   <<: *default
   database: sangria_prod
-  username: prod
+  username: deploy
   password: sangriaprod
   host: localhost
