@@ -1,9 +1,25 @@
-<p id="notice"><%= notice %></p>
+<% if flash[:notice] %>
+  <p id="notice"><%= flash[:notice] %></p>
+<% end %>
 
 <%= link_to "New note", new_note_path(board_id: @board.id) %> <br>
 
+
+
+<div class="row" style="margin: 0">
+<div class="col s12 title-board">
+	<%= form_for @board do |f| %>
+		<div class="title-icons">
+			<%= link_to 'add', "#board-new-modal", :class => "material-icons board-new-modal-trigger" %>
+			<%= link_to 'more_vert', "#board-change-modal", :class => "material-icons board-change-modal-trigger" %>
+			<%= link_to 'delete', @board, method: :delete, data: { confirm: 'Are you sure?' }, :class => "material-icons" %>
+		</div>
+		<%= f.text_field :title, :style => "font-size: 2rem;" %>
+	<% end %>
+</div>
+</div>
 <div class="row">
-	<% @applications.each_with_index do |app, index| %>
+	<% @applications.each_with_index do |stage, index| %>
 	<div class="col s3">
 		<div class="card blue-grey darken-1">
 			<div class="card-content white-text" style="padding: 5px 20px">
@@ -12,34 +28,29 @@
 			</div>
 		</div>
 
-		<% app.each do |staged_app| %>
+		<% stage.each do |application| %>
 		<div class="card teal">
 			<div class="card-content white-text">
-				<span class="card-title white-text"><%= link_to staged_app.company.name, staged_app %></span>
-				<p><%= staged_app.company.location %></p>
-				<!-- <a class="right"><i class="material-icons white-text">add</i></a> -->
-				<a href="#interaction-new-modal" class="interaction-new-modal-trigger"><i class="material-icons card-title right">add</i></a>
+				<span class="card-title white-text"><a href="#application-show-modal" class="application-show-modal-trigger" data-application_id="<%= application.id %>"><%= application.company.name %></a></span>
+				<p class="teal-text text-darken-4"><%= application.company.location %></p>
+				<% if application.interactions.length > 0 %>
+					<hr />
+					<h6>Interactions</h6>
+					<% application.interactions.each do |interaction| %>
+						<a href="/interactions/<%= interaction.id %>"><%= interaction.title %></a>
+						<p class="teal-text text-darken-4"><%= truncate(interaction.details, length: 50, separator: " ") %></p>
+					<% end %>
+				<% end %>
+				<div class="right">
+					<%= link_to 'delete', application, method: :delete, data: { confirm: 'Are you sure?' }, :class => "material-icons" %>
+					<a href="#application-edit-modal" class="application-edit-modal-trigger" data-application_id="<%= application.id %>"><i class="material-icons card-title">edit</i></a>
+					<a href="#interaction-new-modal" class="interaction-new-modal-trigger" data-application_id="<%= application.id %>"><i class="material-icons card-title">add</i></a>
+				</div>
 			</div>
 		</div>
 		<% end %>
 	</div>
 	<% end %>
-</div>
-
-<div class="header-board">
-	<div class="row">
-		
-		<h4 class="col s4 white-text">
-			<%= form_for @board do |f| %>
-				<%= f.text_field :title %>
-			<% end %>
-		</h4>
-		<div class="col s2 offset-s6">
-			<%= link_to 'add', "#board-new-modal", :class => "material-icons board-new-modal-trigger" %>
-			<%= link_to 'more_vert', "#board-change-modal", :class => "material-icons board-change-modal-trigger" %>
-			<%= link_to 'delete', @board, method: :delete, data: { confirm: 'Are you sure?' }, :class => "material-icons" %>
-		</div>
-	</div>
 </div>
 
 <div id="board-change-modal" class="modal modal-fixed-footer">
@@ -55,27 +66,29 @@
 </div>
 
 <div id="application-new-modal" class="modal modal-fixed-footer">
-	<%= render 'applications/new' %>
+	<%= render 'applications/form_new' %>
 </div>
 
-<div id="board-new-modal" class="modal modal-fixed-footer">
-	<%= form_for Board.new do |f| %>
-	<div class="modal-content">
-		<h4>Create New Board</h4>
-		<div class="row">
-			<div class="input-field col s12">
-				Title: <%= f.text_field :title %>
-			</div>
-		</div>
-	</div>
-	<div class="modal-footer">
-		<a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">
-			<%= f.submit %>
-		</a>
-	</div>
-	<% end %>
+<div id="application-edit-modal" class="modal modal-fixed-footer">
+  <%= render 'applications/form_edit' %>
+</div>
+
+<div id="application-show-modal" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <h4 id="application-show-modal-title">Company Name</h4>
+    <p>Status: <span id="application-show-modal-stage">Stage</span></p>
+    <p>Category: <span id="application-show-modal-category">Category</span></p>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Exit</a>
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Edit</a>
+  </div>
 </div>
 
 <div id="interaction-new-modal" class="modal modal-fixed-footer">
-	<%= render 'interactions/form' %>
+	<%= render 'interactions/form_new' %>
+</div>
+
+<div id="board-new-modal" class="modal modal-fixed-footer">
+	<%= render 'boards/form_new' %>
 </div>

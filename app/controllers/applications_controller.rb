@@ -22,6 +22,7 @@ class ApplicationsController < ApplicationController
     @jobs = @user.jobs
     @companies = Company.where(user_id: [@user.id, 'glassdoor'])
     @categories = Application.categories
+    render 'test_form'
 
   end
 
@@ -37,8 +38,8 @@ class ApplicationsController < ApplicationController
 
     respond_to do |format|
       if @application.save
-        format.html { redirect_to @board, notice: 'Board was successfully created.' }
-        format.json { render :show, status: :created, location: @board }
+        format.html { redirect_to :back }
+        format.json { render :index, status: :created, location: @board }
       else
         format.html { render :new }
         format.json { render json: @application.errors, status: :unprocessable_entity }
@@ -51,7 +52,7 @@ class ApplicationsController < ApplicationController
   def update
     respond_to do |format|
       if @application.update(application_params)
-        format.html { redirect_to @application, notice: 'Application was successfully updated.' }
+        format.html { redirect_to :back }
         format.json { render :show, status: :ok, location: @application }
       else
         format.html { render :edit }

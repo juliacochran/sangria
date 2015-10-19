@@ -1,0 +1,22 @@
+<%= form_for :application, :url => { :action => "update" }, :html => { method: "patch", :id => "application_edit" } do |f| %>
+  <div class="modal-content">
+    <h4>Edit <span id="application-edit-modal-title"></span> Application</h4>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= f.hidden_field :application_id %>
+        <%= f.hidden_field :board_id %>
+        Stage: <%= f.text_field :stage %>
+        Applied Date: <%= date_field :application, :applied_date %> <br>
+        Company_id #: <%= f.text_field :company_id %>
+        Job_id #: <%= f.text_field :job_id %>
+        Category: <%= f.text_field :category %>
+        Settings: <%= f.text_field :settings %>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">
+      <%= f.submit %>
+    </a>
+  </div>
+<% end %>

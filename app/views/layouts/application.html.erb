@@ -29,8 +29,8 @@
     <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Appliq</a>
       <ul class="right hide-on-med-and-down">
         <% if current_user %>
-          <li><%= link_to 'Home', homes_index_path %></li>
-          <li><%= link_to 'Boards', boards_path %></li>
+          <!-- Now defaults to the last created board -->
+          <li><%= link_to 'Boards', current_user.boards.last %></li>
           <li><%= link_to 'Applications', applications_path %></li>
           <li><%= link_to 'Companies', companies_path %></li>
           <li><%= link_to 'Contacts', contacts_path %></li>
