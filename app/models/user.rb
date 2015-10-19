@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
       user.name = auth_hash['info']['name']
       user.save!
     end
-      user
+    if not user.boards.exists?
+      boardTitle = 'Your first board!'
+      firstBoard = user.boards.create(title: boardTitle)
+    end
+    user
   end
 end
