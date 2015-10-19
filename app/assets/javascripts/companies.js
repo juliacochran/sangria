@@ -1,12 +1,16 @@
+//TODO: change the cancell logic. since new data could be matching but not 
+
+var emp_set = new Set();
+
 var icTO = null;
 var changing = 0;
 
-//TODO offset the timer
 function inputChanged(e){
 	if(icTO == null){
 		// console.log("set timer");
 		clearTimeout(icTO);
 		icTO = window.setTimeout(function(){
+			icTO = null;
 			updateList(e);
 		}, 200);
 	}else{
@@ -16,10 +20,10 @@ function inputChanged(e){
 
 function updateList(e){
 	// console.log("updating");
-	icTO = null;
-
 	var text = document.getElementById('company_name').value;
 	// console.log(document.getElementById('company_list').innerHTML);
+
+	updateInfo(text);
 
 	if(isOption(text)){
 		// console.log("cancelled");
@@ -46,12 +50,16 @@ function updateList(e){
 	    	if(response["employers"].length > 0){
 				//console.log(response);
 				//var compname = response["employers"][0]["name"];
-				var resplist = response["employers"];
+				var emp_list = response["employers"];
 				// console.log(resplist[0]["name"]);
-				for (var index = 0; index < resplist.length; index++){
-					var emp = resplist[index]["name"];
-					if(!isOption(emp)){
-						$('#company_list').append('<option value="'+ emp +'">' + emp + '</option>');
+				for (var index = 0; index < emp_list.length; index++){
+					emp_set.add(emp_list[index]);
+					var emp_name = emp_list[index]["name"];
+					var emp_logo = emp_list[index]["squareLogo"];
+					//console.log(emp_logo);
+					if(!isOption(emp_name)){
+						$('#company_list').append('<option value="'+ emp_name +'" id="' + emp_logo + '">' + emp_name + '</option>');
+						//$('#company_list').append('<option id="'+ emp_logo +'">' + emp_logo + '</option>');
 					}
 				}
 	    	}else{
@@ -65,9 +73,25 @@ function updateList(e){
 	        changing = 0;
 	    }
 	});	
-
 }
 
+function updateInfo(text){
+	var matchString = text.toLowerCase();
+	
+	for (comp of emp_set){
+
+		var comp_name = comp["name"];
+		var index = comp_name.toLowerCase().indexOf(matchString);
+		if(index == 0 && comp_name.length == matchString.length){
+			console.log(comp["squareLogo"]);
+			document.getElementById('company_logo_img').src = comp["squareLogo"];
+			document.getElementById('company_logo').value = comp["squareLogo"];
+			document.getElementById('company_location').value = comp["featuredReview"]["location"];
+			document.getElementById('company_website').value = comp["website"];
+			document.getElementById('company_user_id').value = 0;
+		}
+	}
+}
 
 
 function isOption(text1){
@@ -87,3 +111,21 @@ function isOption(text1){
 
 	return found;
 }
+
+$('#company_list').each(function() {
+    if($(this).is(':selected')){
+    	console.log("feaf");
+   }else{
+   	    console.log($(this));
+   }
+});
+// $('#company_list').val();
+
+
+// $(function() {
+//   $('#company_list').on('input',function() {
+//     var opt = $('option[value="'+$(this).val()+'"]');
+//     alert(opt.length ? opt.attr('id') : 'NO OPTION');
+//   });
+// });
+
