@@ -6,9 +6,8 @@ class Application < ActiveRecord::Base
   has_one :job
   has_many :interactions, dependent: :destroy
 
-  def self.categories
-  	categories = {0 => "Full-time", 1 => "Part-time", 2 => "Internship", 3 => "Co-op"}
-  	return categories
-  end
-
+  CATEGORIES = Array["Full-time",
+                     "Part-time",
+                     "Internship",
+                     "Co-op"]
 end

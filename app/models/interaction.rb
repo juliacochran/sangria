@@ -5,9 +5,10 @@ class Interaction < ActiveRecord::Base
   #I guess a contact can be separate from interaction but many of them can be tied to one
   has_one :contacts
 
-  def self.categories 
-  	categories = {0 => "Phone Interview", 1=>"On-site Interview", 2 => "Career Fair", 3=> "Info Session", 4=> "Recruiter Call", 5=>"Other"}
-  	return categories
-  end
-
+  CATEGORIES = Array["Phone Interview",
+                     "On-site Interview",
+                     "Career Fair",
+                     "Info Session",
+                     "Recruiter Call",
+                     "Other"]
 end
