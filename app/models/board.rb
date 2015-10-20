@@ -8,4 +8,8 @@ class Board < ActiveRecord::Base
                  "Interviewing",
                  "Waiting",
                  "Offered"]#, "Discontinued"]
+  # STAGES = {1 => "Applied",
+  #           2 => "Interviewing",
+  #           3 => "Waiting",
+  #           4 => "Offered"}#"Discontinued"
 end

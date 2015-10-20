@@ -3,7 +3,7 @@
 <p>Status: <%= @stage %></p>
 <p>Category: <%= @category %></p>
 <p>Job: <%= @job %></p>
-<p>Applied Date: <%= @application.applied_date %></p>
+<p>Applied Date: <%= @application.applied_date.strftime("%B %e %Y") %></p>
 <% if @interactions.length > 0 %>
   <hr />
   <h4>Interactions</h4>

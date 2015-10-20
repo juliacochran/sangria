@@ -20,34 +20,34 @@
 </div>
 <div class="row">
 	<% @applications.each_with_index do |stage, index| %>
-	<div class="col s3">
-		<div class="card blue-grey darken-1">
-			<div class="card-content white-text" style="padding: 5px 20px">
-				<span class="card-title"><%= @stages[index] %></span>
-				<a href="#application-new-modal" class="application-new-modal-trigger" data-stage="<%= @stages[index] %>" data-stage_num="<%= index+1 %>"><i class="material-icons card-title right">add</i></a>
+		<div class="col s3">
+			<div class="card blue-grey darken-1">
+				<div class="card-content white-text" style="padding: 5px 20px">
+					<span class="card-title"><%= @stages[index] %></span>
+					<a href="#application-new-modal" class="application-new-modal-trigger" data-stage="<%= @stages[index] %>" data-stage_num="<%= index %>"><i class="material-icons card-title right">add</i></a>
+				</div>
 			</div>
-		</div>
 
-		<% stage.each do |application| %>
-		<div class="card teal">
-			<div class="card-content white-text">
-				<!-- <span class="card-title white-text"><a href="#application-show-modal" class="application-show-modal-trigger" data-application_id="<%= application.id %>"><%= application.company.name %></a></span> -->
-				<span class="card-title white-text"><a href="#application-show-modal" class="application-show-modal-trigger" data-application_id="<%= application.id %>"><img src="<%= application.company.logo %>" style="max-width:100px; max-height:100px; background-color: #ffffff; padding: 0.1em;" /></a></span>
-				<p class="teal-text text-darken-4"><%= application.company.location %></p>
-				<% if application.current_interaction != nil %>
-					<hr />
-					<h6>Most Current Interaction</h6>
-					<a href="/interactions/<%= application.current_interaction.id %>"><%= application.current_interaction.title %></a>
-					<p class="teal-text text-darken-4"><%= truncate(application.current_interaction.details, length: 50, separator: " ") %></p>
-				<% end %>
+			<% stage.each do |application| %>
+			<div class="card teal">
+				<div class="card-content white-text">
+					<!-- <span class="card-title white-text"><a href="#application-show-modal" class="application-show-modal-trigger" data-application_id="<%= application.id %>"><%= application.company.name %></a></span> -->
+					<span class="card-title white-text"><a href="#application-show-modal" class="application-show-modal-trigger" data-application_id="<%= application.id %>"><img src="<%= application.company.logo %>" style="max-width:100px; max-height:100px; background-color: #ffffff; padding: 0.1em;" /></a></span>
+					<p class="teal-text text-darken-4"><%= application.company.location %></p>
+					<% if application.current_interaction != nil %>
+						<hr />
+						<h6>Most Current Interaction</h6>
+						<a href="/interactions/<%= application.current_interaction.id %>"><%= application.current_interaction.title %></a>
+						<p class="teal-text text-darken-4"><%= truncate(application.current_interaction.details, length: 50, separator: " ") %></p>
+					<% end %>
+				</div>
+				<div class="card-action" style="text-align: right;">
+					<!-- <a href="#application-edit-modal" class="application-edit-modal-trigger" data-application_id="<%= application.id %>"><i class="material-icons card-title">edit</i></a> -->
+					<a href="#interaction-new-modal" class="interaction-new-modal-trigger" style="margin-right: 0;" data-application_id="<%= application.id %>"><i class="material-icons card-title">add</i></a>
+				</div>
 			</div>
-			<div class="card-action" style="text-align: right;">
-				<!-- <a href="#application-edit-modal" class="application-edit-modal-trigger" data-application_id="<%= application.id %>"><i class="material-icons card-title">edit</i></a> -->
-				<a href="#interaction-new-modal" class="interaction-new-modal-trigger" style="margin-right: 0;" data-application_id="<%= application.id %>"><i class="material-icons card-title">add</i></a>
-			</div>
+			<% end %>
 		</div>
-		<% end %>
-	</div>
 	<% end %>
 </div>
 
