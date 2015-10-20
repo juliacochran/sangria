@@ -34,13 +34,11 @@
 				<!-- <span class="card-title white-text"><a href="#application-show-modal" class="application-show-modal-trigger" data-application_id="<%= application.id %>"><%= application.company.name %></a></span> -->
 				<span class="card-title white-text"><a href="#application-show-modal" class="application-show-modal-trigger" data-application_id="<%= application.id %>"><img src="<%= application.company.logo %>" style="max-width:100px; max-height:100px; background-color: #ffffff; padding: 0.1em;" /></a></span>
 				<p class="teal-text text-darken-4"><%= application.company.location %></p>
-				<% if application.interactions.length > 0 %>
+				<% if application.current_interaction != nil %>
 					<hr />
-					<h6>Interactions</h6>
-					<% application.interactions.each do |interaction| %>
-						<a href="/interactions/<%= interaction.id %>"><%= interaction.title %></a>
-						<p class="teal-text text-darken-4"><%= truncate(interaction.details, length: 50, separator: " ") %></p>
-					<% end %>
+					<h6>Most Current Interaction</h6>
+					<a href="/interactions/<%= application.current_interaction.id %>"><%= application.current_interaction.title %></a>
+					<p class="teal-text text-darken-4"><%= truncate(application.current_interaction.details, length: 50, separator: " ") %></p>
 				<% end %>
 			</div>
 			<div class="card-action" style="text-align: right;">

@@ -10,4 +10,21 @@ class Application < ActiveRecord::Base
                      "Part-time",
                      "Internship",
                      "Co-op"]
+
+  """
+  If all interactions have no dates, get the most recently created one
+  If there is a date today or in the future, get the one closest to now
+  Otherwise get the one that has most recently passed
+  """
+  def current_interaction
+    interactions_with_date = self.interactions.where.not(date: nil)
+    if interactions_with_date.length == 0
+      current_interaction = self.interactions.order(created_at: :desc).first
+    elsif interactions_with_date.where("date >= ?", Date.today).length > 0
+      current_interaction = interactions_with_date.where("date >= ?", Date.today).order(created_at: :desc, date: :asc).first
+    else
+      current_interaction = interactions_with_date.where("date < ?", Date.today).order(created_at: :desc, date: :desc).first
+    end
+    return current_interaction
+  end
 end
