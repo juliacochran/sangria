@@ -1,5 +1,5 @@
 class ApplicationsController < ApplicationController
-  before_action :set_application, only: [:show, :edit, :update, :destroy]
+  before_action :set_application, only: [:show, :show_modal, :edit, :edit_modal, :update, :destroy]
   before_filter :logged_in?
 
   # GET /applications
@@ -15,6 +15,17 @@ class ApplicationsController < ApplicationController
     @interactions = @application.interactions
   end
 
+  # GET /applications/1/show_modal
+  # GET /applications/1/show_modal.json
+  def show_modal
+    @category = Application.categories[@application.category]
+    @stage = Board.stages[@application.stage]
+    @company = Company.find(@application.company_id)
+    @job = @application.job_id
+    @interactions = @application.interactions.order(date: :desc)
+    render 'show', :layout => nil
+  end
+
   # GET /applications/new
   def new
     @application = Application.new
@@ -22,12 +33,16 @@ class ApplicationsController < ApplicationController
     @jobs = @user.jobs
     @companies = Company.where(user_id: [@user.id, 'glassdoor'])
     @categories = Application.categories
-    render 'test_form'
-
   end
 
   # GET /applications/1/edit
   def edit
+  end
+
+  # GET /applications/1/edit_modal
+  # GET /applications/1/edit_modal.json
+  def edit_modal
+    render 'edit', :layout => nil
   end
 
   # POST /applications
@@ -67,7 +82,7 @@ class ApplicationsController < ApplicationController
     #TODO: destroy method destroys user and board too. What's going on?
     @application.destroy
     respond_to do |format|
-      format.html { redirect_to applications_url, notice: 'Application was successfully destroyed.' }
+      format.html { redirect_to :back }
       format.json { head :no_content }
     end
   end

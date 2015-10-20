@@ -1,46 +1,17 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Company:</strong>
-  <%= @application.company.name %>
-</p>
-
-<p>
-  <strong>Board:</strong>
-  <%= @board.title %>
-</p>
-
-<p>
-  <strong>Job:</strong>
-  <%= @application.job_id %>
-</p>
-
-<p>
-  <strong>Applied Date:</strong>
-  <%= @application.applied_date %>
-</p>
-
-<p>
-  <strong>Stage:</strong>
-  <%= @application.stage %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= @application.category %>
-</p>
-
-<p>
-  <strong>Settings:</strong>
-  <%= @application.settings %>
-</p>
-
-<p>
-  <strong>Interactions:</strong>
+<h4><%= @application.company.name %> Application</h4>
+<img src="<%= @application.company.logo %>" width="100" />
+<p>Status: <%= @stage %></p>
+<p>Category: <%= @category %></p>
+<p>Job: <%= @job %></p>
+<p>Applied Date: <%= @application.applied_date %></p>
+<% if @interactions.length > 0 %>
+  <hr />
+  <h4>Interactions</h4>
   <% @interactions.each do |interaction| %>
-    <%= interaction.title %> </br>
+    <p>Title: <%= interaction.title %></p>
+    <p>Date: <%= interaction.date %></p>
+    <p>Category: <%= interaction.category %></p>
+    <p>Details: <%= interaction.details %></p>
+    <br />
   <% end %>
-</p>
-
-<%= link_to 'Edit', edit_application_path(@application) %> |
-<%= link_to 'Back', applications_path %>
+<% end %>
