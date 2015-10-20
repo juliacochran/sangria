@@ -1,9 +1,9 @@
 <h4><%= @application.company.name %> Application</h4>
 <img src="<%= @application.company.logo %>" width="100" />
-<p>Status: <%= @stage %></p>
-<p>Category: <%= @category %></p>
-<p>Job: <%= @job %></p>
-<p>Applied Date: <%= @application.applied_date.strftime("%B %e %Y") %></p>
+<p>Status: <%= @stage || "" %></p>
+<p>Category: <%= @category || "" %></p>
+<p>Job: <%= @job || "" %></p>
+<p>Applied Date: <%= (@application.applied_date?) ? @application.applied_date.strftime("%B %e %Y") : "" %></p>
 <% if @interactions.length > 0 %>
   <hr />
   <h4>Interactions</h4>
