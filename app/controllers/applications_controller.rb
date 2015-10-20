@@ -18,8 +18,8 @@ class ApplicationsController < ApplicationController
   # GET /applications/1/show_modal
   # GET /applications/1/show_modal.json
   def show_modal
-    @category = Application.categories[@application.category]
-    @stage = Board.stages[@application.stage]
+    @category = Application::CATEGORIES[@application.category]
+    @stage = Board::STAGES[@application.stage]
     @company = Company.find(@application.company_id)
     @job = @application.job_id
     @interactions = @application.interactions.order(date: :desc)
@@ -32,7 +32,7 @@ class ApplicationsController < ApplicationController
     @user = current_user
     @jobs = @user.jobs
     @companies = Company.where(user_id: [@user.id, 'glassdoor'])
-    @categories = Application.categories
+    @categories = Application::CATEGORIES
   end
 
   # GET /applications/1/edit
