@@ -19,7 +19,7 @@ class ApplicationsController < ApplicationController
   # GET /applications/1/show_modal.json
   def show_modal
     @category = Application::CATEGORIES[@application.category]
-    @stage = Board::STAGES[@application.stage]
+    @stage = Board::STAGES[@application.stage-1]
     @company = Company.find(@application.company_id)
     @job = @application.job_id
     @interactions = @application.interactions.order(date: :desc)

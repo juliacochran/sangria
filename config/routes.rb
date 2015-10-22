@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   get "/applications/:id/show_modal" => "applications#show_modal"
   get "/applications/new_modal" => "applications#new_modal"
   get "/applications/:id/edit_modal" => "applications#edit_modal"
+  get "/interactions/:id/show_modal" => "interactions#show_modal"
+  get "/interactions/new_modal" => "interactions#new_modal"
+  get "/interactions/:id/edit_modal" => "interactions#edit_modal"
 
   resources :contacts
   resources :jobs

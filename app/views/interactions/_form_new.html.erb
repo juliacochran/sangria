@@ -2,18 +2,71 @@
   <div class="modal-content">
     <h4>Create New Interaction</h4>
     <div class="row">
-      <div class="input-field col s12">
-        <%= f.hidden_field :application_id %>
-        Title: <%= f.text_field :title %>
-        Category: <%= f.number_field :category %>
-        Date: <%= date_field :interaction, :date %>
-        Details: <%= f.text_area :details %>
+      <div class="col s12">
+        <div class="field">
+          <%= f.hidden_field :application_id %>
+        </div>
+        <div class="field">
+          <%= f.label :title %><br>
+          <%= f.text_field :title %>
+        </div>
+        <div class="field">
+          <%= f.label :category %><br>
+          <%= f.number_field :category %>
+        </div>
+        <div class="field">
+          <%= f.label :date %><br>
+          <%= date_field :interaction, :date %>
+        </div>
+        <div class="field">
+          <%= f.label :details %><br>
+          <%= f.text_area :details %>
+        </div>
+        <br />
+        <br />
+        Want to add a <a class="interaction-new-contact-trigger" href="#!">new contact?</a> Or maybe an <a class="interaction-existing-contact-trigger" href="#!">existing contact?</a>
+        <br />
+        <br />
+        <div class="interaction-new-contact" style="display: none;">
+          <%= form_for(Contact.new) do |c_f| %>
+            <h5>Add New Contact</h5>
+            <div class="field">
+              <%= c_f.hidden_field :company_id %>
+            </div>
+            <div class="field">
+              <%= c_f.label :name %><br>
+              <%= c_f.text_field :name %>
+            </div>
+            <div class="field">
+              <%= c_f.label :email %><br>
+              <%= c_f.text_field :email %>
+            </div>
+            <div class="field">
+              <%= c_f.label :phone_number %><br>
+              <%= c_f.text_field :phone_number %>
+            </div>
+            <div class="field">
+              <%= c_f.label :role %><br>
+              <%= c_f.number_field :role %>
+            </div>
+            <div class="actions">
+              <%= c_f.submit "Create Contact", :id => "interaction-new-contact-submit", :style => "display: none;" %>
+            </div>
+          <% end %>
+        </div>
+        <div class="interaction-existing-contact" style="display: none;">
+          <h5>Add Existing Contact</h5>
+          <div class="field">
+            <%= f.label :contact_id, "Existing Contact" %><br>
+            <%= f.text_field :contact_id %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="modal-footer">
+  <div class="modal-footer actions">
     <a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">
-      <%= f.submit %>
+      <%= f.submit "Create Interaction", :id => "interaction-new-submit" %>
     </a>
   </div>
 <% end %>

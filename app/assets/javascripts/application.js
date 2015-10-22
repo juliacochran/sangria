@@ -57,6 +57,29 @@ $(document).ready(function() {
   });
 
 
+  $(".interaction-show-modal-trigger").leanModal({
+    in_duration: 200,
+    out_duration: 200
+  }).on("click", function() {
+    var $this = $(this);
+    var interaction_id = $this.data("interaction_id");
+    $.ajax({
+      method: "GET",
+      dataType: 'html',
+      url: "/interactions/" + interaction_id + "/show_modal"
+    })
+    .done(function(data) {
+      // have to do this because we can't replace the edit button because
+      // it's bound to a js event on document load
+      $("#interaction-show-modal .modal-content").html(data);
+      $(".interaction-edit-modal-trigger").data("interaction_id", interaction_id);
+      $(".interaction-delete-modal-trigger").attr("href", "/interactions/" + interaction_id);
+    })
+    .fail(function() {
+      alert( "error" );
+    });
+  });
+
   $(".interaction-new-modal-trigger").leanModal({
     in_duration: 200,
     out_duration: 200
@@ -65,12 +88,37 @@ $(document).ready(function() {
     $("#interaction_application_id").val($this.data("application_id"));
   });
 
+  $(".interaction-new-contact-trigger").on("click", function() {
+    $(".interaction-new-contact").show();
+    $(".interaction-existing-contact").hide();
+  });
+
+  $(".interaction-existing-contact-trigger").on("click", function() {
+    $(".interaction-new-contact").hide();
+    $(".interaction-existing-contact").show();
+  });
+
+  $("#interaction-new-submit").on("click", function(e) {
+    e.preventDefault();
+    $("#interaction-new-contact-submit").trigger(jQuery.Event("submit"));
+    return $(this).trigger(jQuery.Event("submit"));
+  });
+
   $(".interaction-edit-modal-trigger").leanModal({
     in_duration: 200,
     out_duration: 200
-  }).on("click", function() {
+  }).on("click", function(e) {
     var $this = $(this);
-    $("#interaction_application_id").val($this.data("application_id"));
+    $.ajax({
+      method: "GET",
+      url: "/interactions/" + $this.data("interaction_id") + "/edit_modal"
+    })
+    .done(function(data) {
+      $("#interaction-edit-modal").html(data);
+    })
+    .fail(function() {
+      alert( "error" );
+    });
   });
 
 

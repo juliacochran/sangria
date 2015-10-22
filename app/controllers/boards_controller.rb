@@ -17,7 +17,7 @@ class BoardsController < ApplicationController
     @board = @boards.find(params[:id])
     @stages = Board::STAGES
     @applications = Array.new(@stages.size)
-    board_applications = @board.applications
+    board_applications = @board.applications.order(applied_date: :desc)
     @stages.each_with_index do |stage, index|
       @applications[index] = board_applications.where('stage': index+1)
     @companies = Company.where(user_id: [@user.id, 'glassdoor'])

@@ -1,5 +1,5 @@
 class InteractionsController < ApplicationController
-  before_action :set_interaction, only: [:show, :edit, :update, :destroy]
+  before_action :set_interaction, only: [:show, :show_modal, :edit, :edit_modal, :update, :destroy]
   before_filter :logged_in?
 
   # GET /interactions
@@ -11,6 +11,14 @@ class InteractionsController < ApplicationController
   # GET /interactions/1
   # GET /interactions/1.json
   def show
+    render 'show', :layout => nil
+  end
+
+  # GET /interactions/1/show_modal
+  # GET /interactions/1/show_modal.json
+  def show_modal
+    @category = Interaction::CATEGORIES[@interaction.category]
+    render 'show', :layout => nil
   end
 
   # GET /interactions/new
@@ -23,6 +31,12 @@ class InteractionsController < ApplicationController
 
   # GET /interactions/1/edit
   def edit
+  end
+
+  # GET /interactions/1/edit_modal
+  # GET /interactions/1/edit_modal.json
+  def edit_modal
+    render 'edit', :layout => nil
   end
 
   # POST /interactions
