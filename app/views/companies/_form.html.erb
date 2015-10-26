@@ -12,11 +12,7 @@
 
   <div class="input-field">
     <%= f.label :name %>
-<<<<<<< HEAD
     <%= f.combobox_tag('company[name]', [], :list_id => "company_list")%>
-=======
-    <%= f.combobox_tag('company[name]', options_for_select(@companies), :list_id => "company_list")%>
->>>>>>> 85a63c1141a7081f491e714f8af68d291516d617
   </div>
 
   <div class="input-field">
@@ -27,23 +23,11 @@
     <%= f.label :website, :class => "active" %>
     <%= f.text_field :website %>
   </div>
-<<<<<<< HEAD
   <div class="field" >
     <%= f.label :logo %><br>
     <%= f.text_field :logo %>
     <%= image_tag("https://media.glassdoor.com/sqll/9079/google-squarelogo-1441130773284.png", :alt => "company_logo", :id => "company_logo_img") %>
   </div>
-=======
-  <div class="input-field">
-    <%= f.label :logo, :class => "active" %>
-    <%= f.text_field :logo %>
-    <%= image_tag("https://media.glassdoor.com/sqll/9079/google-squarelogo-1441130773284.png", :alt => "company_logo", :id => "company_logo_img") %>
-  </div>
-  <div class="input-field">
-    <%= f.label :user_id, :class => "active" %>
-    <%= f.text_field :user_id %>
-  </div>
->>>>>>> 85a63c1141a7081f491e714f8af68d291516d617
   <div class="actions">
     <%= f.submit %>
   </div>
