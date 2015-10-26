@@ -3,7 +3,7 @@
     <h4>Create New Board</h4>
     <div class="row">
       <div class="col s12">
-        <div class="field"
+        <div class="input-field"
           <%= f.label :title %>
           <%= f.text_field :title %>
         </div>
@@ -11,8 +11,6 @@
     </div>
   </div>
   <div class="modal-footer actions">
-    <a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">
-      <%= f.submit %>
-    </a>
+    <%= f.submit :class => "modal-action modal-close btn-flat" %>
   </div>
 <% end %>
