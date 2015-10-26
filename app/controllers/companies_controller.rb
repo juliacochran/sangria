@@ -26,7 +26,8 @@ class CompaniesController < ApplicationController
 
   # GET /companies/new
   def new
-    @companies = Company.pluck(:name)
+    @company_names = Company.pluck(:name)
+    @companies = Company.all.to_json
     @company = Company.new
   end
 

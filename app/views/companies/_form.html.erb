@@ -2,7 +2,6 @@
   <% if @company.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@company.errors.count, "error") %> prohibited this company from being saved:</h2>
-
       <ul>
       <% @company.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -13,7 +12,9 @@
 
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.combobox_tag('company[name]', options_for_select(@companies), :list_id => "company_list")%>
+<!--     <input id="company_name" list="company_list">
+    <datalist id="company_list"></datalist> -->
+    <%= f.combobox_tag('company[name]', options_for_select(@company_names), :list_id => "company_list")%>
   </div>
 
   <div class="field">
@@ -24,14 +25,10 @@
     <%= f.label :website %><br>
     <%= f.text_field :website %>
   </div>
-  <div class="field">
+  <div class="field" >
     <%= f.label :logo %><br>
     <%= f.text_field :logo %>
     <%= image_tag("https://media.glassdoor.com/sqll/9079/google-squarelogo-1441130773284.png", :alt => "company_logo", :id => "company_logo_img") %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
   </div>
   <div class="actions">
     <%= f.submit %>

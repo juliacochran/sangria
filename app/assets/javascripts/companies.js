@@ -1,6 +1,5 @@
 //TODO: change the cancell logic. since new data could be matching but not 
-
-var emp_set = new Set();
+var emp_list = new Array();
 
 var icTO = null;
 var changing = 0;
@@ -19,29 +18,20 @@ function inputChanged(e){
 }
 
 function updateList(e){
-	// console.log("updating");
-	var text = document.getElementById('company_name').value;
-	// console.log(document.getElementById('company_list').innerHTML);
+	var text = document.getElementById('company_name').getAttribute("name");
 
 	updateInfo(text);
 
 	if(isOption(text)){
-		// console.log("cancelled");
 		return;
 	}
-
-	// console.log(changing);
 
 	if(changing == 1){
-		// console.log("queueing");
 		inputChanged(e);
 		return;
-	}
-	else{
+	}else{
 		changing = 1;
 	}
-
-	// console.log("searching");
 
 	$.ajax({
 	    url: "/search",
@@ -58,7 +48,7 @@ function updateList(e){
 					var emp_logo = emp_list[index]["squareLogo"];
 					//console.log(emp_logo);
 					if(!isOption(emp_name)){
-						$('#company_list').append('<option value="'+ emp_name +'" id="' + emp_logo + '">' + emp_name + '</option>');
+						$('#company_list').append('<option value="' + emp_logo + '">' + emp_name + '</option>');
 						//$('#company_list').append('<option id="'+ emp_logo +'">' + emp_logo + '</option>');
 					}
 				}
@@ -79,7 +69,6 @@ function updateInfo(text){
 	var matchString = text.toLowerCase();
 	
 	for (comp of emp_set){
-
 		var comp_name = comp["name"];
 		var index = comp_name.toLowerCase().indexOf(matchString);
 		if(index == 0 && comp_name.length == matchString.length){
@@ -88,7 +77,7 @@ function updateInfo(text){
 			document.getElementById('company_logo').value = comp["squareLogo"];
 			document.getElementById('company_location').value = comp["featuredReview"]["location"];
 			document.getElementById('company_website').value = comp["website"];
-			document.getElementById('company_user_id').value = 0;
+			document.getElementById('company_user_id').value = 1;
 		}
 	}
 }
@@ -112,20 +101,16 @@ function isOption(text1){
 	return found;
 }
 
-$('#company_list').each(function() {
-    if($(this).is(':selected')){
-    	console.log("feaf");
-   }else{
-   	    console.log($(this));
-   }
-});
-// $('#company_list').val();
 
 
-// $(function() {
-//   $('#company_list').on('input',function() {
-//     var opt = $('option[value="'+$(this).val()+'"]');
-//     alert(opt.length ? opt.attr('id') : 'NO OPTION');
-//   });
-// });
+function addCompanies(companies){
+	for (company of companies){
+		console.log(company);
+		emp_list[id] = company;
+	}
+}
 
+for (var key in emp_list) {
+    if (key === 'length' || !widthRange.hasOwnProperty(key)) continue;
+    var value = widthRange[key];
+}
