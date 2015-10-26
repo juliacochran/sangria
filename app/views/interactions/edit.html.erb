@@ -1,6 +1,35 @@
-<h1>Editing Interaction</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @interaction %> |
-<%= link_to 'Back', interactions_path %>
+<%= form_for(@interaction) do |f| %>
+  <div class="modal-content">
+    <h4>Edit <%= @interaction.title %> Interaction</h4>
+    <div class="row">
+      <div class="col s12">
+        <div class="input-field">
+          <%= f.hidden_field :application_id %>
+        </div>
+        <div class="input-field">
+          <%= f.label :title, :class => "active" %>
+          <%= f.text_field :title %>
+        </div>
+        <div class="input-field">
+          <%= f.label :category, :class => "active" %>
+          <%= f.number_field :category %>
+        </div>
+        <div class="input-field">
+          <%= f.label :date, :class => "active" %>
+          <%= date_field :application, :applied_date, :class => "datepicker" %>
+        </div>
+        <div class="input-field">
+          <%= f.label :contact_id, :class => "active" %>
+          <%= f.number_field :contact_id %>
+        </div>
+        <div class="input-field">
+          <%= f.label :details, :class => "active" %>
+          <%= f.text_area :details, :class => "materialize-textarea" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer actions">
+    <%= f.submit :class => "modal-action modal-close btn-flat" %>
+  </div>
+<% end %>

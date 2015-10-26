@@ -4,8 +4,12 @@ class Board < ActiveRecord::Base
   has_many :applications, dependent: :destroy
   has_many :notes, dependent: :destroy
 
-  def self.stages
-    stages = Array["Applied", "Interviewing", "Waiting", "Offered"]#, "Discontinued"]
-    return stages
-  end
+  STAGES = Array["Applied",
+                 "Interviewing",
+                 "Waiting",
+                 "Offered"]#, "Discontinued"]
+  # STAGES = {1 => "Applied",
+  #           2 => "Interviewing",
+  #           3 => "Waiting",
+  #           4 => "Offered"}#"Discontinued"
 end

@@ -10,19 +10,17 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-<!--     <input id="company_name" list="company_list">
-    <datalist id="company_list"></datalist> -->
-    <%= f.combobox_tag('company[name]', options_for_select(@company_names), :list_id => "company_list")%>
+  <div class="input-field">
+    <%= f.label :name %>
+    <%= f.combobox_tag('company[name]', [], :list_id => "company_list")%>
   </div>
 
-  <div class="field">
-    <%= f.label :location %><br>
+  <div class="input-field">
+    <%= f.label :location, :class => "active" %>
     <%= f.text_field :location %>
   </div>
-  <div class="field">
-    <%= f.label :website %><br>
+  <div class="input-field">
+    <%= f.label :website, :class => "active" %>
     <%= f.text_field :website %>
   </div>
   <div class="field" >

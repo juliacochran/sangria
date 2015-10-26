@@ -5,6 +5,12 @@ Rails.application.routes.draw do
   get 'homes/index'
   delete '/logout' => 'sessions#destroy'
   get "/search" => "companies#search"
+  get "/applications/:id/show_modal" => "applications#show_modal"
+  get "/applications/new_modal" => "applications#new_modal"
+  get "/applications/:id/edit_modal" => "applications#edit_modal"
+  get "/interactions/:id/show_modal" => "interactions#show_modal"
+  get "/interactions/new_modal" => "interactions#new_modal"
+  get "/interactions/:id/edit_modal" => "interactions#edit_modal"
 
   resources :contacts
   resources :jobs
@@ -18,7 +24,7 @@ Rails.application.routes.draw do
   # resources :sessions, only: :index
   # get "/auth/:provider/callback" => 'sessions#create'
 
-  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

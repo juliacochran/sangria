@@ -2,12 +2,13 @@
 
 <%= javascript_include_tag "companies.js" %> 
 
-<script type="text/javascript">
-  var companies = <%= @companies.html_safe %>;
-  addCompanies(companies);
-</script>
-
-
 <%= render 'form' %>
 
 <%= link_to 'Back', companies_path %>
+
+<script type="text/javascript">
+  window.onload = function(event){
+	  var companies = <%= @companies.html_safe %>;
+	  addCompanies(companies, false);
+	};
+</script>

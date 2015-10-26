@@ -15,15 +15,14 @@ class BoardsController < ApplicationController
     @user = current_user
     @boards = @user.boards
     @board = @boards.find(params[:id])
-    @stages = Board.stages
+    @stages = Board::STAGES
     @applications = Array.new(@stages.size)
-    apps_for_board = @board.applications
+    board_applications = @board.applications.order(applied_date: :desc)
     @stages.each_with_index do |stage, index|
-      @applications[index] = apps_for_board.where('stage': index+1)
-    @companies = Company.where(user_id: [@user.id, 'glassdoor'])
+    @applications[index] = board_applications.where('stage': index+1)
+    @companies = Company.all.to_json
     @jobs = @user.jobs
-    @categories = Application.categories
-
+    @categories = Application::CATEGORIES
     end
   end
 

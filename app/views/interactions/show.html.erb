@@ -1,30 +1,7 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Application:</strong>
-  <%= @interaction.application_id %>
-</p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @interaction.title %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= @interaction.category %>
-</p>
-
-<p>
-  <strong>Date:</strong>
-  <%= @interaction.date %>
-</p>
-
-
-<p>
-  <strong>Details:</strong>
-  <%= @interaction.details %>
-</p>
-
-<%= link_to 'Edit', edit_interaction_path(@interaction) %> |
-<%= link_to 'Back', interactions_path %>
+<b><%= @interaction.title || "" %> - <%= @category || "" %></b>
+<p><%= (@interaction.date) ? @interaction.date.strftime("%-m/%e/%Y") : "" %></p>
+<p><%= @interaction.details || "" %></p>
+<% if @interaction && @interaction.contact_id? %>
+  <p>Name: <%= @interaction.contact.name %>
+<% end %>
+<br />
