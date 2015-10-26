@@ -31,11 +31,9 @@ class ApplicationsController < ApplicationController
     @application = Application.new
     @user = current_user
     @jobs = @user.jobs
-    # @companies = Company.where(user_id: [@user.id, 'glassdoor'])
     @categories = Application::CATEGORIES
     @companies = Company.all.to_json
     @company = Company.new
-
   end
 
   # GET /applications/1/edit
