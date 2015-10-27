@@ -20,7 +20,7 @@
     <% @applications.each do |application| %>
       <tr>
         <td><%= application.id %></td>
-        <td><%= application.company.name %></td>
+        <td><%= (application.company) ? application.company.name : "" %></td>
         <td><%= application.board.title %></td>
         <td><%= application.job_id %></td>
         <td><%= application.stage %></td>

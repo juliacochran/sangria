@@ -3,23 +3,23 @@
     <h4>Create New Interaction</h4>
     <div class="row">
       <div class="col s12">
-        <div class="field">
+        <div class="input-field">
           <%= f.hidden_field :application_id %>
         </div>
-        <div class="field">
-          <%= f.label :title %><br>
+        <div class="input-field">
+          <%= f.label :title %>
           <%= f.text_field :title %>
         </div>
-        <div class="field">
-          <%= f.label :category %><br>
+        <div class="input-field">
+          <%= f.label :category %>
           <%= f.number_field :category %>
         </div>
-        <div class="field">
-          <%= f.label :date %><br>
-          <%= date_field :interaction, :date %>
+        <div class="input-field">
+          <%= f.label :date %>
+          <%= date_field :interaction, :date, :class => "datepicker" %>
         </div>
-        <div class="field">
-          <%= f.label :details %><br>
+        <div class="input-field">
+          <%= f.label :details %>
           <%= f.text_area :details %>
         </div>
         <br />
@@ -30,23 +30,23 @@
         <div class="interaction-new-contact" style="display: none;">
           <%= form_for(Contact.new) do |c_f| %>
             <h5>Add New Contact</h5>
-            <div class="field">
+            <div class="input-field">
               <%= c_f.hidden_field :company_id %>
             </div>
-            <div class="field">
-              <%= c_f.label :name %><br>
+            <div class="input-field">
+              <%= c_f.label :name %>
               <%= c_f.text_field :name %>
             </div>
-            <div class="field">
-              <%= c_f.label :email %><br>
+            <div class="input-field">
+              <%= c_f.label :email %>
               <%= c_f.text_field :email %>
             </div>
-            <div class="field">
-              <%= c_f.label :phone_number %><br>
+            <div class="input-field">
+              <%= c_f.label :phone_number %>
               <%= c_f.text_field :phone_number %>
             </div>
-            <div class="field">
-              <%= c_f.label :role %><br>
+            <div class="input-field">
+              <%= c_f.label :role %>
               <%= c_f.number_field :role %>
             </div>
             <div class="actions">
@@ -56,8 +56,8 @@
         </div>
         <div class="interaction-existing-contact" style="display: none;">
           <h5>Add Existing Contact</h5>
-          <div class="field">
-            <%= f.label :contact_id, "Existing Contact" %><br>
+          <div class="input-field">
+            <%= f.label :contact_id, "Existing Contact" %>
             <%= f.text_field :contact_id %>
           </div>
         </div>
@@ -65,8 +65,6 @@
     </div>
   </div>
   <div class="modal-footer actions">
-    <a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">
-      <%= f.submit "Create Interaction", :id => "interaction-new-submit" %>
-    </a>
+    <%= f.submit :id => "interaction-new-submit", :class => "modal-action modal-close btn-flat" %>
   </div>
 <% end %>
