@@ -21,15 +21,15 @@
 <div class="row">
 	<% @applications.each_with_index do |stage, index| %>
 		<div class="col s3">
-			<div class="card blue-grey darken-1">
-				<div class="card-content white-text" style="padding: 5px 20px">
+			<div class="card cyan lighten-2">
+				<div class="card-content" style="padding: 5px 20px">
 					<span class="card-title"><%= @stages[index] %></span>
 					<a href="#application-new-modal" class="application-new-modal-trigger" data-stage="<%= @stages[index] %>" data-stage_num="<%= index+1 %>"><i class="material-icons card-title right">add</i></a>
 				</div>
 			</div>
 
 			<% stage.each do |application| %>
-			<div class="card teal">
+			<div class="card">
 				<div class="card-content white-text">
 					<!-- <span class="card-title white-text"><a href="#application-show-modal" class="application-show-modal-trigger" data-application_id="<%= application.id %>"><%= application.company.name %></a></span> -->
 					<span class="card-title white-text"><a href="#application-show-modal" class="application-show-modal-trigger" data-application_id="<%= application.id %>"><img src="<%= application.company.logo %>" style="max-width:100px; max-height:100px; background-color: #ffffff; padding: 0.1em;" /></a></span>
