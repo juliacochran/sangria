@@ -2,21 +2,21 @@
   <p id="notice"><%= flash[:notice] %></p>
 <% end %>
 
-<%= link_to "New note", new_note_path(board_id: @board.id) %> <br>
-
-
 
 <div class="row" style="margin: 0">
-<div class="col s12 title-board">
-	<%= form_for @board do |f| %>
-		<div class="title-icons">
-			<%= link_to 'add', "#board-new-modal", :class => "material-icons board-new-modal-trigger" %>
-			<%= link_to 'more_vert', "#board-change-modal", :class => "material-icons board-change-modal-trigger" %>
-			<%= link_to 'delete', @board, method: :delete, data: { confirm: 'Are you sure?' }, :class => "material-icons" %>
-		</div>
-		<%= f.text_field :title, :style => "font-size: 2rem;" %>
-	<% end %>
-</div>
+	<div class="col s4 title-board">
+		<%= form_for @board do |f| %>
+			<div class="title-icons">
+				<%= link_to 'add', "#board-new-modal", :class => "material-icons board-new-modal-trigger" %>
+				<%= link_to 'more_vert', "#board-change-modal", :class => "material-icons board-change-modal-trigger" %>
+				<%= link_to 'delete', @board, method: :delete, data: { confirm: 'Are you sure?' }, :class => "material-icons" %>
+				<%= link_to "description", new_note_path(board_id: @board.id) , :class=> "material-icons"%> 
+				<br>
+
+			</div>
+			<%= f.text_field :title, :style => "font-size: 2rem; margin-top:1rem;" %>
+		<% end %>
+	</div>
 </div>
 <div class="row">
 	<% @applications.each_with_index do |stage, index| %>
