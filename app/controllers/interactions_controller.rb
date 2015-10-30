@@ -47,18 +47,10 @@ class InteractionsController < ApplicationController
     Case 2.1: new contact with new company
     Case 2.2: new contact with existing company
   Case 3: create interaction with existing contact
+
+  This currently only covers case 2.1
   """
   def create
-    puts "===================="
-    puts "===================="
-    puts "===================="
-    puts "===================="
-    puts params
-    puts interaction_params
-    puts "===================="
-    puts "===================="
-    puts "===================="
-    puts "===================="
 
     @user = current_user
     @company = @user.companies.create(company_params)
@@ -72,13 +64,6 @@ class InteractionsController < ApplicationController
     end
     new_interaction_params[:contact_id] = @contact.id
     @interaction = @application.interactions.create(new_interaction_params)
-
-    puts params
-    puts interaction_params
-    puts "===================="
-    puts "===================="
-    puts "===================="
-    puts "===================="
 
     respond_to do |format|
       if @company.save
