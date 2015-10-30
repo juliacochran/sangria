@@ -1,22 +1,27 @@
-<div class="application-show-modal-title" style="margin-bottom: 2em;">
+<div class="section application-show-modal-title">
   <img src="<%= @application.company.logo %>" width="150" style="float: right;" />
   <h4>Job: <%= @job || "" %></h4>
   <p><%= @application.company.name %></p>
 </div>
-<p>Date Applied: <%= (@application.applied_date?) ? @application.applied_date.strftime("%-m/%e/%Y") : "" %></p>
-<p>Status: <%= @stage || "" %></p>
-<p>Category: <%= @category || "" %></p>
-<p></p>
+<div class="section">
+  <p>Date Applied: <%= (@application.applied_date?) ? @application.applied_date.strftime("%-m/%e/%Y") : "" %></p>
+  <p>Status: <%= @stage || "" %></p>
+  <p>Category: <%= @category || "" %></p>
+  <p></p>
+</div>
 <% if @interactions.length > 0 %>
-  <hr />
-  <h4>Interactions</h4>
-  <% @interactions.each do |interaction| %>
-    <b><%= interaction.title || "" %> - <%= interaction.category || "" %></b>
-    <p><%= (interaction.date) ? interaction.date.strftime("%-m/%e/%Y") : "" %></p>
-    <p><%= interaction.details || "" %></p>
-    <% if interaction && interaction.contact_id? %>
-      <p>Name: <%= interaction.contact.name %>
-    <% end %>
-    <br />
+  <div class="divider"></div>
+  <div class="section">
+    <h4>Interactions</h4>
+    <% @interactions.each do |interaction| %>
+      <div class="section">
+        <b><%= interaction.title || "" %> - <%= interaction.category || "" %></b>
+        <p><%= (interaction.date) ? interaction.date.strftime("%-m/%e/%Y") : "" %></p>
+        <p><%= interaction.details || "" %></p>
+        <% if interaction && interaction.contact_id? %>
+          <p>Name: <%= interaction.contact.name %>
+        <% end %>
+      </div>
+    </div>
   <% end %>
 <% end %>

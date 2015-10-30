@@ -1,5 +1,3 @@
-<%= javascript_include_tag "applications.js" %> 
-
 <%= form_for(Application.new, builder: ComboboxFormBuilder) do |f| %>
   <div class="modal-content">
     <h4>Create New <span id="application-new-modal-title"></span> Application</h4>
@@ -16,25 +14,19 @@
           <%= date_field :application, :applied_date, :class => "datepicker" %>
         </div>
         <div class="input-field">
-          <%= f.label :name %>
-          <%= f.combobox_tag('company[name]', [] , :list_id => "company_list")%>
-        </div>
-
-        <div class="input-field" display="none">
-          <%= f.label :company_id %>
-          <%= f.number_field :company_id %>
+          <%= f.label :company_id, "Company Name" %>
+          <%= f.combobox_tag('application[company_id]', [] , :list_id => "company_list") %>
         </div>
         <div class="input-field">
           <%= f.label :job_id %>
           <%= f.number_field :job_id %>
         </div>
         <div class="input-field">
-          <%= f.label :category %>
-          <%= f.number_field :category %>
+          <%= f.label :category, :class => "active" %>
+          <%= f.select(:category, options_for_select(Application.categories_for_select), {}, {class: "materialize-select"}) %>
         </div>
         <div class="input-field">
-          <%= f.label :settings %>
-          <%= f.text_field :settings %>
+          <%= f.hidden_field :settings, :value => "00000000" %>
         </div>
 
       </div>

@@ -3,5 +3,8 @@
 <p><%= @interaction.details || "" %></p>
 <% if @interaction && @interaction.contact_id? %>
   <p>Name: <%= @interaction.contact.name %>
+  <p>Name: <%= @interaction.contact.email %>
+  <p>Name: <%= @interaction.contact.phone_number %>
+  <p>Name: <%= @interaction.contact.role %>
 <% end %>
 <br />

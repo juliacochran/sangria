@@ -8,8 +8,12 @@ class Board < ActiveRecord::Base
                  "Interviewing",
                  "Waiting",
                  "Offered"]#, "Discontinued"]
-  # STAGES = {1 => "Applied",
-  #           2 => "Interviewing",
-  #           3 => "Waiting",
-  #           4 => "Offered"}#"Discontinued"
+
+  def self.stages_for_select
+    select_array = [["Choose Stage", ""]]
+    STAGES.each_with_index do |stage, index|
+      select_array.push([stage, index+1])
+    end
+    return select_array
+  end
 end

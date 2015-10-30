@@ -2,23 +2,22 @@
   <p id="notice"><%= flash[:notice] %></p>
 <% end %>
 <!-- <div id="sidebar">
-        
+
 </div> -->
 
 <!-- <div class="animate">
-        <p class="button"><i class="material-icons">description</i></p>    
+        <p class="button"><i class="material-icons">description</i></p>
 </div> -->
 
 <div class="row" style="margin: 0">
 	<div class="col s12 m6 l4 title-board" >
 		<%= form_for @board do |f| %>
-			<div class="title-icons" style="padding-top:1rem;">
+			<div class="title-icons">
 				<%= link_to 'add', "#board-new-modal", :class => "material-icons board-new-modal-trigger" %>
 				<%= link_to 'arrow_drop_down', "#board-change-modal", :class => "material-icons board-change-modal-trigger" %>
 				<%= link_to 'delete', @board, method: :delete, data: { confirm: 'Are you sure?' }, :class => "material-icons" %>
-				<%= link_to "description", new_note_path(board_id: @board.id) , :class=> "material-icons "%> 
+				<%= link_to "description", new_note_path(board_id: @board.id) , :class=> "material-icons "%>
 				<br>
-
 			</div>
 			<%= f.text_field :title, :style => "font-size: 2rem; margin-top:1rem;" %>
 		<% end %>
@@ -35,23 +34,28 @@
 			</div>
 
 			<% stage.each do |application| %>
-			<div class="card">
-				<div class="card-content white-text">
-					<!-- <span class="card-title white-text"><a href="#application-show-modal" class="application-show-modal-trigger" data-application_id="<%= application.id %>"><%= application.company.name %></a></span> -->
-					<span class="card-title white-text"><a href="#application-show-modal" class="application-show-modal-trigger" data-application_id="<%= application.id %>"><img src="<%= application.company.logo %>" style="max-width:100px; max-height:100px; background-color: #ffffff; padding: 0.1em;" /></a></span>
-					<p class="teal-text text-darken-4"><%= application.company.location %></p>
-					<% if application.current_interaction != nil %>
-						<hr />
-						<h6>Most Current Interaction</h6>
-						<a href="#interaction-show-modal" class="interaction-show-modal-trigger" data-interaction_id="<%= application.current_interaction.id %>"><%= application.current_interaction.title %></a>
-						<p class="teal-text text-darken-4"><%= truncate(application.current_interaction.details, length: 50, separator: " ") %></p>
-					<% end %>
+				<div class="card">
+					<div class="card-content">
+						<span class="card-title"><a href="#application-show-modal" class="application-show-modal-trigger" data-application_id="<%= application.id %>">
+							<% if application.company && application.company.logo? %>
+								<img src="<%= application.company.logo %>" style="max-width:100px; max-height:100px; background-color: #ffffff; padding: 0.1em;" />
+							<% else %>
+								<%= application.company.name %>
+							<% end %>
+						</a></span>
+						<p class="teal-text text-darken-4"><%= application.company.location %></p>
+						<% if application.current_interaction != nil %>
+							<div class="divider" style="margin: 1em 0;"></div>
+							<h6>Most Current Interaction</h6>
+							<a href="#interaction-show-modal" class="interaction-show-modal-trigger" data-interaction_id="<%= application.current_interaction.id %>"><%= application.current_interaction.title %></a>
+							<p class="teal-text text-darken-4"><%= truncate(application.current_interaction.details, length: 50, separator: " ") %></p>
+						<% end %>
+					</div>
+					<div class="card-action" style="text-align: right;">
+						<!-- <a href="#application-edit-modal" class="application-edit-modal-trigger" data-application_id="<%= application.id %>"><i class="material-icons card-title">edit</i></a> -->
+						<a href="#interaction-new-modal" class="interaction-new-modal-trigger" style="margin-right: 0;" data-application_id="<%= application.id %>"><i class="material-icons card-title black-text">add</i></a>
+					</div>
 				</div>
-				<div class="card-action" style="text-align: right;">
-					<!-- <a href="#application-edit-modal" class="application-edit-modal-trigger" data-application_id="<%= application.id %>"><i class="material-icons card-title">edit</i></a> -->
-					<a href="#interaction-new-modal" class="interaction-new-modal-trigger" style="margin-right: 0;" data-application_id="<%= application.id %>"><i class="material-icons card-title black-text">add</i></a>
-				</div>
-			</div>
 			<% end %>
 		</div>
 	<% end %>
@@ -61,10 +65,10 @@
 	<div class="modal-content center">
 		<h4 class="">Change Boards</h4>
 		<% @boards.each do |board| %>
-		
-		<div class=" <%= (board.id == @board.id) ? "selected" : "" %>"><%= link_to board.title, board, :class=>"card-panel light-grey waves-effect waves-teal" %> 
+
+		<div class=" <%= (board.id == @board.id) ? "selected" : "" %>"><%= link_to board.title, board, :class=>"card-panel light-grey waves-effect waves-teal" %>
 		</div>
-		
+
 		<% end %>
 	</div>
 	<div class="modal-footer">

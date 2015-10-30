@@ -4,9 +4,19 @@
 //= require_tree .
 //= require materialize-sprockets
 var stage_num = 0;
+
+var init_selects = function($this) {
+  var $selects = $this.find(".materialize-select");
+  $selects.material_select();
+  $selects.find("option:first").attr("disabled", "true");
+};
+
 $(document).ready(function() {
 
+  init_selects($(".content"));
+
 	$(".dropdown-button").dropdown();
+
   $(".application-new-modal-trigger").leanModal({
     in_duration: 200,
     out_duration: 200
@@ -32,13 +42,15 @@ $(document).ready(function() {
       url: "/applications/" + $this.data("application_id") + "/edit_modal"
     })
     .done(function(data) {
-      $("#application-edit-modal").html(data);
+      var $modal = $("#application-edit-modal");
+      $modal.html(data);
 
-      $("#application-edit-modal .datepicker").pickadate({
+      $modal.find(".datepicker").pickadate({
         selectMonths: true, // Creates a dropdown to control month
         selectYears: 15, // Creates a dropdown of 15 years to control year
         container: "body"
       });
+      init_selects($modal);
     })
     .fail(function() {
       alert( "error" );
@@ -128,12 +140,6 @@ $(document).ready(function() {
     $(".interaction-existing-contact").show();
   });
 
-  $("#interaction-new-submit").on("click", function(e) {
-    e.preventDefault();
-    $("#interaction-new-contact-submit").trigger(jQuery.Event("submit"));
-    return $(this).trigger(jQuery.Event("submit"));
-  });
-
   $(".interaction-edit-modal-trigger").leanModal({
     in_duration: 200,
     out_duration: 200
@@ -144,13 +150,15 @@ $(document).ready(function() {
       url: "/interactions/" + $this.data("interaction_id") + "/edit_modal"
     })
     .done(function(data) {
-      $("#interaction-edit-modal").html(data);
+      var $modal = $("#interaction-edit-modal");
+      $modal.html(data);
 
-      $("#interaction-edit-modal .datepicker").pickadate({
+      $modal.find(".datepicker").pickadate({
         selectMonths: true, // Creates a dropdown to control month
         selectYears: 15, // Creates a dropdown of 15 years to control year
         container: "body"
       });
+      init_selects($modal);
     })
     .fail(function() {
       alert( "error" );

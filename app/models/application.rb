@@ -11,6 +11,14 @@ class Application < ActiveRecord::Base
                      "Internship",
                      "Co-op"]
 
+  def self.categories_for_select
+    select_array = [["Choose Category", ""]]
+    CATEGORIES.each_with_index do |category, index|
+      select_array.push([category, index+1])
+    end
+    return select_array
+  end
+
   """
   If all interactions have no dates, get the most recently created one
   If there is a date today or in the future, get the one closest to now

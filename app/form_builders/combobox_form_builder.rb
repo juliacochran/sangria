@@ -6,6 +6,5 @@ class ComboboxFormBuilder < ActionView::Helpers::FormBuilder
      @template.content_tag(:input, :name => name, :id => sanitize_to_id(name), :type => "text", :list => opts[:list_id], :onkeyup => 'inputChanged()') do
        content_tag(:datalist, :id => opts[:list_id]) {options}
      end
-  end    
+  end
 end
-

@@ -12,7 +12,7 @@
         </div>
         <div class="input-field">
           <%= f.label :category, :class => "active" %>
-          <%= f.number_field :category %>
+          <%= f.select(:category, options_for_select(Interaction.categories_for_select), {}, {class: "materialize-select"}) %>
         </div>
         <div class="input-field">
           <%= f.label :date, :class => "active" %>

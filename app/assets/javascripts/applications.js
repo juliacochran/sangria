@@ -1,7 +1,7 @@
 
 
 
-//TODO: change the cancell logic. since new data could be matching but not 
+//TODO: change the cancell logic. since new data could be matching but not
 
 
 //make the emp_list the array of all companies
@@ -45,7 +45,7 @@ function updateList(e){
 	    	if(response["employers"].length > 0){
 				//the employee list
 				var emp_list = response["employers"];
-				
+
 				addCompanies(emp_list,true);
 	    	}else{
 	    		//found no employers
@@ -56,7 +56,7 @@ function updateList(e){
 	        //Do Something to handle error
 	        changing = 0;
 	    }
-	});	
+	});
 }
 
 
@@ -64,7 +64,7 @@ function updateList(e){
 //var text = emp_list[index].name;
 
 
-function updateInfo(text){	
+function updateInfo(text){
 	//console.log(comp_list);
 	for (comp of comp_list){
 		var comp_name = comp["name"];
@@ -106,7 +106,7 @@ function inCompList(comp){
 	var comp_logo = comp["logo"];
 	var comp_website = comp["website"];
 	var comp_location = comp["location"];
-	
+
 	for (comp1 of comp_list){
 		if(eqStr(comp_name, comp1["name"]) && eqStr(comp_logo, comp1["squareLogo"]) && eqStr(comp_website, comp["website"]) && eqStr(comp_location, comp["location"]) ){
 			return true;
@@ -151,8 +151,9 @@ function addGDCompany(comp){
 
 	var emp_name = comp["name"];
 	var emp_logo = comp["squareLogo"];
+	var emp_id = comp["glassdoor_id"];
 
-	$('#company_list').append('<option value="' + emp_name + '">' + emp_name + '</option>');
+	$('#company_list').append('<option value="' + emp_id + '">' + emp_name + '</option>');
 	comp_list.push(createCompany(comp));
 }
 
@@ -161,16 +162,18 @@ function addCompanies(companies, gd){
 		comp_list = new Array();
 	}
 	for (var index = 0; index < companies.length; index++){
-		if(gd){
-			var emp_name = companies[index]["name"];
-			var emp_logo = companies[index]["squareLogo"];
+		var company = companies[index];
+		if (gd) {
+			// why even have these variables?
+			var emp_name = company["name"];
+			var emp_logo = company["squareLogo"];
 
-			if(!inCompList(companies[index])){
-				addGDCompany(companies[index]);
+			if (!inCompList(company)) {
+				addGDCompany(company);
 			}
-		}else{
-			$('#company_list').append('<option value="' + companies[index]["name"] + '">' + companies[index]["name"] + '</option>');
-			comp_list.push(companies[index]);
+		} else {
+			$('#company_list').append('<option value="' + company["id"] + '">' + company["name"] + '</option>');
+			comp_list.push(company);
 		}
 	}
 }

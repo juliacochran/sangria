@@ -41,17 +41,60 @@ class InteractionsController < ApplicationController
 
   # POST /interactions
   # POST /interactions.json
+  """
+  Case 1: create interaction without contact
+  Case 2: create interaction with new contact
+    Case 2.1: new contact with new company
+    Case 2.2: new contact with existing company
+  Case 3: create interaction with existing contact
+  """
   def create
+    puts "===================="
+    puts "===================="
+    puts "===================="
+    puts "===================="
+    puts params
+    puts interaction_params
+    puts "===================="
+    puts "===================="
+    puts "===================="
+    puts "===================="
+
+    @user = current_user
+    @company = @user.companies.create(company_params)
+    @contact = @company.contacts.create(contact_params)
+
     @application = Application.find(interaction_params[:application_id])
-    @interaction = @application.interactions.create(interaction_params)
+    # params are mutable so I'm making an extra with the new contact_id
+    new_interaction_params = {}
+    interaction_params.each do |key, value|
+      new_interaction_params[key] = value
+    end
+    new_interaction_params[:contact_id] = @contact.id
+    @interaction = @application.interactions.create(new_interaction_params)
+
+    puts params
+    puts interaction_params
+    puts "===================="
+    puts "===================="
+    puts "===================="
+    puts "===================="
 
     respond_to do |format|
-      if @interaction.save
-        format.html { redirect_to :back }
-        format.json { render :show, status: :created, location: @interaction }
+      if @company.save
+        if @contact.save
+          if @interaction.save
+            format.html { redirect_to :back }
+            format.json { render :show, status: :created, location: @interaction }
+          else
+            format.html { render :new }
+            format.json { render json: @interaction.errors, status: :unprocessable_entity }
+          end
+        else
+          format.html { redirect_to :back }
+        end
       else
-        format.html { render :new }
-        format.json { render json: @interaction.errors, status: :unprocessable_entity }
+        format.html { redirect_to :back }
       end
     end
   end
@@ -89,5 +132,15 @@ class InteractionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def interaction_params
       params.require(:interaction).permit(:application_id, :title, :category, :date, :contact_id, :details)
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def company_params
+      params.require(:company).permit(:id, :name, :location, :website, :logo)
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def contact_params
+      params.require(:contact).permit(:company_id, :name, :email, :phone_number, :role)
     end
 end
