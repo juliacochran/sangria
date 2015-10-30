@@ -1,16 +1,22 @@
 <% if flash[:notice] %>
   <p id="notice"><%= flash[:notice] %></p>
 <% end %>
+<!-- <div id="sidebar">
+        
+</div> -->
 
+<!-- <div class="animate">
+        <p class="button"><i class="material-icons">description</i></p>    
+</div> -->
 
 <div class="row" style="margin: 0">
-	<div class="col s4 title-board">
+	<div class="col s12 m6 l4 title-board" >
 		<%= form_for @board do |f| %>
-			<div class="title-icons">
+			<div class="title-icons" style="padding-top:1rem;">
 				<%= link_to 'add', "#board-new-modal", :class => "material-icons board-new-modal-trigger" %>
-				<%= link_to 'more_vert', "#board-change-modal", :class => "material-icons board-change-modal-trigger" %>
+				<%= link_to 'arrow_drop_down', "#board-change-modal", :class => "material-icons board-change-modal-trigger" %>
 				<%= link_to 'delete', @board, method: :delete, data: { confirm: 'Are you sure?' }, :class => "material-icons" %>
-				<%= link_to "description", new_note_path(board_id: @board.id) , :class=> "material-icons"%> 
+				<%= link_to "description", new_note_path(board_id: @board.id) , :class=> "material-icons "%> 
 				<br>
 
 			</div>
@@ -20,9 +26,9 @@
 </div>
 <div class="row">
 	<% @applications.each_with_index do |stage, index| %>
-		<div class="col s3">
+		<div class="col s12 m6 l3">
 			<div class="card cyan lighten-2">
-				<div class="card-content" style="padding: 5px 20px">
+				<div class="card-content" style="padding: 0px 20px">
 					<span class="card-title"><%= @stages[index] %></span>
 					<a href="#application-new-modal" class="application-new-modal-trigger" data-stage="<%= @stages[index] %>" data-stage_num="<%= index+1 %>"><i class="material-icons card-title right">add</i></a>
 				</div>
@@ -43,7 +49,7 @@
 				</div>
 				<div class="card-action" style="text-align: right;">
 					<!-- <a href="#application-edit-modal" class="application-edit-modal-trigger" data-application_id="<%= application.id %>"><i class="material-icons card-title">edit</i></a> -->
-					<a href="#interaction-new-modal" class="interaction-new-modal-trigger" style="margin-right: 0;" data-application_id="<%= application.id %>"><i class="material-icons card-title">add</i></a>
+					<a href="#interaction-new-modal" class="interaction-new-modal-trigger" style="margin-right: 0;" data-application_id="<%= application.id %>"><i class="material-icons card-title black-text">add</i></a>
 				</div>
 			</div>
 			<% end %>
@@ -52,14 +58,17 @@
 </div>
 
 <div id="board-change-modal" class="modal modal-fixed-footer">
-	<div class="modal-content">
-		<h4>Change Boards</h4>
+	<div class="modal-content center">
+		<h4 class="">Change Boards</h4>
 		<% @boards.each do |board| %>
-		<p class="model-options <%= (board.id == @board.id) ? "selected" : "" %>"><%= link_to board.title, board %><p>
+		
+		<div class=" <%= (board.id == @board.id) ? "selected" : "" %>"><%= link_to board.title, board, :class=>"card-panel light-grey waves-effect waves-teal" %> 
+		</div>
+		
 		<% end %>
 	</div>
 	<div class="modal-footer">
-		<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancel</a>
+		<a href="#!" class="modal-action modal-close waves-effect waves-teal btn-flat ">Cancel</a>
 	</div>
 </div>
 

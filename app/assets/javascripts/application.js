@@ -167,3 +167,8 @@ $(document).ready(function() {
 		out_duration: 200
 	});
 });
+
+
+$('.button').click(function(){
+            $('.animate').toggleClass('slide');
+            });

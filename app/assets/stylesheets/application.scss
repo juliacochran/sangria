@@ -48,4 +48,19 @@ body{
     border-bottom:none;
 }
 
+/* label underline focus color */
+#board_title:focus {
+ border-bottom: 1px solid #4DD0E1;
+ box-shadow: 0 1px 0 0 #4DD0E1;
+}
+
+html{
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: 300;
+}
+
+.nav-wrapper{
+    margin-left: 20px;
+}
+
 
