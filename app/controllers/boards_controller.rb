@@ -21,7 +21,10 @@ class BoardsController < ApplicationController
     @stages.each_with_index do |stage, index|
       @applications[index] = board_applications.where('stage': index+1)
     end
+    #@companies = Company.where("user_id = '0' OR " + "'" + @user + "'").to_json
     @companies = Company.all.to_json
+    @company = Company.new
+    @application = Application.new
     @jobs = @user.jobs
     @categories = Application::CATEGORIES
   end
