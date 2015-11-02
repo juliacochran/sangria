@@ -29,7 +29,7 @@
 			<div class="card cyan lighten-2">
 				<div class="card-content" style="padding: 0px 20px">
 					<span class="card-title"><%= @stages[index] %></span>
-					<a href="#application-new-modal" class="application-new-modal-trigger" data-stage="<%= @stages[index] %>" data-stage_num="<%= index+1 %>"><i class="material-icons card-title right">add</i></a>
+					<a href="#application-new-modal" class="application-new-modal-trigger" data-stage_num="<%= index+1 %>" data-board_id="<%= @board.id %>"><i class="material-icons card-title right">add</i></a>
 				</div>
 			</div>
 
@@ -60,7 +60,7 @@
 			<% end %>
 		</div>
 	<% end %>
-	
+
 <!-- 	<div class="col s12 m6 l2">
 		<div class="card cyan lighten-2">
 			<div class="card-content" style="padding: 0px 20px;">
@@ -73,7 +73,7 @@
 			</div>
 		</div>
 	</div> -->
-	
+
 </div>
 
 <div id="extruder" class="{title:'Notes', url:'boards/extruderTop.html'}"> </div>
@@ -105,9 +105,7 @@
 	</div>
 </div>
 
-<div id="application-new-modal" class="modal modal-fixed-footer">
-	<%= render 'applications/form_new' %>
-</div>
+<div id="application-new-modal" class="modal modal-fixed-footer"></div>
 
 <div id="application-edit-modal" class="modal modal-fixed-footer"></div>
 
@@ -123,19 +121,15 @@
 	</div>
 </div>
 
-<div id="interaction-new-modal" class="modal modal-fixed-footer">
-	<%= render 'interactions/form_new' %>
-</div>
+<div id="interaction-new-modal" class="modal modal-fixed-footer"></div>
 
 <div id="interaction-edit-modal" class="modal modal-fixed-footer"></div>
 
-<div id="board-new-modal" class="modal modal-fixed-footer">
-	<%= render 'boards/form_new' %>
+<div id="board-new-modal" class="modal modal-fixed-footer"></div>
 
-	<script type="text/javascript">
-	  window.onload = function(event){
-	    var companies = <%= @companies.html_safe %>;
-	    addCompanies(companies, false);
-	  };
-	</script>
-</div>
+<script type="text/javascript">
+  window.onload = function(event){
+    var companies = <%= @companies.html_safe %>;
+    addCompanies(companies, false);
+  };
+</script>

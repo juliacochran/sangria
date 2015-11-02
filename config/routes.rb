@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'homes/index'
   delete '/logout' => 'sessions#destroy'
   get "/search" => "companies#search"
+  get "/boards/new_modal" => "boards#new_modal"
   get "/applications/:id/show_modal" => "applications#show_modal"
   get "/applications/new_modal" => "applications#new_modal"
   get "/applications/:id/edit_modal" => "applications#edit_modal"

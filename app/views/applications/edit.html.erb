@@ -19,7 +19,7 @@
         </div>
         <div class="input-field">
           <%= f.label :company_id, :class => "active" %>
-          <%= f.combobox_tag('application[company_id]', [] , :list_id => "company_list") %>
+          <%= f.combobox_tag('application[company_id]', [] , :list_id => "company_list", :form_id => "edit_application") %>
         </div>
         <div class="input-field">
           <%= f.label :job_id, :class => "active" %>

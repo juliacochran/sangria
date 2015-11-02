@@ -36,6 +36,20 @@ class ApplicationsController < ApplicationController
     @company = Company.new
   end
 
+  # GET /applications/new
+  def new_modal
+    @board = Board.find(params[:board_id].to_i)
+    @application = Application.new
+    @user = current_user
+    @jobs = @user.jobs
+    @categories = Application::CATEGORIES
+    @companies = Company.all.to_json
+    @company = Company.new
+    stage_num = params[:stage].to_i
+    @stage = {'name' => Board::STAGES[stage_num+1], 'num' => stage_num}
+    render 'new', :layout => nil
+  end
+
   # GET /applications/1/edit
   def edit
   end
@@ -60,12 +74,12 @@ class ApplicationsController < ApplicationController
       new_application_params[key] = value
     end
     # TODO: if statement for if creation or company_id
-    
+
     if application_params[:company_id].blank?
       @company = @user.companies.create(company_params)
       new_application_params[:company_id] = @company.id
     end
-    
+
     @application = @board.applications.create(new_application_params)
 
     respond_to do |format|

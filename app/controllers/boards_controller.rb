@@ -34,6 +34,12 @@ class BoardsController < ApplicationController
     @board = Board.new
   end
 
+  # GET /boards/new
+  def new_modal
+    @board = Board.new
+    render 'new', :layout => nil
+  end
+
   # GET /boards/1/edit
   def edit
   end

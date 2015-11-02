@@ -1,5 +1,16 @@
-<h1>New Board</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', users_path %>
+<%= form_for(@board) do |f| %>
+  <div class="modal-content">
+    <h4>Create New Board</h4>
+    <div class="row">
+      <div class="col s12">
+        <div class="input-field"
+          <%= f.label :title %>
+          <%= f.text_field :title %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer actions">
+    <%= f.submit :class => "modal-action modal-close btn-flat" %>
+  </div>
+<% end %>

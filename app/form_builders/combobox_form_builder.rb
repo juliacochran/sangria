@@ -3,7 +3,7 @@ class ComboboxFormBuilder < ActionView::Helpers::FormBuilder
   include ActionView::Helpers::FormTagHelper #for sanitize_to_id method access
 
   def combobox_tag(name, options, opts= {})
-     @template.content_tag(:input, :name => name, :id => sanitize_to_id(name), :type => "text", :list => opts[:list_id], :onkeyup => 'inputChanged()') do
+     @template.content_tag(:input, :name => name, :id => sanitize_to_id(name), :type => "text", :list => opts[:list_id], :onkeyup => 'inputChanged("' + opts[:form_id] + '")') do
        content_tag(:datalist, :id => opts[:list_id]) {options}
      end
   end
