@@ -129,7 +129,7 @@ function inCompList(comp){
 	var comp_website = comp["website"];
 	var comp_location = comp["location"];
 
-	for (comp1 of comp_list){
+	for (comp1 in comp_list){
 		if(eqStr(comp_name, comp1["name"]) && eqStr(comp_logo, comp1["squareLogo"]) && eqStr(comp_website, comp["website"]) && eqStr(comp_location, comp["location"]) ){
 			return true;
 		}
@@ -207,7 +207,7 @@ function addCompanies(companies, gd){
 }
 
 function getCompanyId(comp_name,comp_logo,comp_website,comp_location){
-	for (comp1 of comp_list){
+	for (comp1 in comp_list){
 		if(eqStr(comp_name, comp1["name"]) && eqStr(comp_logo, comp1["logo"]) && eqStr(comp_website, comp["website"]) && eqStr(comp_location, comp["location"]) ){
 			if(comp1["id"] > 0)
 				return comp1["id"];
