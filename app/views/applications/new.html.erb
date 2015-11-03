@@ -1,5 +1,58 @@
-<h1>New Application</h1>
+<%= form_for(@application, builder: ComboboxFormBuilder) do |f| %>
+  <div class="modal-content">
+    <h4>Create New <%= @stage['name'] %> Application</h4>
+    <div class="row">
+      <div class="col s12">
+        <div class="input-field">
+          <%= f.hidden_field :stage, :value => @stage['num'] %>
+        </div>
+        <div class="input-field">
+          <%= f.hidden_field :board_id, :value => @board.id %>
+        </div>
+        <div class="input-field">
+          <%= f.label :applied_date %>
+          <%= date_field :application, :applied_date, :class => "datepicker" %>
+        </div>
+        <%= fields_for :company do |company| %>
+          <div class="input-field">
+            <%= company.label :name, "Company name" %>
+            <%= f.combobox_tag('company[name]', [], :list_id => "company_list", :form_id => "new_application")%>
+          </div>
 
-<%= render 'form' %>
+          <div style="display: none;">
+            <div class="input-field">
+              <%= company.label :location, :class => "active hidden" %>
+              <%= company.text_field :location %>
+            </div>
+            <div class="input-field">
+              <%= company.label :website, :class => "active hidden" %>
+              <%= company.text_field :website %>
+            </div>
+            <div class="field">
+              <%= company.label :logo, :class=> "active hidden" %><br>
+              <%= company.text_field :logo %>
+              <%= image_tag("https://media.glassdoor.com/sqll/9079/google-squarelogo-1441130773284.png", :alt => "company_logo", :id => "company_logo_img") %>
+            </div>
+          </div>
+        <%end %>
+        <div class="input-field">
+          <%= f.label :job_id %>
+          <%= f.number_field :job_id %>
+        </div>
+        <div class="input-field">
+          <%= f.label :category, :class => "active" %>
+          <%= f.select(:category, options_for_select(Application.categories_for_select), {}, {class: "materialize-select"}) %>
+        </div>
+        <div class="input-field">
+          <!-- hard coded settings since we don't use it -->
+          <%= f.hidden_field :settings, :value => "00000000" %>
+        </div>
 
-<%= link_to 'Back', users_path %>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer actions">
+    <%= f.submit :class => "modal-action modal-close btn-flat" %>
+  </div>
+<% end %>
+

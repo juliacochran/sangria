@@ -29,6 +29,16 @@ class InteractionsController < ApplicationController
     @categories = Interaction::CATEGORIES
   end
 
+  # GET /interactions/new_modal
+  def new_modal
+    @interaction = Interaction.new
+    @user = current_user
+    @contacts = @user.contacts_for_select
+    @categories = Interaction.categories_for_select
+    @application = Application.find(params[:application_id].to_i)
+    render 'new', :layout => nil
+  end
+
   # GET /interactions/1/edit
   def edit
   end
@@ -48,22 +58,28 @@ class InteractionsController < ApplicationController
     Case 2.2: new contact with existing company
   Case 3: create interaction with existing contact
 
-  This currently only covers case 2.1
+  THIS CURRENTLY DOES NOT COVER CASE 2.2
   """
   def create
 
     @user = current_user
-    @company = @user.companies.create(company_params)
-    @contact = @company.contacts.create(contact_params)
+    if contact_params[:name]
+      # we don't have autofill on interaction add yet so we're creating new
+      @company = @user.companies.create(company_params)
+      @contact = @company.contacts.create(contact_params)
 
-    @application = Application.find(interaction_params[:application_id])
-    # params are mutable so I'm making an extra with the new contact_id
-    new_interaction_params = {}
-    interaction_params.each do |key, value|
-      new_interaction_params[key] = value
+      @application = Application.find(interaction_params[:application_id])
+      # params are mutable so I'm making an extra with the new contact_id
+      new_interaction_params = {}
+      interaction_params.each do |key, value|
+        new_interaction_params[key] = value
+      end
+      new_interaction_params[:contact_id] = @contact.id
+      @interaction = @application.interactions.create(new_interaction_params)
+    else
+      # create without contact or if they've filled in existing contact
+      @interaction = @application.interactions.create(interaction_params)
     end
-    new_interaction_params[:contact_id] = @contact.id
-    @interaction = @application.interactions.create(new_interaction_params)
 
     respond_to do |format|
       if @company.save

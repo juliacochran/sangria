@@ -2,9 +2,10 @@
 <p><%= (@interaction.date) ? @interaction.date.strftime("%-m/%e/%Y") : "" %></p>
 <p><%= @interaction.details || "" %></p>
 <% if @interaction && @interaction.contact_id? %>
-  <p>Name: <%= @interaction.contact.name %>
-  <p>Name: <%= @interaction.contact.email %>
-  <p>Name: <%= @interaction.contact.phone_number %>
-  <p>Name: <%= @interaction.contact.role %>
+  <p>Name: <%= @interaction.contact.name %></p>
+  <p>Name: <%= @interaction.contact.email %></p>
+  <p>Name: <%= @interaction.contact.phone_number %></p>
+  <p>Name: <%= @interaction.contact.role %></p>
+  <p>Name: <%= @interaction.contact.role %></p>
 <% end %>
 <br />

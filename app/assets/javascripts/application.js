@@ -3,7 +3,6 @@
 //= require turbolinks
 //= require_tree .
 //= require materialize-sprockets
-var stage_num = 0;
 
 var init_selects = function($this) {
   var $selects = $this.find(".materialize-select");
@@ -22,14 +21,26 @@ $(document).ready(function() {
     out_duration: 200
   }).on("click", function() {
     var $this = $(this);
-    $("#application-new-modal-title").text($this.data("stage"));
-    $("#application_stage").val($this.data("stage_num"));
+    $.ajax({
+      method: "GET",
+      url: "/applications/new_modal",
+      data: { stage: $this.data("stage_num"), board_id: $this.data("board_id") }
+    })
+    .done(function(data) {
+      var $modal = $("#application-new-modal");
+      $modal.html(data);
 
-    $("#application-new-modal .datepicker").pickadate({
-      selectMonths: true, // Creates a dropdown to control month
-      selectYears: 15, // Creates a dropdown of 15 years to control year
-      container: "body"
+      $modal.find(".datepicker").pickadate({
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: 15, // Creates a dropdown of 15 years to control year
+        container: "body"
+      });
+      init_selects($modal);
+    })
+    .fail(function() {
+      alert( "error" );
     });
+
   });
 
   $(".application-edit-modal-trigger").leanModal({
@@ -121,23 +132,35 @@ $(document).ready(function() {
     out_duration: 200
   }).on("click", function() {
     var $this = $(this);
-    $("#interaction_application_id").val($this.data("application_id"));
+    $.ajax({
+      method: "GET",
+      url: "/interactions/new_modal",
+      data: { application_id: $this.data("application_id") }
+    })
+    .done(function(data) {
+      var $modal = $("#interaction-new-modal");
+      $modal.html(data);
 
-    $("#interaction-new-modal .datepicker").pickadate({
-      selectMonths: true, // Creates a dropdown to control month
-      selectYears: 15, // Creates a dropdown of 15 years to control year
-      container: "body"
+      $modal.find(".datepicker").pickadate({
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: 15, // Creates a dropdown of 15 years to control year
+        container: "body"
+      });
+      init_selects($modal);
+
+      $(".interaction-new-contact-trigger").on("click", function() {
+        $(".interaction-new-contact").show();
+        $(".interaction-existing-contact").hide();
+      });
+
+      $(".interaction-existing-contact-trigger").on("click", function() {
+        $(".interaction-new-contact").hide();
+        $(".interaction-existing-contact").show();
+      });
+    })
+    .fail(function() {
+      alert( "error" );
     });
-  });
-
-  $(".interaction-new-contact-trigger").on("click", function() {
-    $(".interaction-new-contact").show();
-    $(".interaction-existing-contact").hide();
-  });
-
-  $(".interaction-existing-contact-trigger").on("click", function() {
-    $(".interaction-new-contact").hide();
-    $(".interaction-existing-contact").show();
   });
 
   $(".interaction-edit-modal-trigger").leanModal({
@@ -170,10 +193,24 @@ $(document).ready(function() {
 		in_duration: 200,
 		out_duration: 200
 	});
+
 	$(".board-new-modal-trigger").leanModal({
 		in_duration: 200,
 		out_duration: 200
-	});
+	}).on("click", function() {
+    var $this = $(this);
+    $.ajax({
+      method: "GET",
+      url: "/boards/new_modal"
+    })
+    .done(function(data) {
+      var $modal = $("#board-new-modal");
+      $modal.html(data);
+    })
+    .fail(function() {
+      alert( "error" );
+    });
+  });
 });
 
 

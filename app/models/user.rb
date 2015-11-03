@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :boards, dependent: :destroy
   has_many :jobs, dependent: :destroy
   has_many :companies, dependent: :destroy
+  has_many :contacts, through: :companies
 
   def self.from_omniauth(auth_hash)
     user = User.find_or_create_by(email: auth_hash['info']['email'])
@@ -23,5 +24,13 @@ class User < ActiveRecord::Base
       firstBoard = user.boards.create(title: boardTitle)
     end
     user
+  end
+
+  def contacts_for_select
+    select_array = [["Choose Contact", ""]]
+    self.contacts.each do |contact|
+      select_array.push([contact.name, contact.id])
+    end
+    return select_array
   end
 end

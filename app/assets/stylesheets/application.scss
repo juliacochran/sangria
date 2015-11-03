@@ -5,6 +5,12 @@
     *= require_tree .
 */
 
+
+html{
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+}
+
 body {
     background: transparent;
     margin: 0;
@@ -27,10 +33,23 @@ body {
     background-position: 50% 100%;
 }
 
-.title-board .title-icons {
-    position: absolute;
-    right: 0.75rem;
-    margin-top: 1.7rem;
+.title-board {
+
+    & .title-icons {
+        position: absolute;
+        right: 0.75rem;
+        margin-top: 1.7rem;
+    }
+
+    & #board_title {
+        border-bottom:none;
+
+        /* label underline focus color */
+        & &:focus {
+         border-bottom: 1px solid #4DD0E1;
+         box-shadow: 0 1px 0 0 #4DD0E1;
+        }
+    }
 }
 
 
@@ -38,20 +57,6 @@ body {
     left: 0;
 }
 
-#board_title {
-    border-bottom:none;
-}
-
-/* label underline focus color */
-#board_title:focus {
- border-bottom: 1px solid #4DD0E1;
- box-shadow: 0 1px 0 0 #4DD0E1;
-}
-
-html{
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    font-weight: 300;
-}
 
 .nav-wrapper{
     margin-left: 20px;
