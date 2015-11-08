@@ -30,7 +30,7 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/sys
 
 # For Cron job reminders
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
-set :whenever_command, "bundle exec whenever"
+#set :whenever_command, "bundle exec whenever"
 # require "whenever/capistrano"
 
 # Default value for default_env is {}
