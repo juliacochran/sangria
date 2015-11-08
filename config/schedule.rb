@@ -5,7 +5,7 @@
 
 # Example:
 #
-set :output, "/Users/juliacochran7/Documents/CS 4911/seniordesign/sangria/cronlog.log"
+set :output, "/tmp/cronlog.log"
 
 every 1.minutes do
   runner "RemindersController.send_welcome_email"

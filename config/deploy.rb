@@ -32,6 +32,8 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/sys
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 #set :whenever_command, "bundle exec whenever"
 # require "whenever/capistrano"
+set :rbenv_type, :user # or :system, depends on your rbenv setup
+set :rbenv_ruby, '2.2.2'
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
