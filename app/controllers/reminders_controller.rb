@@ -1,6 +1,6 @@
 class RemindersController < ApplicationController
 	def self.send_welcome_email
-		@user = User.find_by_id(17)
+		@user = User.find_by_id(1)
 		NotifyMailer.welcome_email(@user).deliver
 		# @user = User.new
 		# @user.name = "test"
