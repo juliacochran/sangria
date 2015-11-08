@@ -10,7 +10,7 @@
 </div> -->
 
 <div class="row" style="margin: 0">
-	<div class="col s12 m6 l4 title-board" >
+	<div class="col s12 m6 l3 title-board" >
 		<%= form_for @board do |f| %>
 			<div class="title-icons">
 				<%= link_to 'add', "#board-new-modal", :class => "material-icons board-new-modal-trigger" %>
@@ -29,9 +29,10 @@
 			<div class="card cyan lighten-2">
 				<div class="card-content" style="padding: 0px 20px">
 					<span class="card-title"><%= @stages[index] %></span>
-					<a href="#application-new-modal" class="application-new-modal-trigger" data-stage="<%= @stages[index] %>" data-stage_num="<%= index+1 %>"><i class="material-icons card-title right">add</i></a>
+					<a href="#application-new-modal" class="application-new-modal-trigger" data-stage_num="<%= index+1 %>" data-board_id="<%= @board.id %>"><i class="material-icons card-title right">add</i></a>
 				</div>
 			</div>
+
 
 			<% stage.each do |application| %>
 				<div class="card">
@@ -59,7 +60,23 @@
 			<% end %>
 		</div>
 	<% end %>
+
+<!-- 	<div class="col s12 m6 l2">
+		<div class="card cyan lighten-2">
+			<div class="card-content" style="padding: 0px 20px;">
+				<span class="card-title">
+					Notes
+				</span>
+				<p>
+					This is a note
+				</p>
+			</div>
+		</div>
+	</div> -->
+
 </div>
+
+<div id="extruder" class="{title:'Notes', url:'boards/extruderTop.html'}"> </div>
 
 <div id="board-change-modal" class="modal modal-fixed-footer">
 	<div class="modal-content center">
@@ -88,9 +105,7 @@
 	</div>
 </div>
 
-<div id="application-new-modal" class="modal modal-fixed-footer">
-	<%= render 'applications/form_new' %>
-</div>
+<div id="application-new-modal" class="modal modal-fixed-footer"></div>
 
 <div id="application-edit-modal" class="modal modal-fixed-footer"></div>
 
@@ -106,20 +121,15 @@
 	</div>
 </div>
 
-<div id="interaction-new-modal" class="modal modal-fixed-footer">
-	<%= render 'interactions/form_new' %>
-</div>
+<div id="interaction-new-modal" class="modal modal-fixed-footer"></div>
 
 <div id="interaction-edit-modal" class="modal modal-fixed-footer"></div>
 
+<div id="board-new-modal" class="modal modal-fixed-footer"></div>
 
-<div id="board-new-modal" class="modal modal-fixed-footer">
-	<%= render 'boards/form_new' %>
-
-	<script type="text/javascript">
-	  window.onload = function(event){
-	    var companies = <%= @companies.html_safe %>;
-	    addCompanies(companies, false);
-	  };
-	</script>
-</div>
+<script type="text/javascript">
+  window.onload = function(event){
+    var companies = <%= @companies.html_safe %>;
+    addCompanies(companies, false);
+  };
+</script>

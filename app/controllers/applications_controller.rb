@@ -36,6 +36,20 @@ class ApplicationsController < ApplicationController
     @company = Company.new
   end
 
+  # GET /applications/new
+  def new_modal
+    @board = Board.find(params[:board_id].to_i)
+    @application = Application.new
+    @user = current_user
+    @jobs = @user.jobs
+    @categories = Application::CATEGORIES
+    @companies = Company.all.to_json
+    @company = Company.new
+    stage_num = params[:stage].to_i
+    @stage = {'name' => Board::STAGES[stage_num+1], 'num' => stage_num}
+    render 'new', :layout => nil
+  end
+
   # GET /applications/1/edit
   def edit
   end
@@ -50,7 +64,23 @@ class ApplicationsController < ApplicationController
   # POST /applications.json
   def create
     @board = Board.find(application_params[:board_id])
-    @application = @board.applications.create(application_params)
+
+    @user = current_user
+
+    logger.info(company_params)
+
+    new_application_params = {}
+    application_params.each do |key, value|
+      new_application_params[key] = value
+    end
+    # TODO: if statement for if creation or company_id
+
+    if application_params[:company_id].blank?
+      @company = @user.companies.create(company_params)
+      new_application_params[:company_id] = @company.id
+    end
+
+    @application = @board.applications.create(new_application_params)
 
     respond_to do |format|
       if @application.save
@@ -97,5 +127,9 @@ class ApplicationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def application_params
       params.require(:application).permit(:company_id, :board_id, :job_id, :stage, :category, :settings, :applied_date)
+    end
+
+    def company_params
+      params.require(:company).permit(:name, :location, :website, :logo)
     end
 end

@@ -40,7 +40,7 @@ class CompaniesController < ApplicationController
   def create
     #TODO: make sure its getting the user_id
     @company = Company.new(company_params)
-
+    
     respond_to do |format|
       if @company.save
         format.html { redirect_to :back }
@@ -84,6 +84,6 @@ class CompaniesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
-      params.require(:company).permit(:user_id, :name, :location, :website, :logo)
+      params.require(:company).permit(:user_id, :name, :location, :website, :logo, :isGlassdoor)
     end
 end

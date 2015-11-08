@@ -21,7 +21,10 @@ class BoardsController < ApplicationController
     @stages.each_with_index do |stage, index|
       @applications[index] = board_applications.where('stage': index+1)
     end
+    #@companies = Company.where("user_id = '0' OR " + "'" + @user + "'").to_json
     @companies = Company.all.to_json
+    @company = Company.new
+    @application = Application.new
     @jobs = @user.jobs
     @categories = Application::CATEGORIES
   end
@@ -29,6 +32,12 @@ class BoardsController < ApplicationController
   # GET /boards/new
   def new
     @board = Board.new
+  end
+
+  # GET /boards/new
+  def new_modal
+    @board = Board.new
+    render 'new', :layout => nil
   end
 
   # GET /boards/1/edit

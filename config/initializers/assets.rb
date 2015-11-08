@@ -13,3 +13,4 @@ Rails.application.config.assets.precompile << "#{Rails.root}/app/public/assets"
 # Rails.application.config.assets.precompile += %w( companies.js )
 Rails.application.config.assets.precompile += %w( applications.js )
 Rails.application.config.assets.precompile += %w( companies.js )
+Rails.application.config.assets.precompile += %w( boards.js )
