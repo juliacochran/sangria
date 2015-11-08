@@ -76,33 +76,35 @@ function updateList(form_id){
 
 function updateInfo(text, form_id){
 	if(comp_list == null) return;
-	for (comp of comp_list){
-		var comp_name = comp["name"];
-		//console.log("comping:" + comp_name + " " + text);
-		if(compStr(text, comp_name)){
+	//commented out
+	// for (comp of comp_list){
+	// 	var comp_name = comp["name"];
+	// 	//console.log("comping:" + comp_name + " " + text);
+	// 	if(compStr(text, comp_name)){
 
-			console.log(comp);
+	// 		console.log(comp);
 
-			var form_id_jq = '#' + form_id + ' ';
+	// 		var form_id_jq = '#' + form_id + ' ';
 
 
 
-			$(form_id_jq + 'application_company_id').val(getCompanyId(comp["name"], comp["logo"],comp["website"],comp["location"]));
-			//console.log($(form_id_jq + 'application_company_id').value );
-			$(form_id_jq + 'company_logo_img').attr('src', comp["logo"]);
-			$(form_id_jq + 'company_logo').val(comp["logo"]);
-			$(form_id_jq + 'company_location').val(comp["location"]);
-			$(form_id_jq + 'company_website').val(comp["website"]);
-			$(form_id_jq + 'company_user_id').val(comp["user_id"]);
+	// 		$(form_id_jq + 'application_company_id').val(getCompanyId(comp["name"], comp["logo"],comp["website"],comp["location"]));
+	// 		//console.log($(form_id_jq + 'application_company_id').value );
+	// 		$(form_id_jq + 'company_logo_img').attr('src', comp["logo"]);
+	// 		$(form_id_jq + 'company_logo').val(comp["logo"]);
+	// 		$(form_id_jq + 'company_location').val(comp["location"]);
+	// 		$(form_id_jq + 'company_website').val(comp["website"]);
+	// 		$(form_id_jq + 'company_user_id').val(comp["user_id"]);
 
-			// if(comp["id"] < 0){
-			// 	$("new_company").on("submit", function (e) {
-			//     	e.preventDefault();
-			//     });
-			// 	document.getElementById("new_company").submit();
-			// }
-		}
-	}
+	// 		// if(comp["id"] < 0){
+	// 		// 	$("new_company").on("submit", function (e) {
+	// 		//     	e.preventDefault();
+	// 		//     });
+	// 		// 	document.getElementById("new_company").submit();
+	// 		// }
+	// 	}
+	// }
+	// end of my commenting
 	// document.getElementById('company_logo_img').setAttribute("display", "none");
 	// document.getElementById('company_logo').setAttribute("display", "none");
 	// document.getElementById('company_location').setAttribute("display", "none");
