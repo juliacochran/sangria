@@ -11,6 +11,10 @@ every 1.days do
   runner "RemindersController.send_welcome_email"
 end
 
+every 1.minutes do 
+	runner "RemindersController.send_followup_reminders"
+end
+
 
 #
 # every 4.days do

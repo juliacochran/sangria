@@ -9,4 +9,23 @@ class RemindersController < ApplicationController
 		
 	end
 
+	# Sends reminders to follow-up after an interview 
+	def self.send_followup_reminders
+		# For all users we have
+		@user = User.find_by_id(1)
+		# get interactions for that user, maybe later breakdown by category
+		@interactions = @user.interactions.last
+		NotifyMailer.followup_reminder(@user, @interactions).deliver
+		# @interactions.each do |event|
+		# 	today = Date.today
+		# 	if today - event.date < 2
+		# 		NotifyMailer.followup_reminder(@user).deliver
+		# 	end
+
+		# end
+
+
+
+	end
+
  end

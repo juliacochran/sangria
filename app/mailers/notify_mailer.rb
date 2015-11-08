@@ -6,4 +6,11 @@ class NotifyMailer < ApplicationMailer
 		message = 'Hi ' + @user.name + '! Welcome to Sangria.'
 		mail(to: @user.email, subject: message)
 	end
+
+	def followup_reminder(user, interaction)
+		@user = user
+		@interaction = interaction
+		message = 'Have you followed-up after your ' + @interaction.title
+		mail(to: @user.email, subject: message)
+	end
 end
