@@ -14,15 +14,15 @@ class RemindersController < ApplicationController
 		# For all users we have
 		@user = User.find_by_id(1)
 		# get interactions for that user, maybe later breakdown by category
-		@interactions = @user.interactions.last
-		NotifyMailer.followup_reminder(@user, @interactions).deliver
-		# @interactions.each do |event|
-		# 	today = Date.today
-		# 	if today - event.date < 2
-		# 		NotifyMailer.followup_reminder(@user).deliver
-		# 	end
+		@interactions = @user.interactions
+	#	NotifyMailer.followup_reminder(@user, @interactions).deliver
+		@interactions.each do |event|
+			today = Date.today
+			if today - event.date < 2
+				NotifyMailer.followup_reminder(@user, @interactions).deliver
+			end
 
-		# end
+		end
 
 
 

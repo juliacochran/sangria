@@ -10,7 +10,7 @@ class NotifyMailer < ApplicationMailer
 	def followup_reminder(user, interaction)
 		@user = user
 		@interaction = interaction
-		message = 'Have you followed-up after your ' + @interaction.title
+		message = 'Have you followed-up after ' + @interaction.title
 		mail(to: @user.email, subject: message)
 	end
 end
