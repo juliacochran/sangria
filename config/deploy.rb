@@ -35,7 +35,6 @@ set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 set :rbenv_type, :user # or :system, depends on your rbenv setup
 set :rbenv_ruby, '2.2.2'
 set :rbenv_ruby_dir, '/home/deploy/.rbenv/shims/ruby'
-set :rbenv_custom_path, '/home/deploy/.rbenv'
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
