@@ -7,7 +7,7 @@
 #
 set :output, "/tmp/cronlog.log"
 
-every 1.minutes do
+every 1.days do
   runner "RemindersController.send_welcome_email"
 end
 
