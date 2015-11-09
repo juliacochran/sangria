@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   has_many :jobs, dependent: :destroy
   has_many :companies, dependent: :destroy
   has_many :contacts, through: :companies
+  has_many :applications, through: :boards
+  has_many :interactions, through: :applications
 
   def self.from_omniauth(auth_hash)
     user = User.find_or_create_by(email: auth_hash['info']['email'])

@@ -5,10 +5,14 @@
 
 # Example:
 #
-set :output, "/path/to/my/cron_log.log"
+set :output, "/tmp/cronlog.log"
 
-every 1.minutes do
-  runner "NotifyMailer.welcome_email"
+every 1.days do
+  runner "RemindersController.send_welcome_email"
+end
+
+every 1.days, :at => '8am' do 
+	runner "RemindersController.send_followup_reminders"
 end
 
 
