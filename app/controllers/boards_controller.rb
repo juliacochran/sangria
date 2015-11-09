@@ -26,6 +26,7 @@ class BoardsController < ApplicationController
     @company = Company.new
     @application = Application.new
     @categories = Application::CATEGORIES
+    @notes = @board.notes
   end
 
   # GET /boards/new
