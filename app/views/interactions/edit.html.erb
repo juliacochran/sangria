@@ -26,6 +26,10 @@
           <%= f.label :details, :class => "active" %>
           <%= f.text_area :details, :class => "materialize-textarea" %>
         </div>
+        <div class="input-field">
+          <%= f.check_box :followup, :id => "followup" %>
+          <%= f.label "Have you followed-up yet?", :class => "active", :id => "followup"  %>
+        </div>
       </div>
     </div>
   </div>
