@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   get "/interactions/:id/followed_up" => "interactions#followed_up"
 
   resources :contacts
-  resources :jobs
   resources :notes
   resources :interactions
   resources :companies
