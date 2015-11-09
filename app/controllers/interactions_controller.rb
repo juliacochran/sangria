@@ -39,6 +39,13 @@ class InteractionsController < ApplicationController
     render 'new', :layout => nil
   end
 
+  def followed_up
+    @interaction = Interaction.find_by_id(params[:id])
+    @interaction.followup = true
+    @interaction.save
+    redirect_to current_user.boards.last
+  end
+
   # GET /interactions/1/edit
   def edit
   end
@@ -132,7 +139,7 @@ class InteractionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def interaction_params
-      params.require(:interaction).permit(:application_id, :title, :category, :date, :contact_id, :details)
+      params.require(:interaction).permit(:application_id, :title, :category, :date, :contact_id, :details, :followup)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

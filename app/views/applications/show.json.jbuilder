@@ -1,4 +1,4 @@
-json.extract! @application, :id, :job_id, :settings, :created_at, :updated_at, :applied_date
+json.extract! @application, :id, :job, :settings, :created_at, :updated_at, :applied_date
 json.company Company.find(@application.company_id)
 json.category Application::CATEGORIES[@application.category]
 json.stage Board::STAGES[@application.stage-1]

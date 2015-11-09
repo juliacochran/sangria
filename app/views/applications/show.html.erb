@@ -1,7 +1,8 @@
 <div class="section application-show-modal-title">
   <img src="<%= @application.company.logo %>" width="150" style="float: right;" />
-  <h4>Job: <%= @job || "" %></h4>
-  <p><%= @application.company.name %></p>
+  <h4>Job: <%= @application.job || "" %></h4>
+  <p><%= @application.company.name %> - <%= @application.company.location %></p>
+  <p><%= @application.category %></p>
 </div>
 <div class="section">
   <p>Date Applied: <%= (@application.applied_date?) ? @application.applied_date.strftime("%-m/%e/%Y") : "" %></p>

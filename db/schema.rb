@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019205941) do
+ActiveRecord::Schema.define(version: 20151109202624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,9 +23,9 @@ ActiveRecord::Schema.define(version: 20151019205941) do
     t.datetime "updated_at",   null: false
     t.integer  "board_id"
     t.integer  "company_id"
-    t.integer  "job_id"
     t.integer  "category"
     t.date     "applied_date"
+    t.string   "job"
   end
 
   add_index "applications", ["board_id"], name: "index_applications_on_board_id", using: :btree
@@ -71,19 +71,10 @@ ActiveRecord::Schema.define(version: 20151019205941) do
     t.integer  "application_id"
     t.integer  "category"
     t.integer  "contact_id"
+    t.boolean  "followup"
   end
 
   add_index "interactions", ["application_id"], name: "index_interactions_on_application_id", using: :btree
-
-  create_table "jobs", force: :cascade do |t|
-    t.string   "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "user_id"
-    t.integer  "category"
-  end
-
-  add_index "jobs", ["user_id"], name: "index_jobs_on_user_id", using: :btree
 
   create_table "notes", force: :cascade do |t|
     t.string   "title"
@@ -121,6 +112,5 @@ ActiveRecord::Schema.define(version: 20151019205941) do
   add_foreign_key "boards", "users"
   add_foreign_key "contacts", "companies"
   add_foreign_key "interactions", "applications"
-  add_foreign_key "jobs", "users"
   add_foreign_key "notes", "boards"
 end

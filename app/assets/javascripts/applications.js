@@ -10,33 +10,33 @@ var comp_list = null;
 var icTO = null;
 var changing = 0;
 
-function inputChanged(form_id){
+function inputChanged(form_selector, input_selector){
 	if(icTO == null){
 		// console.log("set timer");
 		clearTimeout(icTO);
 		icTO = window.setTimeout(function(){
 			icTO = null;
-			updateList(form_id);
+			updateList(form_selector, input_selector);
 		}, 200);
 	}else{
 		// console.log("about to update..");
 	}
 }
 
-function updateList(form_id){
-	var text = $('#' + form_id + ' #company_name').val();
+function updateList(form_selector, input_selector){
+	var text = $(form_selector + ' ' + input_selector).val();
 
 	console.log("adding1");
 
 	if(isOption(text)){
-		updateInfo(text, form_id);
+		updateInfo(text, form_selector);
 		return;
 	}
 
 	console.log("adding2");
 
 	if(changing == 1){
-		inputChanged(form_id);
+		inputChanged(form_selector, input_selector);
 		return;
 	}else{
 		changing = 1;
@@ -52,7 +52,7 @@ function updateList(form_id){
 				//the employee list
 				var emp_list = response["employers"];
 
-				addCompanies(emp_list, true, form_id);
+				addCompanies(emp_list, true, form_selector);
 
 				console.log("adding");
 	    	}else{
@@ -74,36 +74,32 @@ function updateList(form_id){
 //var text = emp_list[index].name;
 
 
-function updateInfo(text, form_id){
+function updateInfo(text, form_selector){
 	if(comp_list == null) return;
 	//commented out
-	// for (comp of comp_list){
-	// 	var comp_name = comp["name"];
-	// 	//console.log("comping:" + comp_name + " " + text);
-	// 	if(compStr(text, comp_name)){
+	for (comp in comp_list){
+		var comp_name = comp["name"];
+		//console.log("comping:" + comp_name + " " + text);
+		if(compStr(text, comp_name)){
 
-	// 		console.log(comp);
+			console.log(comp);
 
-	// 		var form_id_jq = '#' + form_id + ' ';
+			$(form_selector + ' application_company_id').val(getCompanyId(comp["name"], comp["logo"],comp["website"],comp["location"]));
+			//console.log($(form_selector + ' application_company_id').value );
+			$(form_selector + ' company_logo_img').attr('src', comp["logo"]);
+			$(form_selector + ' company_logo').val(comp["logo"]);
+			$(form_selector + ' company_location').val(comp["location"]);
+			$(form_selector + ' company_website').val(comp["website"]);
+			$(form_selector + ' company_user_id').val(comp["user_id"]);
 
-
-
-	// 		$(form_id_jq + 'application_company_id').val(getCompanyId(comp["name"], comp["logo"],comp["website"],comp["location"]));
-	// 		//console.log($(form_id_jq + 'application_company_id').value );
-	// 		$(form_id_jq + 'company_logo_img').attr('src', comp["logo"]);
-	// 		$(form_id_jq + 'company_logo').val(comp["logo"]);
-	// 		$(form_id_jq + 'company_location').val(comp["location"]);
-	// 		$(form_id_jq + 'company_website').val(comp["website"]);
-	// 		$(form_id_jq + 'company_user_id').val(comp["user_id"]);
-
-	// 		// if(comp["id"] < 0){
-	// 		// 	$("new_company").on("submit", function (e) {
-	// 		//     	e.preventDefault();
-	// 		//     });
-	// 		// 	document.getElementById("new_company").submit();
-	// 		// }
-	// 	}
-	// }
+			// if(comp["id"] < 0){
+			// 	$("new_company").on("submit", function (e) {
+			//     	e.preventDefault();
+			//     });
+			// 	document.getElementById("new_company").submit();
+			// }
+		}
+	}
 	// end of my commenting
 	// document.getElementById('company_logo_img').setAttribute("display", "none");
 	// document.getElementById('company_logo').setAttribute("display", "none");
@@ -173,20 +169,20 @@ function createCompany(gdComp){
 	return comp;
 }
 
-function addGDCompany(comp, form_id){
+function addGDCompany(comp, form_selector){
 	var index = comp_list.length;
 
 	var emp_name = comp["name"];
 	var emp_logo = comp["squareLogo"];
 	var emp_id = comp["glassdoor_id"];
 
-	$('#' + form_id + ' #company_list').append('<option value="' + emp_name + '" id="' + index + '">' + emp_name + '</option>');
+	$(form_selector + ' #company_list').append('<option value="' + emp_name + '" id="' + index + '">' + emp_name + '</option>');
 	comp_list.push(createCompany(comp));
 
 	//console.log("comped");
 }
 
-function addCompanies(companies, gd, form_id){
+function addCompanies(companies, gd, form_selector){
 	if(comp_list == null){
 		comp_list = new Array();
 	}
@@ -201,16 +197,16 @@ function addCompanies(companies, gd, form_id){
 			console.log("gd:" + inCompList(company) + emp_name);
 
 			if (!inCompList(company)) {
-				addGDCompany(company, form_id);
+				addGDCompany(company, form_selector);
 			}
 		} else {
-			$('#' + form_id + ' #company_list').append('<option value="' + company["name"] + '" id="' + comp_list.length + '">' + company["name"] + '</option>');
+			$(form_selector + ' #company_list').append('<option value="' + company["name"] + '" id="' + comp_list.length + '">' + company["name"] + '</option>');
 			comp_list.push(company);
 		}
 	}
 }
 
-function getCompanyId(comp_name,comp_logo,comp_website,comp_location){
+function getCompanyId(comp_name, comp_logo, comp_website, comp_location){
 	for (comp1 in comp_list){
 		if(eqStr(comp_name, comp1["name"]) && eqStr(comp_logo, comp1["logo"]) && eqStr(comp_website, comp["website"]) && eqStr(comp_location, comp["location"]) ){
 			if(comp1["id"] > 0)
