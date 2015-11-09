@@ -21,7 +21,6 @@ class ApplicationsController < ApplicationController
     @category = Application::CATEGORIES[@application.category]
     @stage = Board::STAGES[@application.stage-1]
     @company = Company.find(@application.company_id)
-    @job = @application.job_id
     @interactions = @application.interactions.order(date: :desc)
     render 'show', :layout => nil
   end
@@ -30,7 +29,6 @@ class ApplicationsController < ApplicationController
   def new
     @application = Application.new
     @user = current_user
-    @jobs = @user.jobs
     @categories = Application::CATEGORIES
     @companies = Company.all.to_json
     @company = Company.new
@@ -41,7 +39,6 @@ class ApplicationsController < ApplicationController
     @board = Board.find(params[:board_id].to_i)
     @application = Application.new
     @user = current_user
-    @jobs = @user.jobs
     @categories = Application::CATEGORIES
     @companies = Company.all.to_json
     @company = Company.new
@@ -126,7 +123,7 @@ class ApplicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def application_params
-      params.require(:application).permit(:company_id, :board_id, :job_id, :stage, :category, :settings, :applied_date)
+      params.require(:application).permit(:company_id, :board_id, :job_id, :job, :stage, :category, :settings, :applied_date)
     end
 
     def company_params

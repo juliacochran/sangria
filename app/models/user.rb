@@ -3,7 +3,6 @@ class User < ActiveRecord::Base
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create
   #validates_uniqueness_of :email, on: :create
   has_many :boards, dependent: :destroy
-  has_many :jobs, dependent: :destroy
   has_many :companies, dependent: :destroy
   has_many :contacts, through: :companies
   has_many :applications, through: :boards

@@ -14,7 +14,6 @@ Rails.application.routes.draw do
   get "/interactions/:id/edit_modal" => "interactions#edit_modal"
 
   resources :contacts
-  resources :jobs
   resources :notes
   resources :interactions
   resources :companies
