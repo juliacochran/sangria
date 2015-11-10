@@ -1,13 +1,6 @@
 <% if flash[:notice] %>
   <p id="notice"><%= flash[:notice] %></p>
 <% end %>
-<!-- <div id="sidebar">
-
-</div> -->
-
-<!-- <div class="animate">
-        <p class="button"><i class="material-icons">description</i></p>
-</div> -->
 
 <div class="row" style="margin: 0">
 	<div class="col s12 m6 l3 title-board" >
@@ -61,22 +54,29 @@
 		</div>
 	<% end %>
 
-<!-- 	<div class="col s12 m6 l2">
+
+
+</div>
+
+<div id="extruder" class="{title:'Notes', url:'boards/show'}">
 		<div class="card cyan lighten-2">
 			<div class="card-content" style="padding: 0px 20px;">
 				<span class="card-title">
 					Notes
 				</span>
-				<p>
-					This is a note
-				</p>
 			</div>
 		</div>
-	</div> -->
+		<% @notes.each do |note| %>
 
+			<div class="card">
+				<div class="card-content" style="padding-top: 10px; padding-bottom: 10px;">
+					<b><%= note.title %></b><br>
+					<%= note.details %>
+				</div>
+			</div>
+
+		<% end %>
 </div>
-
-<div id="extruder" class="{title:'Notes', url:'boards/extruderTop.html'}"> </div>
 
 <div id="board-change-modal" class="modal modal-fixed-footer">
 	<div class="modal-content center">
@@ -124,6 +124,7 @@
 <div id="interaction-new-modal" class="modal modal-fixed-footer"></div>
 
 <div id="interaction-edit-modal" class="modal modal-fixed-footer"></div>
+
 
 <div id="board-new-modal" class="modal modal-fixed-footer"></div>
 

@@ -1,6 +1,16 @@
 <b><%= @interaction.title || "" %> - <%= @category || "" %></b>
 <p><%= (@interaction.date) ? @interaction.date.strftime("%B %-d, %Y") : "" %></p>
 <p><%= @interaction.details || "" %></p>
+<p>Have you sent a follow-up?
+  <% if @interaction.followup %>
+  	Yes
+  <% else %>
+  	No
+  <% end %>
+  </p>
+  <p>
+    <%= link_to 'Followup', '/interactions/'+@interaction.id.to_s+'/followed_up' %>
+  </p>
 <% if @interaction.contact.present? %>
   <p>Name: <%= @interaction.contact.name %></p>
   <p>Email: <%= @interaction.contact.email %></p>
