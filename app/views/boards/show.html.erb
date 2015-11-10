@@ -14,6 +14,7 @@
 		<% end %>
 	</div>
 </div>
+
 <div class="row">
 	<% @applications.each_with_index do |stage, index| %>
 		<div class="col s12 m6 l3">
@@ -23,7 +24,6 @@
 					<a href="#application-new-modal" class="application-new-modal-trigger" data-stage_num="<%= index+1 %>" data-board_id="<%= @board.id %>"><i class="material-icons card-title right">add</i></a>
 				</div>
 			</div>
-
 
 			<% stage.each do |application| %>
 				<div class="card">
@@ -58,12 +58,12 @@
 					</div>
 				</div>
 			<% end %>
+
 		</div>
 	<% end %>
-
-
-
 </div>
+
+
 
 <div id="side-panel">
   <div id="slide-out" class="side-nav row sangria-accent">
@@ -101,10 +101,8 @@
 	<div class="modal-content center">
 		<h5 class="strong title">Change Boards</h5>
 		<% @boards.each do |board| %>
-
-		<div class="<%= (board.id == @board.id) ? "selected" : "" %>"><%= link_to board.title, board, :class=>"card-panel light-grey waves-effect waves-teal" %>
-		</div>
-
+			<div class="<%= (board.id == @board.id) ? "selected" : "" %>"><%= link_to board.title, board, :class=>"card-panel light-grey waves-effect waves-teal" %>
+			</div>
 		<% end %>
 	</div>
 	<div class="modal-footer">
