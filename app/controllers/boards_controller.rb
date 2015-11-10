@@ -26,7 +26,7 @@ class BoardsController < ApplicationController
     @company = Company.new
     @application = Application.new
     @categories = Application::CATEGORIES
-    @notes = @board.notes
+    @notes = @board.notes.order(created_at: :desc)
   end
 
   # GET /boards/new

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151110050721) do
+ActiveRecord::Schema.define(version: 20151110192115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,7 +77,6 @@ ActiveRecord::Schema.define(version: 20151110050721) do
   add_index "interactions", ["application_id"], name: "index_interactions_on_application_id", using: :btree
 
   create_table "notes", force: :cascade do |t|
-    t.string   "title"
     t.text     "details"
     t.date     "remind_date"
     t.datetime "created_at",  null: false

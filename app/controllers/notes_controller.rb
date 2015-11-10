@@ -18,6 +18,13 @@ class NotesController < ApplicationController
     @note = Note.new
   end
 
+  # GET /notes/new_modal
+  def new_modal
+    @note = Note.new
+    @board = Board.find(params[:board_id].to_i)
+    render 'new', :layout => nil
+  end
+
   # GET /notes/1/edit
   def edit
   end
@@ -30,7 +37,7 @@ class NotesController < ApplicationController
 
     respond_to do |format|
       if @note.save
-        format.html { redirect_to @note, notice: 'Note was successfully created.' }
+        format.html { redirect_to :back }
         format.json { render :show, status: :created, location: @note }
       else
         format.html { render :new }
@@ -44,7 +51,7 @@ class NotesController < ApplicationController
   def update
     respond_to do |format|
       if @note.update(note_params)
-        format.html { redirect_to @note, notice: 'Note was successfully updated.' }
+        format.html { redirect_to :back }
         format.json { render :show, status: :ok, location: @note }
       else
         format.html { render :edit }
@@ -71,6 +78,6 @@ class NotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def note_params
-      params.require(:note).permit(:board_id, :title, :details, :remind_date)
+      params.require(:note).permit(:board_id, :details, :remind_date)
     end
 end

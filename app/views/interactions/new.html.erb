@@ -1,7 +1,7 @@
 <%= form_for(@interaction) do |interaction| %>
   <div class="modal-content">
     <% if @application.company.present? && @application.company.logo.present? %>
-      <img src="<%= @application.company.logo %>" width="150" style="float: right;" />
+      <img class="modal-title-logo" src="<%= @application.company.logo %>" />
     <% end %>
     <h5 class="strong title">Add New Interaction</h5>
     <div class="row">

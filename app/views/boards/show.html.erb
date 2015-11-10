@@ -9,8 +9,6 @@
 				<%= link_to 'add', "#board-new-modal", :class => "material-icons board-new-modal-trigger" %>
 				<%= link_to 'arrow_drop_down', "#board-change-modal", :class => "material-icons board-change-modal-trigger" %>
 				<%= link_to 'delete', @board, method: :delete, data: { confirm: 'Are you sure?' }, :class => "material-icons" %>
-				<%= link_to "description", new_note_path(board_id: @board.id) , :class=> "material-icons "%>
-				<br>
 			</div>
 			<%= f.text_field :title, :style => "font-size: 2rem; margin-top:1rem;" %>
 		<% end %>
@@ -67,25 +65,37 @@
 
 </div>
 
-<div id="extruder" class="{title:'Notes', url:'boards/show'}">
-		<div class="card sangria-accent">
-			<div class="card-content" style="padding: 0px 20px;">
-				<span class="card-title">
-					Notes
-				</span>
-			</div>
+<div id="side-panel">
+  <div id="slide-out" class="side-nav row sangria-accent">
+  	<div class="col s12 note-title">
+			<h5 class="strong white-text" style="display: inline-block;">Notes</h5>
+			<a href="#note-new-modal" class="note-new-modal-trigger white-text" data-board_id="<%= @board.id %>"><i class="material-icons right" style="margin-top: 1rem;">add</i></a>
 		</div>
 		<% @notes.each do |note| %>
-
-			<div class="card">
-				<div class="card-content" style="padding-top: 10px; padding-bottom: 10px;">
-					<b><%= note.title %></b><br>
-					<%= note.details %>
+	  	<div class="col s12">
+				<div class="card">
+					<div class="card-content">
+						<% if note.remind_date.present? %>
+							<%= note.remind_date.strftime("%B %-d, %Y") %>
+							<br />
+						<% end %>
+						<%= note.details %>
+					</div>
 				</div>
 			</div>
-
 		<% end %>
+  	<div class="col s12" style="height: 225px;">
+		  <a href="#note-new-modal" class="note-new-modal-trigger" data-board_id="<%= @board.id %>" style="padding: 0;">
+		    <div class="note-card empty">
+		      <div><i class="material-icons">add</i></div>
+		    </div>
+		  </a>
+	  </div>
+  </div>
+	<a href="#" data-activates="slide-out" class="button-collapse show-on-large side-nav-trigger">Notes</a>
 </div>
+
+
 
 <div id="board-change-modal" class="modal modal-fixed-footer">
 	<div class="modal-content center">
@@ -136,6 +146,9 @@
 
 
 <div id="board-new-modal" class="modal modal-fixed-footer"></div>
+
+
+<div id="note-new-modal" class="modal modal-fixed-footer"></div>
 
 <div id="datepicker_container"></div>
 

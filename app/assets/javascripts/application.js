@@ -19,6 +19,9 @@ $(document).ready(function() {
   init_selects($(".content"));
 
 	$(".dropdown-button").dropdown();
+  $(".button-collapse").sideNav({
+    edge: 'right', // Choose the horizontal origin
+  });
 
   $(".application-new-modal-trigger").leanModal({
     in_duration: 200,
@@ -44,7 +47,6 @@ $(document).ready(function() {
     .fail(function() {
       alert("Failed to load New Application Modal");
     });
-
   });
 
   $(".application-edit-modal-trigger").leanModal({
@@ -222,6 +224,32 @@ $(document).ready(function() {
     })
     .fail(function() {
       alert("Failed to load New Board Modal");
+    });
+  });
+
+  $(".note-new-modal-trigger").leanModal({
+    in_duration: 200,
+    out_duration: 200
+  }).on("click", function() {
+    var $this = $(this);
+    $.ajax({
+      method: "GET",
+      url: "/notes/new_modal",
+      data: { board_id: $this.data("board_id") }
+    })
+    .done(function(data) {
+      var $modal = $("#note-new-modal");
+      $modal.html(data);
+      $("#datepicker_container").html("");
+
+      $modal.find(".datepicker").pickadate({
+        format: 'mmmm d, yyyy',
+        container: "#datepicker_container"
+      });
+      init_selects($modal);
+    })
+    .fail(function() {
+      alert("Failed to load New Note Modal");
     });
   });
 
