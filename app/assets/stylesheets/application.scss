@@ -18,6 +18,28 @@ body {
     height: 100%;
 }
 
+a {
+    color: color("cyan", "lighten-2");
+}
+
+.sangria-accent {
+    @extend .cyan.lighten-2;
+}
+.sangria-accent-text {
+    @extend .cyan-text.text-lighten-2;
+}
+
+.sangria-faded {
+    @extend .grey;
+}
+.sangria-faded-text {
+    @extend .grey-text;
+}
+
+.strong {
+    font-weight: bold;
+}
+
 .transparent{
     opacity: 0.5;
 }
@@ -60,6 +82,55 @@ body {
 
 .nav-wrapper{
     margin-left: 20px;
+}
+
+.application-interaction-card {
+    display: inline-block;
+    height: 11rem;
+    width: 19rem;
+    margin: 0 0.5rem 0.5rem 0;
+    padding: .5rem;
+    border: 2px solid color("cyan", "lighten-2");
+    border-radius: 3px;
+    position: relative;
+    vertical-align: top;
+
+    & .left-side {
+        display: inline-block;
+        width: 13rem;
+    }
+    & .right-side {
+        display: inline-block;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+
+    &.empty {
+        height: 11rem;
+        width: 11rem;
+        border: 2px dashed color("cyan", "lighten-2");
+        padding: 0;
+        position: relative;
+
+        & > div {
+            display: block;
+            height: 50%;
+            width: 50%;
+            overflow: auto;
+            margin: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+
+        & i.material-icons {
+            font-size: 5rem;
+            font-weight: bold;
+        }
+    }
 }
 
 //sliding pane for notes (minified)

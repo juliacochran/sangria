@@ -9,7 +9,7 @@
   <% end %>
   </p>
   <p>
-    <%= link_to 'Followup', '/interactions/'+@interaction.id.to_s+'/followed_up' %>
+    <%= link_to 'Followup', '/interactions/' + @interaction.id.to_s + '/followed_up' %>
   </p>
 <% if @interaction.contact.present? %>
   <p>Name: <%= @interaction.contact.name %></p>

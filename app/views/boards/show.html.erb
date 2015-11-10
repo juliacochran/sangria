@@ -19,7 +19,7 @@
 <div class="row">
 	<% @applications.each_with_index do |stage, index| %>
 		<div class="col s12 m6 l3">
-			<div class="card cyan lighten-2">
+			<div class="card sangria-accent">
 				<div class="card-content" style="padding: 0px 20px">
 					<span class="card-title"><%= @stages[index] %></span>
 					<a href="#application-new-modal" class="application-new-modal-trigger" data-stage_num="<%= index+1 %>" data-board_id="<%= @board.id %>"><i class="material-icons card-title right">add</i></a>
@@ -31,16 +31,23 @@
 				<div class="card">
 					<div class="card-content">
 						<span class="card-title"><a href="#application-show-modal" class="application-show-modal-trigger" data-application_id="<%= application.id %>">
-							<% if application.company && application.company.logo? %>
+							<% if application.company.present? && application.company.logo.present? %>
 								<img src="<%= application.company.logo %>" style="max-width:100px; max-height:100px; background-color: #ffffff; padding: 0.1em;" />
-							<% else %>
+							<% elsif application.company.name.present? %>
 								<%= application.company.name %>
 							<% end %>
 						</a></span>
-						<p class="teal-text text-darken-4"><%= application.company.location %></p>
+						<% if application.job.present? %>
+							<h5 class="strong"><%= application.job %></h5>
+						<% end %>
+						<% if application.company.present? && application.company.location.present? %>
+							<p class="sangria-faded-text"><%= application.company.location %></p>
+						<% end %>
+						<% if application.applied_date.present? %>
+							<p class="sangria-faded-text"><%= application.applied_date.strftime("%B %-d, %Y") %></p>
+						<% end %>
 						<% if application.current_interaction != nil %>
 							<div class="divider" style="margin: 1em 0;"></div>
-							<h6>Most Current Interaction</h6>
 							<a href="#interaction-show-modal" class="interaction-show-modal-trigger" data-interaction_id="<%= application.current_interaction.id %>"><%= application.current_interaction.title %></a>
 							<p class="teal-text text-darken-4"><%= truncate(application.current_interaction.details, length: 50, separator: " ") %></p>
 						<% end %>
@@ -59,7 +66,7 @@
 </div>
 
 <div id="extruder" class="{title:'Notes', url:'boards/show'}">
-		<div class="card cyan lighten-2">
+		<div class="card sangria-accent">
 			<div class="card-content" style="padding: 0px 20px;">
 				<span class="card-title">
 					Notes

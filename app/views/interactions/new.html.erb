@@ -53,7 +53,7 @@
                 </div>
                 <div class="input-field">
                   <%= contact.label :role %>
-                  <%= contact.number_field :role %>
+                  <%= contact.text_field :role %>
                 </div>
               </div>
               <div class="section">If this contact is not a part of the company for this application, <%= @application.company.name %>, <a class="interaction-new-company-trigger" href="#!">add a different company</a>.</div>

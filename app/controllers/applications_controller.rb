@@ -12,7 +12,7 @@ class ApplicationsController < ApplicationController
   # GET /applications/1.json
   def show
     @board = Board.find(@application.board_id)
-    @interactions = @application.interactions
+    @interactions = @application.interactions.order(date: :desc)
   end
 
   # GET /applications/1/show_modal
