@@ -9,6 +9,10 @@ class Board < ActiveRecord::Base
                  "Waiting",
                  "Offered"]#, "Discontinued"]
 
+  def self.get_stage(idx)
+    return STAGES[idx-1]
+  end
+
   def self.stages_for_select
     select_array = [["Choose Stage", ""]]
     STAGES.each_with_index do |stage, index|
@@ -16,4 +20,5 @@ class Board < ActiveRecord::Base
     end
     return select_array
   end
+
 end

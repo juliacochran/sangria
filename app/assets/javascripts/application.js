@@ -4,6 +4,8 @@
 //= require_tree .
 //= require materialize-sprockets
 
+/* datepicker stuff: http://amsul.ca/pickadate.js/date/ */
+
 var init_selects = function($this) {
   var $selects = $this.find(".materialize-select");
   $selects.material_select();
@@ -29,16 +31,16 @@ $(document).ready(function() {
     .done(function(data) {
       var $modal = $("#application-new-modal");
       $modal.html(data);
+      $("#datepicker_container").html("");
 
       $modal.find(".datepicker").pickadate({
-        selectMonths: true, // Creates a dropdown to control month
-        selectYears: 15, // Creates a dropdown of 15 years to control year
-        container: "body"
+        format: 'mmmm d, yyyy',
+        container: "#datepicker_container"
       });
       init_selects($modal);
     })
     .fail(function() {
-      alert( "error" );
+      alert("Failed to load New Application Modal");
     });
 
   });
@@ -55,16 +57,16 @@ $(document).ready(function() {
     .done(function(data) {
       var $modal = $("#application-edit-modal");
       $modal.html(data);
+      $("#datepicker_container").html("");
 
       $modal.find(".datepicker").pickadate({
-        selectMonths: true, // Creates a dropdown to control month
-        selectYears: 15, // Creates a dropdown of 15 years to control year
-        container: "body"
+        format: 'mmmm d, yyyy',
+        container: "#datepicker_container"
       });
       init_selects($modal);
     })
     .fail(function() {
-      alert( "error" );
+      alert("Failed to load Edit Application Modal");
     });
   });
 
@@ -85,18 +87,78 @@ $(document).ready(function() {
       $("#application-show-modal .modal-content").html(data);
       $(".application-edit-modal-trigger").data("application_id", application_id);
       $(".application-delete-modal-trigger").attr("href", "/applications/" + application_id);
-
-      $("#application-show-modal .datepicker").pickadate({
-        selectMonths: true, // Creates a dropdown to control month
-        selectYears: 15, // Creates a dropdown of 15 years to control year
-        container: "body"
-      });
     })
     .fail(function() {
-      alert( "error" );
+      alert("Failed to load Show Application Modal");
     });
   });
 
+
+
+  $(".interaction-new-modal-trigger").leanModal({
+    in_duration: 200,
+    out_duration: 200
+  }).on("click", function() {
+    var $this = $(this);
+    $.ajax({
+      method: "GET",
+      url: "/interactions/new_modal",
+      data: { application_id: $this.data("application_id") }
+    })
+    .done(function(data) {
+      var $modal = $("#interaction-new-modal");
+      $modal.html(data);
+      $("#datepicker_container").html("");
+
+      $modal.find(".datepicker").pickadate({
+        format: 'mmmm d, yyyy',
+        container: "#datepicker_container"
+      });
+      init_selects($modal);
+
+      $(".interaction-new-contact-trigger").on("click", function() {
+        $(".interaction-new-contact").show();
+        $(".interaction-existing-contact").hide();
+      });
+
+      $(".interaction-existing-contact-trigger").on("click", function() {
+        $(".interaction-new-contact").hide();
+        $(".interaction-existing-contact").show();
+      });
+
+      $(".interaction-new-company-trigger").on("click", function() {
+        $(".interaction-new-company").toggle();
+      });
+    })
+    .fail(function() {
+      alert("Failed to load New Interaction Modal");
+    });
+  });
+
+  $(".interaction-edit-modal-trigger").leanModal({
+    in_duration: 200,
+    out_duration: 200
+  }).on("click", function(e) {
+    var $this = $(this);
+    $.ajax({
+      method: "GET",
+      url: "/interactions/" + $this.data("interaction_id") + "/edit_modal"
+    })
+    .done(function(data) {
+      var $modal = $("#interaction-edit-modal");
+      $modal.html(data);
+      $("#datepicker_container").html("");
+
+      $modal.find(".datepicker").pickadate({
+        format: 'mmmm d, yyyy',
+        container: "#datepicker_container"
+      });
+      init_selects($modal);
+    })
+    .fail(function() {
+      alert("Failed to load Edit Interaction Modal");
+    });
+  });
 
   $(".interaction-show-modal-trigger").leanModal({
     in_duration: 200,
@@ -115,78 +177,12 @@ $(document).ready(function() {
       $("#interaction-show-modal .modal-content").html(data);
       $(".interaction-edit-modal-trigger").data("interaction_id", interaction_id);
       $(".interaction-delete-modal-trigger").attr("href", "/interactions/" + interaction_id);
-
-      $("#interaction-show-modal .datepicker").pickadate({
-        selectMonths: true, // Creates a dropdown to control month
-        selectYears: 15, // Creates a dropdown of 15 years to control year
-        container: "body"
-      });
     })
     .fail(function() {
-      alert( "error" );
+      alert("Failed to load Show Interaction Modal");
     });
   });
 
-  $(".interaction-new-modal-trigger").leanModal({
-    in_duration: 200,
-    out_duration: 200
-  }).on("click", function() {
-    var $this = $(this);
-    $.ajax({
-      method: "GET",
-      url: "/interactions/new_modal",
-      data: { application_id: $this.data("application_id") }
-    })
-    .done(function(data) {
-      var $modal = $("#interaction-new-modal");
-      $modal.html(data);
-
-      $modal.find(".datepicker").pickadate({
-        selectMonths: true, // Creates a dropdown to control month
-        selectYears: 15, // Creates a dropdown of 15 years to control year
-        container: "body"
-      });
-      init_selects($modal);
-
-      $(".interaction-new-contact-trigger").on("click", function() {
-        $(".interaction-new-contact").show();
-        $(".interaction-existing-contact").hide();
-      });
-
-      $(".interaction-existing-contact-trigger").on("click", function() {
-        $(".interaction-new-contact").hide();
-        $(".interaction-existing-contact").show();
-      });
-    })
-    .fail(function() {
-      alert( "error" );
-    });
-  });
-
-  $(".interaction-edit-modal-trigger").leanModal({
-    in_duration: 200,
-    out_duration: 200
-  }).on("click", function(e) {
-    var $this = $(this);
-    $.ajax({
-      method: "GET",
-      url: "/interactions/" + $this.data("interaction_id") + "/edit_modal"
-    })
-    .done(function(data) {
-      var $modal = $("#interaction-edit-modal");
-      $modal.html(data);
-
-      $modal.find(".datepicker").pickadate({
-        selectMonths: true, // Creates a dropdown to control month
-        selectYears: 15, // Creates a dropdown of 15 years to control year
-        container: "body"
-      });
-      init_selects($modal);
-    })
-    .fail(function() {
-      alert( "error" );
-    });
-  });
 
 
 	$(".board-change-modal-trigger").leanModal({
@@ -208,12 +204,9 @@ $(document).ready(function() {
       $modal.html(data);
     })
     .fail(function() {
-      alert( "error" );
+      alert("Failed to load New Board Modal");
     });
   });
+
+
 });
-
-
-$('.button').click(function(){
-            $('.animate').toggleClass('slide');
-            });

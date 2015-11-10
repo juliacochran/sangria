@@ -11,6 +11,9 @@
       <th>Category</th>
       <th>Date</th>
       <th>Details</th>
+      <th>Contact Name</th>
+      <th>Contact Company ID</th>
+      <th>Contact Company Name</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -24,6 +27,13 @@
         <td><%= interaction.category %></td>
         <td><%= interaction.date %></td>
         <td><%= interaction.details %></td>
+        <% if interaction.contact.present? %>
+          <td><%= interaction.contact.name %></td>
+          <td><%= interaction.contact.company.id %></td>
+          <td><%= interaction.contact.company.name %></td>
+        <% else %>
+          <td colspan="3"></td>
+        <% end %>
         <td><%= link_to 'Show', interaction %></td>
         <td><%= link_to 'Edit', edit_interaction_path(interaction) %></td>
         <td><%= link_to 'Destroy', interaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>

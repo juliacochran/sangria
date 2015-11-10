@@ -83,7 +83,7 @@
 		<h4 class="">Change Boards</h4>
 		<% @boards.each do |board| %>
 
-		<div class=" <%= (board.id == @board.id) ? "selected" : "" %>"><%= link_to board.title, board, :class=>"card-panel light-grey waves-effect waves-teal" %>
+		<div class="<%= (board.id == @board.id) ? "selected" : "" %>"><%= link_to board.title, board, :class=>"card-panel light-grey waves-effect waves-teal" %>
 		</div>
 
 		<% end %>
@@ -126,6 +126,8 @@
 <div id="interaction-edit-modal" class="modal modal-fixed-footer"></div>
 
 <div id="board-new-modal" class="modal modal-fixed-footer"></div>
+
+<div id="datepicker_container"></div>
 
 <script type="text/javascript">
   window.onload = function(event){
