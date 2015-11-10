@@ -1,20 +1,18 @@
-<b><%= @interaction.title || "" %> - <%= @category || "" %></b>
-<p><%= (@interaction.date) ? @interaction.date.strftime("%B %-d, %Y") : "" %></p>
-<p><%= @interaction.details || "" %></p>
-<p>Have you sent a follow-up?
-  <% if @interaction.followup %>
-  	Yes
-  <% else %>
-  	No
-  <% end %>
-  </p>
-  <p>
-    <%= link_to 'Followup', '/interactions/' + @interaction.id.to_s + '/followed_up' %>
-  </p>
+<h5 class="strong title"><%= @interaction.title || "" %></h5>
+<div><%= @category || "" %></div>
+<div><%= (@interaction.date) ? @interaction.date.strftime("%B %-d, %Y") : "" %></div>
+<div><%= @interaction.details || "" %></div>
+<div>
+  Have you sent a follow-up?
+  <%= (@interaction.followup.present?) ? "Yes" : "No" %>
+</div>
+<div>
+  <%= link_to 'Followup', '/interactions/' + @interaction.id.to_s + '/followed_up' %>
+</div>
 <% if @interaction.contact.present? %>
-  <p>Name: <%= @interaction.contact.name %></p>
-  <p>Email: <%= @interaction.contact.email %></p>
-  <p>Phone Number: <%= @interaction.contact.phone_number %></p>
-  <p>Role: <%= @interaction.contact.role %></p>
+  <div>Name: <%= @interaction.contact.name %></div>
+  <div>Email: <%= @interaction.contact.email %></div>
+  <div>Phone Number: <%= @interaction.contact.phone_number %></div>
+  <div>Role: <%= @interaction.contact.role %></div>
 <% end %>
 <br />

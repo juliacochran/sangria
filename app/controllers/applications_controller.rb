@@ -64,8 +64,6 @@ class ApplicationsController < ApplicationController
 
     @user = current_user
 
-    logger.info(company_params)
-
     new_application_params = {}
     application_params.each do |key, value|
       new_application_params[key] = value

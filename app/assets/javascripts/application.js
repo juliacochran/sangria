@@ -136,7 +136,13 @@ $(document).ready(function() {
         });
 
         $(".interaction-new-company-trigger").on("click", function() {
-          $(".interaction-new-company").toggle();
+          $(".interaction-new-company").show();
+          $(".interaction-existing-company").hide();
+        });
+
+        $(".interaction-existing-company-trigger").on("click", function() {
+          $(".interaction-new-company").hide();
+          $(".interaction-existing-company").show();
         });
       })
       .fail(function() {

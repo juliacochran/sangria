@@ -1,8 +1,8 @@
 <div class="section application-show-modal-title" style="padding-top: 0;">
-  <% if @application.company.logo.present? %>
+  <% if @application.company.present? && @application.company.logo.present? %>
     <img src="<%= @application.company.logo %>" width="150" style="float: right;" />
   <% end %>
-  <h4 class="strong"><%= @application.job || "" %></h4>
+  <h5 class="strong title"><%= @application.job || "" %></h5>
   <div class="sangria-accent-text"><%= @application.company.name %> - <%= @application.company.location %></div>
   <div><%= Application::CATEGORIES[@application.category] %> Position</div>
 </div>
@@ -11,30 +11,28 @@
   <div>Date Applied: <span class="sangria-accent-text"><%= (@application.applied_date?) ? @application.applied_date.strftime("%B %-d, %Y") : "" %></span></div>
   <div></div>
 </div>
-<% if @interactions.length > 0 %>
-  <div class="section">
-    <h5>Interactions</h5>
-    <% @interactions.each do |interaction| %>
-      <div class="application-interaction-card">
+<div class="section">
+  <h5>Interactions</h5>
+  <% @interactions.each do |interaction| %>
+    <div class="application-interaction-card">
 
-        <h5 class="strong sangria-accent-text" style="margin: 0;">
-          <a href="#interaction-show-modal" class="interaction-show-modal-trigger" data-interaction_id="<%= interaction.id %>"><%= interaction.title %></a>
-        </h5>
-        <div class="left-side">
-          <div><%= (interaction.category) ? Interaction::get_category(interaction.category) : "" %></div>
-          <div><%= (interaction.date) ? interaction.date.strftime("%B %-d, %Y") : "" %></div>
-          <div><%= truncate(interaction.details, length: 75) || "" %></div>
-        </div>
-        <div class="right-side interaction-actions">
-          <a href="#interaction-edit-modal" class="interaction-edit-modal-trigger" data-interaction_id="<%= interaction.id %>"><i class="material-icons">edit</i></a>
-          <%= link_to 'delete', interaction, method: :delete, data: { confirm: 'Are you sure?' }, :class => "material-icons" %>
-        </div>
+      <h5 class="strong sangria-accent-text" style="margin: 0;">
+        <a href="#interaction-show-modal" class="interaction-show-modal-trigger" data-interaction_id="<%= interaction.id %>"><%= interaction.title %></a>
+      </h5>
+      <div class="left-side">
+        <div><%= (interaction.category) ? Interaction::get_category(interaction.category) : "" %></div>
+        <div><%= (interaction.date) ? interaction.date.strftime("%B %-d, %Y") : "" %></div>
+        <div><%= truncate(interaction.details, length: 75) || "" %></div>
       </div>
-    <% end %>
-    <a href="#interaction-new-modal" class="interaction-new-modal-trigger" data-application_id="<%= @application.id %>">
-      <div class="application-interaction-card empty">
-        <div><i class="material-icons">add</i></div>
+      <div class="right-side interaction-actions">
+        <a href="#interaction-edit-modal" class="interaction-edit-modal-trigger" data-interaction_id="<%= interaction.id %>"><i class="material-icons">edit</i></a>
+        <%= link_to 'delete', interaction, method: :delete, data: { confirm: 'Are you sure?' }, :class => "material-icons" %>
       </div>
-    </a>
-  </div>
-<% end %>
+    </div>
+  <% end %>
+  <a href="#interaction-new-modal" class="interaction-new-modal-trigger" data-application_id="<%= @application.id %>">
+    <div class="application-interaction-card empty">
+      <div><i class="material-icons">add</i></div>
+    </div>
+  </a>
+</div>

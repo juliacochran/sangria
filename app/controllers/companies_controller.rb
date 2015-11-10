@@ -18,7 +18,6 @@ class CompaniesController < ApplicationController
   def search
     company_query = params[:q]
     response = CompaniesHelper::getCompanyInfo(company_query,request.remote_ip, request.env['HTTP_USER_AGENT'])
-    logger.info(response)
     respond_to do |format|
       format.json { render json: response}
     end
@@ -40,7 +39,7 @@ class CompaniesController < ApplicationController
   def create
     #TODO: make sure its getting the user_id
     @company = Company.new(company_params)
-    
+
     respond_to do |format|
       if @company.save
         format.html { redirect_to :back }

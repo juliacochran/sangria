@@ -44,6 +44,15 @@ a {
     opacity: 0.5;
 }
 
+.clear-left {
+    clear: left;
+}
+
+h1.title, h2.title, h3.title,
+h4.title, h5.title, h6.title {
+    margin-top: 0;
+}
+
 .banner{
     background: url(image_path('background2.png')) no-repeat center center;
     // background-color: #1D5479;

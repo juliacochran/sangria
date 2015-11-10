@@ -1,22 +1,19 @@
 <%= form_for(@interaction) do |f| %>
   <div class="modal-content">
-    <h4>Edit <%= @interaction.title %> Interaction</h4>
+    <h5 class="strong title">Edit <%= @interaction.title %> Interaction</h5>
     <div class="row">
       <div class="col s12">
-        <div class="input-field">
-          <%= f.hidden_field :application_id %>
-        </div>
         <div class="input-field">
           <%= f.label :title, :class => "active" %>
           <%= f.text_field :title %>
         </div>
         <div class="input-field">
           <%= f.label :category, :class => "active" %>
-          <%= f.select(:category, options_for_select(Interaction.categories_for_select), {}, {class: "materialize-select"}) %>
+          <%= f.select(:category, options_for_select(Interaction.categories_for_select, @interaction.category), {}, {class: "materialize-select"}) %>
         </div>
         <div class="input-field">
           <%= f.label :date, :class => "active" %>
-          <% date = (@interaction.date) ? @interaction.date.strftime("%-d %B, %Y") : "" %>
+          <% date = (@interaction.date.present?) ? @interaction.date.strftime("%-d %B, %Y") : "" %>
           <%= date_field :application, :date, :value => date, :class => "datepicker" %>
         </div>
         <div class="input-field">
