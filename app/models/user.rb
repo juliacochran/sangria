@@ -3,7 +3,6 @@ class User < ActiveRecord::Base
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create
   #validates_uniqueness_of :email, on: :create
   has_many :boards, dependent: :destroy
-  has_many :jobs, dependent: :destroy
   has_many :companies, dependent: :destroy
   has_many :contacts, through: :companies
   has_many :applications, through: :boards
@@ -32,6 +31,14 @@ class User < ActiveRecord::Base
     select_array = [["Choose Contact", ""]]
     self.contacts.each do |contact|
       select_array.push([contact.name, contact.id])
+    end
+    return select_array
+  end
+
+  def companies_for_select
+    select_array = [["Choose Company", ""]]
+    self.companies.each do |company|
+      select_array.push([company.name, company.id])
     end
     return select_array
   end

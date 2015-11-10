@@ -1,13 +1,6 @@
 <% if flash[:notice] %>
   <p id="notice"><%= flash[:notice] %></p>
 <% end %>
-<!-- <div id="sidebar">
-
-</div> -->
-
-<!-- <div class="animate">
-        <p class="button"><i class="material-icons">description</i></p>
-</div> -->
 
 <div class="row" style="margin: 0">
 	<div class="col s12 m6 l3 title-board" >
@@ -16,23 +9,23 @@
 				<%= link_to 'add', "#board-new-modal", :class => "material-icons board-new-modal-trigger" %>
 				<%= link_to 'arrow_drop_down', "#board-change-modal", :class => "material-icons board-change-modal-trigger" %>
 				<%= link_to 'delete', @board, method: :delete, data: { confirm: 'Are you sure?' }, :class => "material-icons" %>
-				<%= link_to "description", new_note_path(board_id: @board.id) , :class=> "material-icons "%>
-				<br>
 			</div>
 			<%= f.text_field :title, :style => "font-size: 2rem; margin-top:1rem;" %>
 		<% end %>
 	</div>
 </div>
+
 <div class="row">
 	<% @applications.each_with_index do |stage, index| %>
 		<div class="col s12 m6 l3">
-			<div class="card cyan lighten-2">
+			<div class="card sangria-accent">
 				<div class="card-content" style="padding: 0px 20px">
 					<span class="card-title"><%= @stages[index] %></span>
 					<a href="#application-new-modal" class="application-new-modal-trigger" data-stage_num="<%= index+1 %>" data-board_id="<%= @board.id %>"><i class="material-icons card-title right">add</i></a>
 				</div>
 			</div>
 
+<<<<<<< HEAD
 			<ul class="sortable">
 				<% stage.each do |application| %>
 					<li class="ui-state-default">
@@ -61,34 +54,86 @@
 					</li>
 				<% end %>
 			</ul>
+=======
+			<% stage.each do |application| %>
+				<div class="card">
+					<div class="card-content">
+						<div class="card-title">
+							<a href="#application-show-modal" class="application-show-modal-trigger" data-application_id="<%= application.id %>">
+								<% if application.company.present? && application.company.logo.present? %>
+									<img src="<%= application.company.logo %>" style="max-width:100px; max-height:100px; background-color: #ffffff; padding: 0.1em;" />
+								<% elsif application.company.name.present? %>
+									<%= application.company.name %>
+								<% end %>
+							</a>
+						</div>
+						<% if application.job.present? %>
+							<h5 class="strong title"><%= application.job %></h5>
+						<% end %>
+						<% if application.company.present? && application.company.location.present? %>
+							<p class="sangria-faded-text"><%= application.company.location %></p>
+						<% end %>
+						<% if application.applied_date.present? %>
+							<p class="sangria-faded-text"><%= application.applied_date.strftime("%B %-d, %Y") %></p>
+						<% end %>
+						<% if application.current_interaction != nil %>
+							<div class="divider" style="margin: 1em 0;"></div>
+							<a href="#interaction-show-modal" class="interaction-show-modal-trigger" data-interaction_id="<%= application.current_interaction.id %>"><%= application.current_interaction.title %></a>
+							<p class="teal-text text-darken-4"><%= truncate(application.current_interaction.details, length: 50, separator: " ") %></p>
+						<% end %>
+					</div>
+					<div class="card-action" style="text-align: right;">
+						<!-- <a href="#application-edit-modal" class="application-edit-modal-trigger" data-application_id="<%= application.id %>"><i class="material-icons card-title">edit</i></a> -->
+						<a href="#interaction-new-modal" class="interaction-new-modal-trigger" style="margin-right: 0;" data-application_id="<%= application.id %>"><i class="material-icons card-title black-text">add</i></a>
+					</div>
+				</div>
+			<% end %>
+
+>>>>>>> 5a2c38360342c25e122c81ef59b549afe486dd5e
 		</div>
 	<% end %>
-
-<!-- 	<div class="col s12 m6 l2">
-		<div class="card cyan lighten-2">
-			<div class="card-content" style="padding: 0px 20px;">
-				<span class="card-title">
-					Notes
-				</span>
-				<p>
-					This is a note
-				</p>
-			</div>
-		</div>
-	</div> -->
-
 </div>
 
-<div id="extruder" class="{title:'Notes', url:'boards/extruderTop.html'}"> </div>
+
+
+<div id="side-panel">
+  <div id="slide-out" class="side-nav row sangria-accent">
+  	<div class="col s12 note-title">
+			<h5 class="strong white-text" style="display: inline-block;">Notes</h5>
+			<a href="#note-new-modal" class="note-new-modal-trigger white-text" data-board_id="<%= @board.id %>"><i class="material-icons right" style="margin-top: 1rem;">add</i></a>
+		</div>
+		<% @notes.each do |note| %>
+	  	<div class="col s12">
+				<div class="card">
+					<div class="card-content">
+						<% if note.remind_date.present? %>
+							<%= note.remind_date.strftime("%B %-d, %Y") %>
+							<br />
+						<% end %>
+						<%= note.details %>
+					</div>
+				</div>
+			</div>
+		<% end %>
+  	<div class="col s12" style="height: 225px;">
+		  <a href="#note-new-modal" class="note-new-modal-trigger" data-board_id="<%= @board.id %>" style="padding: 0;">
+		    <div class="note-card empty">
+		      <div><i class="material-icons">add</i></div>
+		    </div>
+		  </a>
+	  </div>
+  </div>
+	<a href="#" data-activates="slide-out" class="button-collapse show-on-large side-nav-trigger">Notes</a>
+</div>
+
+
 
 <div id="board-change-modal" class="modal modal-fixed-footer">
 	<div class="modal-content center">
-		<h4 class="">Change Boards</h4>
+		<h5 class="strong title">Change Boards</h5>
 		<% @boards.each do |board| %>
-
-		<div class=" <%= (board.id == @board.id) ? "selected" : "" %>"><%= link_to board.title, board, :class=>"card-panel light-grey waves-effect waves-teal" %>
-		</div>
-
+			<div class="<%= (board.id == @board.id) ? "selected" : "" %>"><%= link_to board.title, board, :class=>"card-panel light-grey waves-effect waves-teal" %>
+			</div>
 		<% end %>
 	</div>
 	<div class="modal-footer">
@@ -126,8 +171,10 @@
 
 <div id="interaction-edit-modal" class="modal modal-fixed-footer"></div>
 
+
 <div id="board-new-modal" class="modal modal-fixed-footer"></div>
 
+<<<<<<< HEAD
 <ul>
   <li id="draggable" class="ui-state-highlight">Drag me down</li>
 </ul>
@@ -139,6 +186,12 @@
   <li class="ui-state-default">Item 3</li>
   <li class="ui-state-default">Item 4</li>
 </ul>
+=======
+
+<div id="note-new-modal" class="modal modal-fixed-footer"></div>
+
+<div id="datepicker_container"></div>
+>>>>>>> 5a2c38360342c25e122c81ef59b549afe486dd5e
 
 <script type="text/javascript">
   window.onload = function(event){

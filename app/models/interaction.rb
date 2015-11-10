@@ -13,6 +13,10 @@ class Interaction < ActiveRecord::Base
                      "Recruiter Call",
                      "Other"]
 
+  def self.get_category(idx)
+    return CATEGORIES[idx]
+  end
+
   def self.categories_for_select
     select_array = [["Choose Category", ""]]
     CATEGORIES.each_with_index do |category, index|

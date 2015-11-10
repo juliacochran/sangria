@@ -2,7 +2,7 @@
 
 <p>
   <strong>Company:</strong>
-  <%= @contact.company_id %>
+  <%= (@contact.company.present?) ? @contact.company.name : "" %>
 </p>
 
 <p>

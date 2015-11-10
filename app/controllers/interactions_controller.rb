@@ -33,10 +33,15 @@ class InteractionsController < ApplicationController
   def new_modal
     @interaction = Interaction.new
     @user = current_user
-    @contacts = @user.contacts_for_select
-    @categories = Interaction.categories_for_select
     @application = Application.find(params[:application_id].to_i)
     render 'new', :layout => nil
+  end
+
+  def followed_up
+    @interaction = Interaction.find_by_id(params[:id])
+    @interaction.followup = true
+    @interaction.save
+    redirect_to current_user.boards.last
   end
 
   # GET /interactions/1/edit
@@ -54,21 +59,32 @@ class InteractionsController < ApplicationController
   """
   Case 1: create interaction without contact
   Case 2: create interaction with new contact
-    Case 2.1: new contact with new company
+    Case 2.1: new contact with same company as application
+    Case 2.2: new contact with new company
     Case 2.2: new contact with existing company
   Case 3: create interaction with existing contact
 
-  THIS CURRENTLY DOES NOT COVER CASE 2.2
+  As of the commit where this message appears it works for all cases
   """
   def create
 
     @user = current_user
-    if contact_params[:name]
-      # we don't have autofill on interaction add yet so we're creating new
-      @company = @user.companies.create(company_params)
-      @contact = @company.contacts.create(contact_params)
+    @application = Application.find(interaction_params[:application_id].to_i)
+    save = {:company => false, :contact => false}
 
-      @application = Application.find(interaction_params[:application_id])
+    if contact_params[:name].present?
+      # we don't have autofill on interaction add yet so we're creating new
+      if company_params[:name].present?
+        # if they're adding a new company
+        @company = @user.companies.create(company_params)
+        save[:company] = true
+      else
+        # if they're using the same company as the application
+        @company = Company.find(contact_params[:company_id].to_i)
+      end
+      @contact = @company.contacts.create(contact_params)
+      save[:contact] = true
+
       # params are mutable so I'm making an extra with the new contact_id
       new_interaction_params = {}
       interaction_params.each do |key, value|
@@ -76,26 +92,33 @@ class InteractionsController < ApplicationController
       end
       new_interaction_params[:contact_id] = @contact.id
       @interaction = @application.interactions.create(new_interaction_params)
+
     else
-      # create without contact or if they've filled in existing contact
+      # create without contact or if they've filled in existing contact in the dropdown
       @interaction = @application.interactions.create(interaction_params)
     end
 
     respond_to do |format|
-      if @company.save
-        if @contact.save
-          if @interaction.save
-            format.html { redirect_to :back }
-            format.json { render :show, status: :created, location: @interaction }
-          else
-            format.html { render :new }
-            format.json { render json: @interaction.errors, status: :unprocessable_entity }
-          end
-        else
-          format.html { redirect_to :back }
+      if save[:company]
+        unless @company.save
+          logger.debug "fuuuck company didn't save #{@company.inspect}"
+          logger.debug "fuuuck company didn't save #{@contact.inspect}"
+          logger.debug "fuuuck company didn't save #{@company.errors.inspect}"
         end
-      else
+      end
+      if save[:contact]
+        unless @contact.save
+          logger.debug "fuuuck contact didn't save #{@company.inspect}"
+          logger.debug "fuuuck contact didn't save #{@contact.inspect}"
+          logger.debug "fuuuck contact didn't save #{@contact.errors.inspect}"
+        end
+      end
+      if @interaction.save
         format.html { redirect_to :back }
+        format.json { render :show, status: :created, location: @interaction }
+      else
+        format.html { render :new }
+        format.json { render json: @interaction.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -132,7 +155,7 @@ class InteractionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def interaction_params
-      params.require(:interaction).permit(:application_id, :title, :category, :date, :contact_id, :details)
+      params.require(:interaction).permit(:application_id, :title, :category, :date, :contact_id, :details, :followup)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

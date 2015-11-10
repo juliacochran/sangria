@@ -25,8 +25,8 @@ class BoardsController < ApplicationController
     @companies = Company.all.to_json
     @company = Company.new
     @application = Application.new
-    @jobs = @user.jobs
     @categories = Application::CATEGORIES
+    @notes = @board.notes.order(created_at: :desc)
   end
 
   # GET /boards/new

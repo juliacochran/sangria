@@ -1,33 +1,54 @@
 <%= form_for(@application, builder: ComboboxFormBuilder) do |f| %>
   <div class="modal-content">
-    <h4>Edit <%= @application.company.name %> Application</h4>
+    <h5 class="strong title">Edit <%= @application.company.name %> Application</h5>
     <div class="row">
       <div class="col s12">
         <div class="input-field">
-          <%= f.hidden_field :id %>
+          <%= f.label :applied_date, :class => "active" %>
+          <% applied_date = (@application.applied_date) ? @application.applied_date.strftime("%-d %B, %Y") : "" %>
+          <%= date_field :application, :applied_date, :value => applied_date, :class => "datepicker" %>
         </div>
         <div class="input-field">
-          <%= f.hidden_field :board_id %>
+          <%= f.hidden_field :company_id, :value => @application.company.id %>
+        </div>
+        <div class="input-field">
+          <%= f.label :job, :class => "active" %>
+          <%= f.text_field :job %>
+        </div>
+        <div class="input-field">
+          <%= f.label :category, :class => "active" %>
+          <%= f.select(:category, options_for_select(Application.categories_for_select, @application.category), {}, {class: "materialize-select"}) %>
         </div>
         <div class="input-field">
           <%= f.label :stage, :class => "active" %>
           <%= f.select(:stage, options_for_select(Board.stages_for_select, @application.stage), {}, {class: "materialize-select"}) %>
         </div>
-        <div class="input-field">
-          <%= f.label :applied_date, :class => "active" %>
-          <%= date_field :application, :applied_date, :class => "datepicker" %>
-        </div>
-        <div class="input-field">
-          <%= f.label :company_id, :class => "active" %>
-          <%= f.combobox_tag('application[company_id]', [] , :list_id => "company_list", :form_id => "edit_application") %>
-        </div>
-        <div class="input-field">
-          <%= f.label :job_id, :class => "active" %>
-          <%= f.number_field :job_id %>
-        </div>
-        <div class="input-field">
-          <%= f.label :category, :class => "active" %>
-          <%= f.select(:category, options_for_select(Application.categories_for_select, @application.category), {}, {class: "materialize-select"}) %>
+        <h5>Company Info</h5>
+        <div class="row">
+          <div class="col s12">
+            <%= fields_for @application.company do |company| %>
+              <div class="input-field">
+                <%= company.label :name, :class => "active" %>
+                <%= f.combobox_tag('application[company_name]', [], :list_id => "company_list", :default => @application.company.name, :form_class => "edit_application", :input_id => "company_name") %>
+              </div>
+
+              <div style="">
+                <div class="input-field">
+                  <%= company.label :location, :class => "active" %>
+                  <%= company.text_field :location %>
+                </div>
+                <div class="input-field">
+                  <%= company.label :website, :class => "active" %>
+                  <%= company.text_field :website %>
+                </div>
+                <div class="input-field">
+                  <%= company.label :logo, :class=> "active" %><br>
+                  <%= company.text_field :logo %>
+                  <%= image_tag(@application.company.logo, :alt => "company_logo", :id => "company_logo_img") %>
+                </div>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>

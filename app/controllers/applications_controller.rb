@@ -12,7 +12,7 @@ class ApplicationsController < ApplicationController
   # GET /applications/1.json
   def show
     @board = Board.find(@application.board_id)
-    @interactions = @application.interactions
+    @interactions = @application.interactions.order(date: :desc)
   end
 
   # GET /applications/1/show_modal
@@ -21,7 +21,6 @@ class ApplicationsController < ApplicationController
     @category = Application::CATEGORIES[@application.category]
     @stage = Board::STAGES[@application.stage-1]
     @company = Company.find(@application.company_id)
-    @job = @application.job_id
     @interactions = @application.interactions.order(date: :desc)
     render 'show', :layout => nil
   end
@@ -30,7 +29,6 @@ class ApplicationsController < ApplicationController
   def new
     @application = Application.new
     @user = current_user
-    @jobs = @user.jobs
     @categories = Application::CATEGORIES
     @companies = Company.all.to_json
     @company = Company.new
@@ -41,12 +39,11 @@ class ApplicationsController < ApplicationController
     @board = Board.find(params[:board_id].to_i)
     @application = Application.new
     @user = current_user
-    @jobs = @user.jobs
     @categories = Application::CATEGORIES
     @companies = Company.all.to_json
     @company = Company.new
-    stage_num = params[:stage].to_i
-    @stage = {'name' => Board::STAGES[stage_num+1], 'num' => stage_num}
+    stage_id = params[:stage].to_i
+    @stage = {:id => stage_id, :name => Board::get_stage(stage_id)}
     render 'new', :layout => nil
   end
 
@@ -67,18 +64,14 @@ class ApplicationsController < ApplicationController
 
     @user = current_user
 
-    logger.info(company_params)
-
     new_application_params = {}
     application_params.each do |key, value|
       new_application_params[key] = value
     end
     # TODO: if statement for if creation or company_id
 
-    if application_params[:company_id].blank?
-      @company = @user.companies.create(company_params)
-      new_application_params[:company_id] = @company.id
-    end
+    @company = @user.companies.create(company_params)
+    new_application_params[:company_id] = @company.id
 
     @application = @board.applications.create(new_application_params)
 
@@ -110,7 +103,6 @@ class ApplicationsController < ApplicationController
   # DELETE /applications/1
   # DELETE /applications/1.json
   def destroy
-    #TODO: destroy method destroys user and board too. What's going on?
     @application.destroy
     respond_to do |format|
       format.html { redirect_to :back }
@@ -126,7 +118,7 @@ class ApplicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def application_params
-      params.require(:application).permit(:company_id, :board_id, :job_id, :stage, :category, :settings, :applied_date)
+      params.require(:application).permit(:company_id, :board_id, :job_id, :job, :stage, :category, :settings, :applied_date)
     end
 
     def company_params

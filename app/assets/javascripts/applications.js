@@ -10,52 +10,45 @@ var comp_list = null;
 var icTO = null;
 var changing = 0;
 
-function inputChanged(form_id){
-	if(icTO == null){
+function inputChanged(form_class, input_id) {
+	if (icTO == null) {
 		// console.log("set timer");
 		clearTimeout(icTO);
-		icTO = window.setTimeout(function(){
+		icTO = window.setTimeout(function() {
 			icTO = null;
-			updateList(form_id);
+			updateList(form_class, input_id);
 		}, 200);
-	}else{
+	} else {
 		// console.log("about to update..");
 	}
 }
 
-function updateList(form_id){
-	var text = $('#' + form_id + ' #company_name').val();
+function updateList(form_class, input_id) {
+	var text = $('.' + form_class + ' #' + input_id).val();
 
-	console.log("adding1");
-
-	if(isOption(text)){
-		updateInfo(text, form_id);
+	if (isOption(text)) {
+		updateInfo(text, form_class);
 		return;
 	}
 
-	console.log("adding2");
-
-	if(changing == 1){
-		inputChanged(form_id);
+	if (changing == 1) {
+		inputChanged(form_class, input_id);
 		return;
-	}else{
+	} else {
 		changing = 1;
 	}
-
-	console.log("adding3");
 
 	$.ajax({
 	    url: "/search",
 	    data: {"q": text},
 	    success: function(response) {
-	    	if(response["employers"].length > 0){
-				//the employee list
-				var emp_list = response["employers"];
+	    	if (response["employers"].length > 0) {
+					//the employee list
+					var emp_list = response["employers"];
 
-				addCompanies(emp_list, true, form_id);
+					addCompanies(emp_list, true, form_class);
 
-				console.log("adding");
-	    	}else{
+	    	} else {
 	    		//found no employers
 	    		console.log("none");
 	    	}
@@ -70,33 +63,29 @@ function updateList(form_id){
 }
 
 
-//console.log(index);
-//var text = emp_list[index].name;
-
-
-function updateInfo(text, form_id){
-	if(comp_list == null) return;
+function updateInfo(text, form_class) {
+	if (comp_list == null) return;
 	//commented out
-	for (comp in comp_list){
+	for (index in comp_list) {
+		var comp = comp_list[index];
 		var comp_name = comp["name"];
-		//console.log("comping:" + comp_name + " " + text);
-		if(compStr(text, comp_name)){
+		// console.log("comping:" + text + " " + comp_name);
+		if (compStr(text, comp_name)) {
 
 			console.log(comp);
 
-			var form_id_jq = '#' + form_id + ' ';
+			var $form = $('.' + form_class).first();
+			var model = form_class.split('_')[1];
 
+			$form.find('#' + model + '_company_id').val(getCompanyId(comp));
+			//console.log($form.find('#application_company_id').value );
+			$form.find('#company_logo_img').css("display", "").attr('src', comp["logo"]);
+			$form.find('#company_logo').val(comp["logo"]);
+			$form.find('#company_location').val(comp["location"]);
+			$form.find('#company_website').val(comp["website"]);
+			$form.find('#company_user_id').val(comp["user_id"]);
 
-
-			$(form_id_jq + 'application_company_id').val(getCompanyId(comp["name"], comp["logo"],comp["website"],comp["location"]));
-			//console.log($(form_id_jq + 'application_company_id').value );
-			$(form_id_jq + 'company_logo_img').attr('src', comp["logo"]);
-			$(form_id_jq + 'company_logo').val(comp["logo"]);
-			$(form_id_jq + 'company_location').val(comp["location"]);
-			$(form_id_jq + 'company_website').val(comp["website"]);
-			$(form_id_jq + 'company_user_id').val(comp["user_id"]);
-
-			// if(comp["id"] < 0){
+			// if (comp["id"] < 0) {
 			// 	$("new_company").on("submit", function (e) {
 			//     	e.preventDefault();
 			//     });
@@ -111,15 +100,15 @@ function updateInfo(text, form_id){
 	// document.getElementById('company_website').setAttribute("display", "none");
 }
 
-function isOption(text1){
+function isOption(text1) {
 	matchString = text1.toLowerCase();
 
 	var found = false;
-	$( "option" ).each(function( index ) {
-		var index = $( this ).text().toLowerCase().indexOf(matchString);
-		if(index == 0){
+	$("option").each(function(index) {
+		var index = $(this).text().toLowerCase().indexOf(matchString);
+		if (index == 0) {
 			found = true;
-		}else{
+		} else{
 			//no match
 		}
 	});
@@ -127,39 +116,39 @@ function isOption(text1){
 	return found;
 }
 
-function inCompList(comp){
+function inCompList(comp) {
 	var comp_name = comp["name"];
 	var comp_logo = comp["logo"];
 	var comp_website = comp["website"];
 	var comp_location = comp["location"];
 
-	for (comp1 in comp_list){
-		if(eqStr(comp_name, comp1["name"]) && eqStr(comp_logo, comp1["squareLogo"]) && eqStr(comp_website, comp["website"]) && eqStr(comp_location, comp["location"]) ){
+	for (comp1 in comp_list) {
+		if (eqStr(comp_name, comp1["name"]) && eqStr(comp_logo, comp1["squareLogo"]) && eqStr(comp_website, comp["website"]) && eqStr(comp_location, comp["location"]) ) {
 			return true;
 		}
 	}
 	return false;
 }
 
-function eqStr(str1, str2){
+function eqStr(str1, str2) {
 	//console.log(str1 + " " + str2);
-	if(str1 == null || str2 == null) return false;
+	if (str1 == null || str2 == null) return false;
 	return str1.toLowerCase() == str2.toLowerCase();
 }
 
 
-function compStr(str1, str2){
-	if(str1 == undefined || str2 == undefined) return false;
+function compStr(str1, str2) {
+	if (str1 == undefined || str2 == undefined) return false;
 	var index = str1.toLowerCase().indexOf(str2.toLowerCase());
-	if(index == 0 && str1.length == str2.length){
+	if (index == 0 && str1.length == str2.length) {
 		return true;
-	}else{
+	} else {
 		return false;
 	}
 }
 
 
-function createCompany(gdComp){
+function createCompany(gdComp) {
 	var comp = {
 		"id" : null,
 		"glassdoor_id" : gdComp["id"],
@@ -173,47 +162,48 @@ function createCompany(gdComp){
 	return comp;
 }
 
-function addGDCompany(comp, form_id){
+function addGDCompany(comp, form_class) {
 	var index = comp_list.length;
 
 	var emp_name = comp["name"];
 	var emp_logo = comp["squareLogo"];
 	var emp_id = comp["glassdoor_id"];
 
-	$('#' + form_id + ' #company_list').append('<option value="' + emp_name + '" id="' + index + '">' + emp_name + '</option>');
+	$('.' + form_class + ' #company_list').append('<option value="' + emp_name + '" id="' + index + '">' + emp_name + '</option>');
 	comp_list.push(createCompany(comp));
 
 	//console.log("comped");
 }
 
-function addCompanies(companies, gd, form_id){
-	if(comp_list == null){
+function addCompanies(companies, gd, form_class) {
+	if (comp_list == null) {
 		comp_list = new Array();
 	}
 
-	for (var index = 0; index < companies.length; index++){
+	var $form = $('.' + form_class).first();
+
+	for (var index = 0; index < companies.length; index++) {
 		var company = companies[index];
 		if (gd) {
 			// why even have these variables?
 			var emp_name = company["name"];
 			var emp_logo = company["squareLogo"];
 
-			console.log("gd:" + inCompList(company) + emp_name);
-
 			if (!inCompList(company)) {
-				addGDCompany(company, form_id);
+				addGDCompany(company, form_class);
 			}
 		} else {
-			$('#' + form_id + ' #company_list').append('<option value="' + company["name"] + '" id="' + comp_list.length + '">' + company["name"] + '</option>');
+			$form.find('#company_list').append('<option value="' + company["name"] + '" id="' + comp_list.length + '">' + company["name"] + '</option>');
 			comp_list.push(company);
 		}
 	}
 }
 
-function getCompanyId(comp_name,comp_logo,comp_website,comp_location){
-	for (comp1 in comp_list){
-		if(eqStr(comp_name, comp1["name"]) && eqStr(comp_logo, comp1["logo"]) && eqStr(comp_website, comp["website"]) && eqStr(comp_location, comp["location"]) ){
-			if(comp1["id"] > 0)
+function getCompanyId(comp) {
+	for (index in comp_list) {
+		var comp1 = comp_list[index];
+		if (eqStr(comp["name"], comp1["name"]) && eqStr(comp["logo"], comp1["logo"]) && eqStr(comp["website"], comp1["website"]) && eqStr(comp["location"], comp1["location"]) ) {
+			if (comp1["id"] > 0)
 				return comp1["id"];
 		}
 	}
