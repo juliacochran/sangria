@@ -684,3 +684,35 @@ $("#extruder").buildMbExtruder({
   slideTimer:300
 });
 
+
+$(function() {
+    var oldList, newList, item;
+    $('.sortable').sortable({
+        start: function(event, ui) {
+            item = ui.item;
+            newList = oldList = ui.item.parent().parent();
+        },
+        stop: function(event, ui) {          
+            //alert("Moved " + item.text() + " from " + oldList.attr('id') + " to " + newList.attr('id'));
+        },
+        change: function(event, ui) {  
+            if(ui.sender) newList = ui.placeholder.parent().parent();
+        },
+        connectWith: ".sortable"
+    }).disableSelection();
+});
+
+
+
+// $(document).ready(function(){  	
+//     $( "#sortable" ).sortable({
+//       revert: true
+//     });
+//     $( "#draggable" ).draggable({
+//       connectToSortable: "#sortable",
+//       helper: "clone",
+//       revert: "invalid"
+//     });
+//     $( "ul, li" ).disableSelection();
+//   });
+
