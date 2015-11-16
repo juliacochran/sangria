@@ -9,8 +9,19 @@ class Board < ActiveRecord::Base
                  "Waiting",
                  "Offered"]#, "Discontinued"]
 
+  def self.get_indexed_stages
+    indexed_stages = Array.new(STAGES)
+    indexed_stages.unshift("")
+    return indexed_stages
+  end
+
   def self.get_stage(idx)
-    return STAGES[idx-1]
+    indexed_stages = get_indexed_stages
+    if idx.present? && idx > 0 && idx < indexed_stages.length
+      return indexed_stages[idx]
+    else
+      return ""
+    end
   end
 
   def self.stages_for_select

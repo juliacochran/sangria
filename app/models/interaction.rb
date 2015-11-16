@@ -14,7 +14,11 @@ class Interaction < ActiveRecord::Base
                      "Other"]
 
   def self.get_category(idx)
-    return CATEGORIES[idx]
+    if idx.present? && idx >= 0 && idx < CATEGORIES.length
+      return CATEGORIES[idx]
+    else
+      return ""
+    end
   end
 
   def self.categories_for_select

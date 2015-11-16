@@ -10,6 +10,14 @@ class Application < ActiveRecord::Base
                      "Internship",
                      "Co-op"]
 
+  def self.get_category(idx)
+    if idx.present? && idx >= 0 && idx < CATEGORIES.length
+      return CATEGORIES[idx]
+    else
+      return ""
+    end
+  end
+
   def self.categories_for_select
     select_array = [["Choose Category", ""]]
     CATEGORIES.each_with_index do |category, index|

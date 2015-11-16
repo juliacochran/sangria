@@ -18,8 +18,8 @@ class ApplicationsController < ApplicationController
   # GET /applications/1/show_modal
   # GET /applications/1/show_modal.json
   def show_modal
-    @category = Application::CATEGORIES[@application.category]
-    @stage = Board::STAGES[@application.stage-1]
+    @category = Application::get_category(@application.category)
+    @stage = Board::get_stage(@application.stage)
     @company = Company.find(@application.company_id)
     @interactions = @application.interactions.order(date: :desc)
     render 'show', :layout => nil
