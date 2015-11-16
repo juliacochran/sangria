@@ -66,12 +66,12 @@ ActiveRecord::Schema.define(version: 20151109202624) do
     t.string   "title"
     t.date     "date"
     t.text     "details"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.integer  "application_id"
     t.integer  "category"
     t.integer  "contact_id"
-    t.boolean  "followup"
+    t.boolean  "followup",       default: false
   end
 
   add_index "interactions", ["application_id"], name: "index_interactions_on_application_id", using: :btree

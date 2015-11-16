@@ -60,29 +60,26 @@
 			<% end %>
 		</div>
 	<% end %>
-
-
-
 </div>
 
 <div id="extruder" class="{title:'Notes', url:'boards/show'}"> 
-		<div class="card cyan lighten-2">
-			<div class="card-content" style="padding: 0px 20px;">
-				<span class="card-title">
-					Notes
-				</span>
-			</div>
+	<div class="card cyan lighten-2">
+		<div class="card-content" style="padding: 0px 20px;">
+			<span class="card-title">
+				Notes
+			</span>
 		</div>
-		<%@notes.each do |note| %>
-		
-		<div class="card">
-			<div class="card-content" style="padding-top: 10px; padding-bottom: 10px;">
-				<b><%= note.title %></b><br>
-				<%= note.details %>
-			</div>
+	</div>
+	<%@notes.each do |note| %>
+	
+	<div class="card">
+		<div class="card-content" style="padding-top: 10px; padding-bottom: 10px;">
+			<b><%= note.title %></b><br>
+			<%= note.details %>
 		</div>
+	</div>
 
-		<% end %>
+	<% end %>
 </div>
 
 <div id="board-change-modal" class="modal modal-fixed-footer">
