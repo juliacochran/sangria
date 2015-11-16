@@ -6,7 +6,7 @@ $(function() {
             item = ui.item;
 	        //console.log(newList);
         },
-        stop: function(event, ui) {          
+        stop: function(event, ui) {
             //alert("Moved " + item.text() + " from " + oldList.attr('id') + " to " + newList.attr('id'));
         },
         change: function(event, ui) {
@@ -14,11 +14,21 @@ $(function() {
 
         },
         update: function(event, ui){
-    	    var num_stage = ui.item.parent().data('stage_num');
+    	    var stage = ui.item.parent().data('stage_num');
     	    var application_id = ui.item.data('application_id');
 
-    	    console.log(num_stage);
+    	    console.log(stage);
     	    console.log(application_id);
+
+            $.ajax({
+                method: "PATCH",
+                url: "/applications/" + application_id,
+                data: {
+                    id: application_id,
+                    application : { stage: stage },
+                    company: {}
+                }
+            });
 
     	    //TODO: update the stage
         },
