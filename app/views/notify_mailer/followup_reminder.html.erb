@@ -10,7 +10,7 @@
       <% if not @interaction.contact.nil? %>
         <%= @interaction.contact.name %> 
       <% else %>
-        contact at <%= @interaction.company.name %>
+        contact at <%= @interaction.application.company.name %>
       <% end %>
       ? 
       If yes, <%= url_for(followup_path(@interaction)) %> let us know so we will stop sending you reminder emails.</a> 
