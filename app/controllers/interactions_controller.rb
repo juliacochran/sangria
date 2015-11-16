@@ -126,6 +126,8 @@ class InteractionsController < ApplicationController
   # PATCH/PUT /interactions/1
   # PATCH/PUT /interactions/1.json
   def update
+    logger.info "FUKK #{params}"
+    logger.info "FUKK #{interaction_params}"
     respond_to do |format|
       if @interaction.update(interaction_params)
         format.html { redirect_to :back }
