@@ -9,7 +9,7 @@ class NotifyMailer < ApplicationMailer
 	def followup_reminder(user, interaction)
 		@user = user
 		@interaction = interaction
-		@category = Interaction::CATEGORIES[@interaction.category]
+		@category = Interaction::get_category(@interaction.category)
 		message = 'Have you followed-up after ' + @interaction.title + '?'
 		mail(to: @user.email, subject: message)
 	end

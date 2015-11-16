@@ -17,7 +17,7 @@ class InteractionsController < ApplicationController
   # GET /interactions/1/show_modal
   # GET /interactions/1/show_modal.json
   def show_modal
-    @category = Interaction::CATEGORIES[@interaction.category]
+    @category = Interaction::get_category(@interaction.category)
     render 'show', :layout => nil
   end
 
