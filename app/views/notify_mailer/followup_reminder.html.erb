@@ -13,7 +13,7 @@
         contact at <%= @interaction.application.company.name %>
       <% end %>
       ? 
-      If yes, <a href="<%= url_for(followup_path(@interaction), :host => "www.sangriaapp.tk") %>" >let us know so we will stop sending you reminder emails.</a> 
+      If yes, <a href="<%= @url %>">let us know so we will stop sending you reminder emails.</a> 
       If not, you should! And you can contact <%= @interaction.contact.name %> at <%= @interaction.contact.email %>.
     </p>
 
