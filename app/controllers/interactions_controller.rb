@@ -41,7 +41,7 @@ class InteractionsController < ApplicationController
     @interaction = Interaction.find_by_id(params[:id])
     @interaction.followup = true
     @interaction.save
-    redirect_to current_user.boards.last
+    redirect_to :back
   end
 
   # GET /interactions/1/edit
