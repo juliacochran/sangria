@@ -1,6 +1,5 @@
 class NotifyMailer < ApplicationMailer
-	default from: "sangrianotify@gmail.com"
-
+	
 	def welcome_email(user)
 		@user = user
 		message = 'Hi ' + @user.name + '! Welcome to Sangria.'
@@ -10,7 +9,8 @@ class NotifyMailer < ApplicationMailer
 	def followup_reminder(user, interaction)
 		@user = user
 		@interaction = interaction
-		@category = Interaction::CATEGORIES[@interaction.category]
+		@url = "www.sangriaapp.tk/interactions/" + @interaction.id.to_s + "/followup"
+		@category = Interaction::get_category(@interaction.category)
 		message = 'Have you followed-up after ' + @interaction.title + '?'
 		mail(to: @user.email, subject: message)
 	end

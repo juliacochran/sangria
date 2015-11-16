@@ -6,8 +6,14 @@
   <body>
     <h1>Hi <%= @user.name %>, </h1>
     <p>
-      Have you sent a follow-up email after your <%= @category%> with <%= @interaction.contact.name %>? 
-      If yes, <a href='www.sangriaapp.tk/interactions/'+<%=@interaction.id.to_s%>+'/followed_up'> let us know so we will stop sending you reminder emails.</a> 
+      Have you sent a follow-up email after your <%= @category%> with 
+      <% if not @interaction.contact.nil? %>
+        <%= @interaction.contact.name %> 
+      <% else %>
+        contact at <%= @interaction.application.company.name %>
+      <% end %>
+      ? 
+      If yes, <%= url_for(@url) %> let us know so we will stop sending you reminder emails. 
       If not, you should! And you can contact <%= @interaction.contact.name %> at <%= @interaction.contact.email %>.
     </p>
 

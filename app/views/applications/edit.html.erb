@@ -5,7 +5,7 @@
       <div class="col s12">
         <div class="input-field">
           <%= f.label :applied_date, :class => "active" %>
-          <% applied_date = (@application.applied_date) ? @application.applied_date.strftime("%-d %B, %Y") : "" %>
+          <% applied_date = (@application.applied_date.present?) ? @application.applied_date.strftime("%-d %B, %Y") : "" %>
           <%= date_field :application, :applied_date, :value => applied_date, :class => "datepicker" %>
         </div>
         <div class="input-field">

@@ -14,7 +14,7 @@ class RemindersController < ApplicationController
 			@interactions.each do |event|
 				today = Date.today
 				if today - event.date > 0
-					if not event.followup
+					if not(event.followup) and event.contact.present?
 						NotifyMailer.followup_reminder(user, event).deliver
 					end
 				end

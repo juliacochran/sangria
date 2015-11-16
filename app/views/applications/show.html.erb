@@ -4,7 +4,7 @@
   <% end %>
   <h5 class="strong title"><%= @application.job || "" %></h5>
   <div class="sangria-accent-text"><%= @application.company.name %> - <%= @application.company.location %></div>
-  <div><%= Application::CATEGORIES[@application.category] %> Position</div>
+  <div><%= Application::get_category(@application.category) %> Position</div>
 </div>
 <div class="section">
   <div>Stage: <span class="sangria-accent-text"><%= @stage || "" %></span></div>
