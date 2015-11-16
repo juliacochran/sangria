@@ -6,7 +6,13 @@
   <body>
     <h1>Hi <%= @user.name %>, </h1>
     <p>
-      Have you sent a follow-up email after your <%= @category%> with <%= @interaction.contact.name %>? 
+      Have you sent a follow-up email after your <%= @category%> with 
+      <% if not @interaction.contact.nil? %>
+        <%= @interaction.contact.name %> 
+      <% else %>
+        contact at <%= @interaction.company.name %>
+      <% end %>
+      ? 
       If yes, <%= url_for(followup_path(@interaction)) %> let us know so we will stop sending you reminder emails.</a> 
       If not, you should! And you can contact <%= @interaction.contact.name %> at <%= @interaction.contact.email %>.
     </p>
