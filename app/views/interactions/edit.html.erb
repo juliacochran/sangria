@@ -14,7 +14,7 @@
         <div class="input-field">
           <%= f.label :date, :class => "active" %>
           <% date = (@interaction.date.present?) ? @interaction.date.strftime("%-d %B, %Y") : "" %>
-          <%= date_field :application, :date, :value => date, :class => "datepicker" %>
+          <%= date_field :interaction, :date, :value => date, :class => "datepicker" %>
         </div>
         <div class="input-field">
           <%= f.label :contact_id, :class => "active" %>
