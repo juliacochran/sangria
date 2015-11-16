@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get "/interactions/new_modal" => "interactions#new_modal"
   get "/interactions/:id/edit_modal" => "interactions#edit_modal"
   get "/interactions/:id/followed_up" => "interactions#followed_up"
+  get "/notes/new_modal" => "notes#new_modal"
 
   resources :contacts
   resources :notes

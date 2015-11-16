@@ -34,4 +34,12 @@ class User < ActiveRecord::Base
     end
     return select_array
   end
+
+  def companies_for_select
+    select_array = [["Choose Company", ""]]
+    self.companies.each do |company|
+      select_array.push([company.name, company.id])
+    end
+    return select_array
+  end
 end
