@@ -22,6 +22,11 @@ a {
     color: color("cyan", "lighten-2");
 }
 
+#board-change-modal .card-panel.selected {
+    color: #ffffff;
+    background-color: color("cyan", "lighten-2");
+}
+
 .modal-title-logo {
     max-height: 150px;
     max-width: 200px;

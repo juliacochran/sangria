@@ -103,7 +103,9 @@
 	<div class="modal-content center">
 		<h5 class="strong title">Change Boards</h5>
 		<% @boards.each do |board| %>
-			<div class="<%= (board.id == @board.id) ? "selected" : "" %>"><%= link_to board.title, board, :class=>"card-panel light-grey waves-effect waves-teal" %>
+			<div>
+				<% klass = "card-panel light-grey waves-effect waves-teal " + ((board.id == @board.id) ? "selected" : "") %>
+				<%= link_to board.title, board, :class => klass %>
 			</div>
 		<% end %>
 	</div>
