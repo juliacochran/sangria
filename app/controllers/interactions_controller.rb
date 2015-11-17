@@ -17,7 +17,7 @@ class InteractionsController < ApplicationController
   # GET /interactions/1/show_modal
   # GET /interactions/1/show_modal.json
   def show_modal
-    @category = Interaction::get_category(@interaction.category)
+    @application = Application.find(@interaction.application_id)
     render 'show', :layout => nil
   end
 
@@ -51,6 +51,9 @@ class InteractionsController < ApplicationController
   # GET /interactions/1/edit_modal
   # GET /interactions/1/edit_modal.json
   def edit_modal
+    @user = current_user
+    @interaction = Interaction.find(params[:id].to_i)
+    @application = Application.find(@interaction.application_id)
     render 'edit', :layout => nil
   end
 
@@ -85,14 +88,9 @@ class InteractionsController < ApplicationController
       @contact = @company.contacts.create(contact_params)
       save[:contact] = true
 
-      # params are mutable so I'm making an extra with the new contact_id
-      new_interaction_params = {}
-      interaction_params.each do |key, value|
-        new_interaction_params[key] = value
-      end
+      new_interaction_params = deep_clone_params(interaction_params)
       new_interaction_params[:contact_id] = @contact.id
       @interaction = @application.interactions.create(new_interaction_params)
-
     else
       # create without contact or if they've filled in existing contact in the dropdown
       @interaction = @application.interactions.create(interaction_params)
@@ -125,11 +123,59 @@ class InteractionsController < ApplicationController
 
   # PATCH/PUT /interactions/1
   # PATCH/PUT /interactions/1.json
+  """
+  Case 1: update interaction without contact
+  Case 2: update interaction with new contact
+    Case 2.1: new contact with same company as application
+    Case 2.2: new contact with new company
+    Case 2.2: new contact with existing company
+  Case 3: update interaction with existing contact
+
+  As of the commit where this message appears it works for all cases
+  """
   def update
     logger.info "FUKK #{params}"
     logger.info "FUKK #{interaction_params}"
+
+    @user = current_user
+    @interaction = Interaction.find(params[:id])
+    save = {:company => false, :contact => false}
+
+    if contact_params[:name].present?
+      # we don't have autofill on interaction add yet so we're creating new
+      if company_params[:name].present?
+        # if they're adding a new company
+        @company = @user.companies.create(company_params)
+        save[:company] = true
+      else
+        # if they're using the same company as the application
+        @company = Company.find(contact_params[:company_id].to_i)
+      end
+      @contact = @company.contacts.create(contact_params)
+      save[:contact] = true
+
+      new_interaction_params = deep_clone_params(interaction_params)
+      new_interaction_params[:contact_id] = @contact.id
+    end
+
+
     respond_to do |format|
-      if @interaction.update(interaction_params)
+      if save[:company]
+        unless @company.save
+          logger.debug "shiiit company didn't save #{@company.inspect}"
+          logger.debug "shiiit company didn't save #{@contact.inspect}"
+          logger.debug "shiiit company didn't save #{@company.errors.inspect}"
+        end
+      end
+      if save[:contact]
+        unless @contact.save
+          logger.debug "shiiit contact didn't save #{@company.inspect}"
+          logger.debug "shiiit contact didn't save #{@contact.inspect}"
+          logger.debug "shiiit contact didn't save #{@contact.errors.inspect}"
+        end
+      end
+      # if we're making a new contact, we have to override the interaction params so we use the new one
+      if @interaction.update((save[:contact]) ? new_interaction_params : interaction_params)
         format.html { redirect_to :back }
         format.json { render :show, status: :ok, location: @interaction }
       else

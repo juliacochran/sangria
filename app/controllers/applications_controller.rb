@@ -64,10 +64,7 @@ class ApplicationsController < ApplicationController
 
     @user = current_user
 
-    new_application_params = {}
-    application_params.each do |key, value|
-      new_application_params[key] = value
-    end
+    new_application_params = deep_clone_params(application_params)
     # TODO: if statement for if creation or company_id
 
     @company = @user.companies.create(company_params)
@@ -113,6 +110,7 @@ class ApplicationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_application
+      logger.info "FUUUUiUK #{params}"
       @application = Application.find(params[:id])
     end
 

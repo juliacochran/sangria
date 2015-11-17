@@ -1,9 +1,9 @@
-<div class="section application-show-modal-title" style="padding-top: 0;">
+<div class="section" style="padding-top: 0;">
   <% if @application.company.present? && @application.company.logo.present? %>
     <img class="modal-title-logo" src="<%= @application.company.logo %>" />
   <% end %>
   <h5 class="strong title"><%= @application.job || "" %></h5>
-  <div class="sangria-accent-text"><%= @application.company.name %> - <%= @application.company.location %></div>
+  <div class="sangria-accent-text"><%= @application.company.name %><%= (@application.company.location.present?) ? (" - " + @application.company.location) : "" %></div>
   <div><%= Application::get_category(@application.category) %> Position</div>
 </div>
 <div class="section">
@@ -20,9 +20,9 @@
         <a href="#interaction-show-modal" class="interaction-show-modal-trigger" data-interaction_id="<%= interaction.id %>"><%= interaction.title %></a>
       </h5>
       <div class="left-side">
-        <div><%= (interaction.category) ? Interaction::get_category(interaction.category) : "" %></div>
-        <div><%= (interaction.date) ? interaction.date.strftime("%B %-d, %Y") : "" %></div>
-        <div><%= truncate(interaction.details, length: 75) || "" %></div>
+        <div><%= (interaction.category.present?) ? Interaction::get_category(interaction.category) : "" %></div>
+        <div><%= (interaction.date.present?) ? interaction.date.strftime("%B %-d, %Y") : "" %></div>
+        <div><%= (interaction.details.present?) ? truncate(interaction.details, length: 75) : "" %></div>
       </div>
       <div class="right-side interaction-actions">
         <a href="#interaction-edit-modal" class="interaction-edit-modal-trigger" data-interaction_id="<%= interaction.id %>"><i class="material-icons">edit</i></a>

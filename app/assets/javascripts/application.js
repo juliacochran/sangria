@@ -157,7 +157,6 @@ $(document).ready(function() {
       in_duration: 200,
       out_duration: 200
     }).on("click", function(e) {
-      console.log("clicl")
       var $this = $(this);
       $.ajax({
         method: "GET",
@@ -173,6 +172,26 @@ $(document).ready(function() {
           container: "#datepicker_container"
         });
         init_selects($modal);
+
+        $(".interaction-new-contact-trigger").on("click", function() {
+          $(".interaction-new-contact").show();
+          $(".interaction-existing-contact").hide();
+        });
+
+        $(".interaction-existing-contact-trigger").on("click", function() {
+          $(".interaction-new-contact").hide();
+          $(".interaction-existing-contact").show();
+        });
+
+        $(".interaction-new-company-trigger").on("click", function() {
+          $(".interaction-new-company").show();
+          $(".interaction-existing-company").hide();
+        });
+
+        $(".interaction-existing-company-trigger").on("click", function() {
+          $(".interaction-new-company").hide();
+          $(".interaction-existing-company").show();
+        });
       })
       .fail(function() {
         alert("Failed to load Edit Interaction Modal");
@@ -196,10 +215,28 @@ $(document).ready(function() {
         $("#interaction-show-modal .modal-content").html(data);
         $(".interaction-edit-modal-trigger").data("interaction_id", interaction_id);
         $(".interaction-delete-modal-trigger").attr("href", "/interactions/" + interaction_id);
+        prepContactModalTriggers();
       })
       .fail(function() {
         alert("Failed to load Show Interaction Modal");
       });
+    });
+  }
+
+
+  function prepContactModalTriggers() {
+    $(".contact-new-modal-trigger").leanModal({
+      in_duration: 200,
+      out_duration: 200
+    }).on("click", function() {
+      $(".interaction-edit-modal-trigger").click();
+    });
+
+    $(".contact-edit-modal-trigger").leanModal({
+      in_duration: 200,
+      out_duration: 200
+    }).on("click", function(e) {
+      $(".interaction-edit-modal-trigger").click();
     });
   }
 

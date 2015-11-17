@@ -206,10 +206,7 @@ textarea.materialize-textarea {
     }
 }
 
-
-[type="checkbox"]:not(:checked),
-[type="checkbox"]:checked {
-    left: 0px;
-    position: absolute;
-    visibility: visible;
+.ui-state-highlight {
+    min-height: 300px ;
+    line-height: 1.2em;
 }
