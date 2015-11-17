@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get "/interactions/:id/edit_modal" => "interactions#edit_modal"
   get "/interactions/:id/followed_up" => "interactions#followed_up", as: :followup
   get "/notes/new_modal" => "notes#new_modal"
+  get "/notes/:id/edit_modal" => "notes#edit_modal"
 
   resources :contacts
   resources :notes

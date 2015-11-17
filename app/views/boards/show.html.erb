@@ -70,11 +70,18 @@
 	  	<div class="col s12">
 				<div class="card">
 					<div class="card-content">
-						<% if note.remind_date.present? %>
-							<%= note.remind_date.strftime("%B %-d, %Y") %>
-							<br />
-						<% end %>
-						<%= note.details %>
+						<div class="sangria-accent-text">
+							<% if note.remind_date.present? %>
+								<%= note.remind_date.strftime("%B %-d, %Y") %>
+							<% end %>
+						</div>
+						<div>
+							<%= note.details %>
+						</div>
+			      <div class="right note-actions">
+			        <a href="#note-edit-modal" class="note-edit-modal-trigger" data-note_id="<%= note.id %>" data-board_id="<%= @board.id %>"><i class="material-icons">edit</i></a>
+			        <%= link_to 'delete', note, method: :delete, data: { confirm: 'Are you sure?' }, :class => "material-icons" %>
+			      </div>
 					</div>
 				</div>
 			</div>
@@ -134,6 +141,9 @@
 <div id="interaction-new-modal" class="modal modal-fixed-footer"></div>
 
 <div id="interaction-edit-modal" class="modal modal-fixed-footer"></div>
+
+
+<div id="note-edit-modal" class="modal modal-fixed-footer"></div>
 
 
 <div id="board-new-modal" class="modal modal-fixed-footer"></div>

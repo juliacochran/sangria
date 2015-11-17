@@ -1,5 +1,5 @@
 class NotesController < ApplicationController
-  before_action :set_note, only: [:show, :edit, :update, :destroy]
+  before_action :set_note, only: [:show, :edit, :edit_modal, :update, :destroy]
   before_filter :logged_in?
 
   # GET /notes
@@ -27,6 +27,12 @@ class NotesController < ApplicationController
 
   # GET /notes/1/edit
   def edit
+  end
+
+  # GET /notes/1/edit_modal
+  def edit_modal
+    @note = Note.find(params[:id].to_i)
+    render 'edit', :layout => nil
   end
 
   # POST /notes

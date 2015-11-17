@@ -291,5 +291,29 @@ $(document).ready(function() {
     });
   });
 
+  $(".note-edit-modal-trigger").leanModal({
+    in_duration: 200,
+    out_duration: 200
+  }).on("click", function(e) {
+    var $this = $(this);
+    $.ajax({
+      method: "GET",
+      url: "/notes/" + $this.data("note_id") + "/edit_modal"
+    })
+    .done(function(data) {
+      var $modal = $("#note-edit-modal");
+      $modal.html(data);
+      $("#datepicker_container").html("");
+
+      $modal.find(".datepicker").pickadate({
+        format: 'mmmm d, yyyy',
+        container: "#datepicker_container"
+      });
+    })
+    .fail(function() {
+      alert("Failed to load Edit Note Modal");
+    });
+  });
+
 
 });
