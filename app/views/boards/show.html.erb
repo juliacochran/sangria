@@ -25,40 +25,37 @@
 				</div>
 			</div>
 
-			<% stage.each do |application| %>
-				<div class="card">
-					<div class="card-content">
-						<div class="card-title">
-							<a href="#application-show-modal" class="application-show-modal-trigger" data-application_id="<%= application.id %>">
-								<% if application.company.present? && application.company.logo.present? %>
-									<img src="<%= application.company.logo %>" style="max-width:100px; max-height:100px; background-color: #ffffff; padding: 0.1em;" />
-								<% elsif application.company.name.present? %>
-									<%= application.company.name %>
+			<ul class="sortable" style="min-height: 100px;" data-stage_num="<%= index+1 %>">
+				<% stage.each do |application| %>
+					<li class="ui-state-default" data-application_id="<%= application.id %>">
+						<div class="card">
+							<div class="card-content">
+								<span class="card-title"><a href="#application-show-modal" class="application-show-modal-trigger" data-application_id="<%= application.id %>">
+									<% if application.company && application.company.logo? %>
+										<img src="<%= application.company.logo %>" style="max-width:100px; max-height:100px; background-color: #ffffff; padding: 0.1em;" />
+									<% else %>
+										<%= application.company.name %>
+									<% end %>
+								</a></span>
+								<p class="teal-text text-darken-4"><%= application.company.location %></p>
+								<% if application.current_interaction != nil %>
+									<div class="divider" style="margin: 1em 0;"></div>
+									<h6>Most Current Interaction</h6>
+									<a href="#interaction-show-modal" class="interaction-show-modal-trigger" data-interaction_id="<%= application.current_interaction.id %>"><%= application.current_interaction.title %></a>
+									<p class="teal-text text-darken-4"><%= truncate(application.current_interaction.details, length: 50, separator: " ") %></p>
 								<% end %>
-							</a>
+							</div>
+							<div class="card-action" style="text-align: right;">
+								<!-- <a href="#application-edit-modal" class="application-edit-modal-trigger" data-application_id="<%= application.id %>"><i class="material-icons card-title">edit</i></a> -->
+								<a href="#interaction-new-modal" class="interaction-new-modal-trigger" style="margin-right: 0;" data-application_id="<%= application.id %>"><i class="material-icons card-title black-text">add</i></a>
+							</div>
 						</div>
-						<% if application.job.present? %>
-							<h5 class="strong title"><%= application.job %></h5>
-						<% end %>
-						<% if application.company.present? && application.company.location.present? %>
-							<p class="sangria-faded-text"><%= application.company.location %></p>
-						<% end %>
-						<% if application.applied_date.present? %>
-							<p class="sangria-faded-text"><%= application.applied_date.strftime("%B %-d, %Y") %></p>
-						<% end %>
-						<% if application.current_interaction != nil %>
-							<div class="divider" style="margin: 1em 0;"></div>
-							<a href="#interaction-show-modal" class="interaction-show-modal-trigger" data-interaction_id="<%= application.current_interaction.id %>"><%= application.current_interaction.title %></a>
-							<p class="teal-text text-darken-4"><%= truncate(application.current_interaction.details, length: 50, separator: " ") %></p>
-						<% end %>
-					</div>
-					<div class="card-action" style="text-align: right;">
-						<!-- <a href="#application-edit-modal" class="application-edit-modal-trigger" data-application_id="<%= application.id %>"><i class="material-icons card-title">edit</i></a> -->
-						<a href="#interaction-new-modal" class="interaction-new-modal-trigger" style="margin-right: 0;" data-application_id="<%= application.id %>"><i class="material-icons card-title black-text">add</i></a>
-					</div>
-				</div>
-			<% end %>
-
+					</li>
+				<% end %>
+<!-- 				<li class="ui-state-default undraggable" >
+					<div style="height:100px;border-style: dashed;" /></div>
+				</li> -->
+			</ul>
 		</div>
 	<% end %>
 </div>
@@ -124,8 +121,6 @@
 
 <div id="application-edit-modal" class="modal modal-fixed-footer"></div>
 
-
-
 <div id="interaction-show-modal" class="modal modal-fixed-footer">
 	<div class="modal-content">
 	</div>
@@ -143,7 +138,6 @@
 
 <div id="board-new-modal" class="modal modal-fixed-footer"></div>
 
-
 <div id="note-new-modal" class="modal modal-fixed-footer"></div>
 
 <div id="datepicker_container"></div>
@@ -154,3 +148,9 @@
     addCompanies(companies, false);
   };
 </script>
+
+
+ <style>
+	.ui-state-highlight { min-height: 100px ; line-height: 1.2em; }
+ </style>
+
