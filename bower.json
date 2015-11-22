@@ -1,0 +1,22 @@
+{
+  "name": "sangria",
+  "homepage": "https://github.com/juliacochran/sangria",
+  "authors": [
+    "ytadavarthi3 <yasasvit@gatech.edu>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/assets/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "tether-shepherd":"~1.2.0"
+  }
+
+}

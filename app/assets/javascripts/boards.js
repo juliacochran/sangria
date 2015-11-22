@@ -40,3 +40,9 @@ $(function() {
 
     }).disableSelection();
 });
+
+$('.drag').mousedown(function(){
+    $(this).toggleClass("z-depth-3");
+}).mouseup(function(){
+    $(this).toggleClass("z-depth-3");
+});

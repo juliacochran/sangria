@@ -27,6 +27,10 @@ a {
     background-color: color("cyan", "lighten-2");
 }
 
+.block{
+    display:block;
+}
+
 .modal-title-logo {
     max-height: 150px;
     max-width: 200px;
@@ -90,13 +94,13 @@ textarea.materialize-textarea {
 }
 
 .banner{
-    background: url(image_path('background2.png')) no-repeat center center;
-    // background-color: #1D5479;
+    // background: url(image_path('background2.png')) no-repeat center center;
+    background-color: #4DD0E1;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: 100%;
-    height: 30em;
+    height: 25em;
     background-position: 50% 100%;
 }
 

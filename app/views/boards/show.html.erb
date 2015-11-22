@@ -2,15 +2,15 @@
   <p id="notice"><%= flash[:notice] %></p>
 <% end %>
 
-<div class="row" style="margin: 0">
-	<div class="col s12 m6 l3 title-board" >
+<div class="row center" style="margin: 0">
+	<div class="col s12 m6 l4 offset-l4 title-board" >
 		<%= form_for @board do |f| %>
 			<div class="title-icons">
 				<%= link_to 'add', "#board-new-modal", :class => "material-icons board-new-modal-trigger" %>
 				<%= link_to 'arrow_drop_down', "#board-change-modal", :class => "material-icons board-change-modal-trigger" %>
 				<%= link_to 'delete', @board, method: :delete, data: { confirm: 'Are you sure?' }, :class => "material-icons" %>
 			</div>
-			<%= f.text_field :title, :style => "font-size: 2rem; margin-top:1rem;" %>
+			<%= f.text_field :title, :style => "font-size: 2rem; margin-top:1rem;", class: "center" %>
 		<% end %>
 	</div>
 </div>
@@ -28,7 +28,7 @@
 			<ul class="sortable" style="min-height: 100px;" data-stage_num="<%= index+1 %>">
 				<% stage.each do |application| %>
 					<li class="ui-state-default" data-application_id="<%= application.id %>">
-						<div class="card">
+						<div class="card drag">
 							<div class="card-content">
 								<span class="card-title"><a href="#application-show-modal" class="application-show-modal-trigger" data-application_id="<%= application.id %>">
 									<% if application.company && application.company.logo? %>
