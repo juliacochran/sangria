@@ -42,7 +42,7 @@ $(function() {
 });
 
 $('.drag').mousedown(function(){
-    $(this).toggleClass("z-depth-3");
+    $(this).toggleClass("z-depth-4");
 }).mouseup(function(){
-    $(this).toggleClass("z-depth-3");
+    $(this).toggleClass("z-depth-4");
 });
