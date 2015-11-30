@@ -10,6 +10,9 @@ var comp_list = null;
 var icTO = null;
 var changing = 0;
 
+/*
+	
+*/
 function inputChanged(form_class, input_id) {
 	if (icTO == null) {
 		// console.log("set timer");
