@@ -6,7 +6,8 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
-    @companies = Company.all
+    @user = current_user
+    @companies = Company.where('user_id' => @user.id)
   end
 
   # GET /companies/1
