@@ -39,9 +39,11 @@ class InteractionsController < ApplicationController
 
   def followed_up
     @interaction = Interaction.find_by_id(params[:id])
-    @interaction.followup = true
-    @interaction.save
-    redirect_to :back
+    RemindersController.send_followup_reminders
+   # @interaction.followup = true
+    #@interaction.save
+    redirect_to @interaction.application.board
+   
   end
 
   # GET /interactions/1/edit

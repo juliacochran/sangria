@@ -80,6 +80,9 @@ group :development, :test do
   gem "netrc"
   gem "git"
   gem "better_errors"
+  gem "letter_opener"
+  gem "rails-erd"
+  gem 'railroady'
 end
 
 group :development do
