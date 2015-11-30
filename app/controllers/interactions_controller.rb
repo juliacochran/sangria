@@ -40,10 +40,7 @@ class InteractionsController < ApplicationController
   def followed_up
     @interaction = Interaction.find_by_id(params[:id])
     RemindersController.send_followup_reminders
-   # @interaction.followup = true
-    #@interaction.save
     redirect_to @interaction.application.board
-   
   end
 
   # GET /interactions/1/edit
@@ -109,9 +106,6 @@ class InteractionsController < ApplicationController
   Case 3: update interaction with existing contact
   """
   def update
-    logger.info "FUKK #{params}"
-    logger.info "FUKK #{interaction_params}"
-
     @user = current_user
     @interaction = Interaction.find(params[:id])
     @application = @interaction.application

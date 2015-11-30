@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :applications, through: :boards
   has_many :interactions, through: :applications
 
+  """Authenticate users"""
   def self.from_omniauth(auth_hash)
     user = User.find_or_create_by(email: auth_hash['info']['email'])
 
@@ -27,6 +28,7 @@ class User < ActiveRecord::Base
     user
   end
 
+  """Set the user contacts up for the select tag"""
   def contacts_for_select
     select_array = [["Choose Contact", ""]]
     self.contacts.each do |contact|
@@ -35,6 +37,7 @@ class User < ActiveRecord::Base
     return select_array
   end
 
+  """Set the user companies up for the select tag"""
   def companies_for_select
     select_array = [["Choose Company", ""]]
     self.companies.each do |company|

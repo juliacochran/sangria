@@ -13,6 +13,7 @@ class Interaction < ActiveRecord::Base
                      "Recruiter Call",
                      "Other"]
 
+  """Given an index, get the appropriate category"""
   def self.get_category(idx)
     if idx.present? && idx >= 0 && idx < CATEGORIES.length
       return CATEGORIES[idx]
@@ -21,6 +22,7 @@ class Interaction < ActiveRecord::Base
     end
   end
 
+  """Set the categories up for the select tag"""
   def self.categories_for_select
     select_array = [["Choose Category", ""]]
     CATEGORIES.each_with_index do |category, index|

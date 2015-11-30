@@ -16,6 +16,7 @@ class CompaniesController < ApplicationController
 
   end
 
+  # used for Glassdoor AJAX API calls
   def search
     company_query = params[:q]
     response = CompaniesHelper::getCompanyInfo(company_query,request.remote_ip, request.env['HTTP_USER_AGENT'])
@@ -38,7 +39,6 @@ class CompaniesController < ApplicationController
   # POST /companies
   # POST /companies.json
   def create
-    #TODO: make sure its getting the user_id
     @company = Company.new(company_params)
 
     respond_to do |format|
