@@ -38,80 +38,34 @@
       </div>
 
       <div class="col s12 interaction-new-contact" style="display: none;">
-        <%= fields_for :company do |company| %>
-          <%= fields_for :contact do |contact| %>
-            <h5>Add New Contact</h5>
-            <div class="col s12 m6">
-              <div class="input-field">
-                <%= contact.hidden_field :company_id, :value => @application.company.id %>
-              </div>
-              <div class="input-field">
-                <%= contact.label :name %>
-                <%= contact.text_field :name %>
-              </div>
-              <div class="input-field">
-                <%= contact.label :email %>
-                <%= contact.text_field :email %>
-              </div>
+        <%= fields_for :contact do |contact| %>
+          <h5>Add New Contact</h5>
+          <div class="col s12 m6">
+            <div class="input-field">
+              <%= contact.hidden_field :company_id, :value => @application.company.id %>
             </div>
-            <div class="col s12 m6">
-              <div class="input-field">
-                <%= contact.label :phone_number %>
-                <%= contact.text_field :phone_number %>
-              </div>
-              <div class="input-field">
-                <%= contact.label :role %>
-                <%= contact.text_field :role %>
-              </div>
+            <div class="input-field">
+              <%= contact.label :name %>
+              <%= contact.text_field :name %>
             </div>
+            <div class="input-field">
+              <%= contact.label :email %>
+              <%= contact.text_field :email %>
+            </div>
+          </div>
+          <div class="col s12 m6">
+            <div class="input-field">
+              <%= contact.label :phone_number %>
+              <%= contact.text_field :phone_number %>
+            </div>
+            <div class="input-field">
+              <%= contact.label :role %>
+              <%= contact.text_field :role %>
+            </div>
+          </div>
 
-            <div class="col s12">
-              If this contact is not a part of the company for this application, <%= @application.company.name %>, add a <a class="interaction-new-company-trigger" href="#!">new company</a> or an <a class="interaction-existing-company-trigger" href="#!">existing company</a>.
-            </div>
-
-            <div class="col s12 interaction-new-company" style="display: none;">
-              <h5>Add New Contact Company</h5>
-              <div class="col s12 m6">
-                <div class="input-field">
-                  <%= company.label :name %>
-                  <%= company.text_field :name %>
-                </div>
-                <div class="input-field">
-                  <%= company.label :location %>
-                  <%= company.text_field :location %>
-                </div>
-              </div>
-              <div class="col s12 m6">
-                <div class="input-field">
-                  <%= company.label :website %>
-                  <%= company.text_field :website %>
-                </div>
-                <div class="input-field" >
-                  <%= company.label :logo, "Logo url" %>
-                  <%= company.text_field :logo %>
-                </div>
-              </div>
-              <div class="col s12 m6">
-                <%= image_tag("", :alt => "company_logo", :id => "company_logo_img", :style => "display: none;") %>
-              </div>
-            </div>
-
-            <div class="col s12 interaction-existing-company" style="display: none;">
-              <h5>Add Existing Contact Company</h5>
-              <div class="col s12">
-                <div class="input-field">
-                  <%= contact.label :company_id, "Company Name", :class => "active" %>
-                  <%= contact.select(:company_id, options_for_select(@user.companies_for_select), {}, {class: "materialize-select"}) %>
-                </div>
-              </div>
-            </div>
-
-            <div class="actions" style="display: none;">
-              <%= contact.submit %>
-            </div>
-          <% end %>
           <div class="actions" style="display: none;">
-            <%= company.submit %>
+            <%= contact.submit %>
           </div>
         <% end %>
       </div>

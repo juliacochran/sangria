@@ -1,21 +1,31 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-  </head>
-  <body>
-    <h1>Hi <%= @user.name %>, </h1>
-    <p>
-      Have you sent a follow-up email after your <%= @category%> with 
-      <% if not @interaction.contact.nil? %>
-        <%= @interaction.contact.name %> 
-      <% else %>
-        contact at <%= @interaction.application.company.name %>
-      <% end %>
-      ? 
-      If yes, <%= url_for(@url) %> let us know so we will stop sending you reminder emails. 
-      If not, you should! And you can contact <%= @interaction.contact.name %> at <%= @interaction.contact.email %>.
-    </p>
+<div class="row">
+  <h4>Hey <%= @user.name.split.first %>, </h4>
+</div>
+<div class="row center">
+  We hope your <%= @category%> with <%= @company %> went well! Just wanted to check in and see if you  had sent a follow-up email to <%= @interaction.contact.name %> afterwards?
+</div>
+<div class="row">
+  <div class="col s4 center">
+    <i class="medium material-icons">email</i>
+    <h5> Make a lasting impression. </h5>
+    <a class="waves-effect waves-light btn-large amber lighten-1" href="mailto:<%=@interaction.contact.email%>?Subject=<%=@category%>%Follow%Up" target="_top"> Email <%= @interaction.contact.name %> now! </a>
+  </div>
 
-  </body>
-</html>
+  <div class="col s4 center">
+      <i class="medium material-icons">list</i>
+      <h5> Learn more about follow-up ettiquette. </h5>
+      <a class="waves-effect waves-light btn-large red lighten-2" href="http://www.getsidekick.com/follow-up-email-after-interview"> Check out some tips! </a>
+  </div>
+  
+  <div class="col s4 center">
+      <i class="medium material-icons">thumb_up</i>
+      <h5> Stop getting these emails. </h5>
+      <a class="waves-effect waves-light btn-large green darken-1" href="<%= url_for(:host => "www.sangriaapp.tk",
+        :controller => "interactions",
+        :action => "followed_up", :id => @interaction.id) %>"> I followed-up :)</a>
+  </div>
+  
+</div>
+<div class="row center">
+<h6> XOXO, The Sangria Team </h6>
+</div>

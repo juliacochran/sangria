@@ -22,6 +22,11 @@ a {
     color: color("cyan", "lighten-2");
 }
 
+.modal { 
+    max-height: 90%; 
+    max-width: 90%; 
+}
+
 #board-change-modal .card-panel.selected {
     color: #ffffff;
     background-color: color("cyan", "lighten-2");
