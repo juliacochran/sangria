@@ -7,6 +7,9 @@
 
 /* datepicker stuff: http://amsul.ca/pickadate.js/date/ */
 
+/* We have to initialize the selects asynchronously after each AJAX
+ * call to replace the HTML so we wrap this in a function for ease of use
+ */
 var init_selects = function($this) {
   var $selects = $this.find(".materialize-select");
   $selects.material_select();
@@ -15,8 +18,8 @@ var init_selects = function($this) {
 
 $(document).ready(function() {
 
+  /* Go ahead and initialize all of the interaction triggers and selects */
   prepInteractionModalTriggers();
-
   init_selects($(".content"));
 
 	$(".dropdown-button").dropdown();
@@ -35,6 +38,7 @@ $(document).ready(function() {
       data: { stage: $this.data("stage_num"), board_id: $this.data("board_id") }
     })
     .done(function(data) {
+      /* replace the html with data, initialize the datepicker and selects */
       var $modal = $("#application-new-modal");
       $modal.html(data);
       $("#datepicker_container").html("");
@@ -60,6 +64,7 @@ $(document).ready(function() {
       url: "/applications/" + $this.data("application_id") + "/edit_modal"
     })
     .done(function(data) {
+      /* replace the html with data, initialize the datepicker and selects */
       var $modal = $("#application-edit-modal");
       $modal.html(data);
       $("#datepicker_container").html("");
@@ -87,8 +92,8 @@ $(document).ready(function() {
       url: "/applications/" + application_id + "/show_modal"
     })
     .done(function(data) {
-      // have to do this because we can't replace the edit button because
-      // it's bound to a js event on document load
+      /* have to do this because we can't replace the edit button because
+       * it's bound to a js event on document load */
       $("#application-show-modal .modal-content").html(data);
       $(".application-edit-modal-trigger").data("application_id", application_id);
       $(".application-delete-modal-trigger").attr("href", "/applications/" + application_id);
@@ -98,7 +103,6 @@ $(document).ready(function() {
       alert("Failed to load Show Application Modal");
     });
   });
-
 
 
 
@@ -118,6 +122,8 @@ $(document).ready(function() {
         data: { application_id: $this.data("application_id") }
       })
       .done(function(data) {
+        /* replace the html with data, initialize the datepicker and selects
+         * prepare the new listeners */
         var $modal = $("#interaction-new-modal");
         $modal.html(data);
         $("#datepicker_container").html("");
@@ -153,6 +159,8 @@ $(document).ready(function() {
         url: "/interactions/" + $this.data("interaction_id") + "/edit_modal"
       })
       .done(function(data) {
+        /* replace the html with data, initialize the datepicker and selects
+         * prepare the new listeners */
         var $modal = $("#interaction-edit-modal");
         $modal.html(data);
         $("#datepicker_container").html("");
@@ -190,8 +198,8 @@ $(document).ready(function() {
         url: "/interactions/" + interaction_id + "/show_modal"
       })
       .done(function(data) {
-        // have to do this because we can't replace the edit button because
-        // it's bound to a js event on document load
+        /* have to do this because we can't replace the edit button because
+         * it's bound to a js event on document load */
         $("#interaction-show-modal .modal-content").html(data);
         $(".interaction-edit-modal-trigger").data("interaction_id", interaction_id);
         $(".interaction-delete-modal-trigger").attr("href", "/interactions/" + interaction_id);
@@ -204,6 +212,11 @@ $(document).ready(function() {
   }
 
 
+
+  /**
+   * All of this runs on document ready (page load basically) and binds all of these
+   * listeners then, so when we replace html with ajax we have to rebind our listeners
+   */
   function prepContactModalTriggers() {
     $(".contact-new-modal-trigger").leanModal({
       in_duration: 200,
@@ -294,6 +307,4 @@ $(document).ready(function() {
       alert("Failed to load Edit Note Modal");
     });
   });
-
-
 });

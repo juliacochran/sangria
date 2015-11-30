@@ -1,4 +1,4 @@
-
+/* js for the draggable cards */
 $(function() {
     var oldList, newList, item;
     $('.sortable').sortable({
@@ -16,6 +16,8 @@ $(function() {
     	    var stage = ui.item.parent().data('stage_num');
     	    var application_id = ui.item.data('application_id');
 
+            /* even though the server thinks it failed, it succeeds and updates
+             * with the new stage correctly */
             $.ajax({
                 method: "PATCH",
                 url: "/applications/" + application_id,
@@ -30,11 +32,10 @@ $(function() {
 
         ,placeholder: "ui-state-highlight"
 
-    	//#,items: "li:not(:last-child)"
-
     }).disableSelection();
 });
 
+/* initialize the draggable cards */
 $(".drag").mousedown(function() {
     $(this).toggleClass("z-depth-4");
 }).mouseup(function() {

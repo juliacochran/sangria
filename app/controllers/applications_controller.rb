@@ -60,12 +60,10 @@ class ApplicationsController < ApplicationController
   # POST /applications
   # POST /applications.json
   def create
+    @user = current_user
     @board = Board.find(application_params[:board_id])
 
-    @user = current_user
-
     new_application_params = deep_clone_params(application_params)
-    # TODO: if statement for if creation or company_id
 
     @company = @user.companies.create(company_params)
     new_application_params[:company_id] = @company.id
@@ -110,7 +108,6 @@ class ApplicationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_application
-      logger.info "FUUUUiUK #{params}"
       @application = Application.find(params[:id])
     end
 

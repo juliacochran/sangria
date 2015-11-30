@@ -28,6 +28,10 @@ a {
 
 #interaction-new-modal { 
     width: 80%;
+
+input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid color("cyan", "lighten-2");
+    box-shadow: 0 1px 0 0 color("cyan", "lighten-2");
 }
 
 #board-change-modal .card-panel.selected {
@@ -36,7 +40,7 @@ a {
 }
 
 .block{
-    display:block;
+    display: block;
 }
 
 .modal-title-logo {
@@ -101,7 +105,6 @@ textarea.materialize-textarea {
 }
 
 .banner{
-    // background: url(image_path('background2.png')) no-repeat center center;
     background-color: #4DD0E1;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -120,12 +123,10 @@ textarea.materialize-textarea {
     }
 
     & #board_title {
-        border-bottom:none;
+        border-bottom: 1px solid #ffffff;
 
-        /* label underline focus color */
-        & &:focus {
-         border-bottom: 1px solid #4DD0E1;
-         box-shadow: 0 1px 0 0 #4DD0E1;
+        &:focus {
+            border-bottom: 1px solid color("cyan", "lighten-2");
         }
     }
 }

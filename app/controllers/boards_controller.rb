@@ -17,13 +17,15 @@ class BoardsController < ApplicationController
     @board = @boards.find(params[:id])
     @stages = Board::STAGES
     @applications = Array.new(@stages.size)
+
+    # order applications by desc applied date and group them by stage
     board_applications = @board.applications.order(applied_date: :desc)
     @stages.each_with_index do |stage, index|
       @applications[index] = board_applications.where('stage': index+1)
     end
-    #@companies = Company.where("user_id = '0' OR " + "'" + @user + "'").to_json
-    @companies = Company.all.to_json
+
     @company = Company.new
+    @companies = Company.all.to_json
     @application = Application.new
     @categories = Application::CATEGORIES
     @notes = @board.notes.order(created_at: :desc)

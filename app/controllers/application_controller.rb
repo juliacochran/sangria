@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
   	redirect_to(root_url) unless !current_user.nil?
   end
 
-  """params are immutable so we have to make a new hash if we want to edit any params"""
+  """params passed through the endpoints are immutable so we have to make a new
+  hash if we want to edit any params"""
   def deep_clone_params(params)
     new_params = {}
     params.each do |key, value|
