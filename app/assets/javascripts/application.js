@@ -139,16 +139,6 @@ $(document).ready(function() {
           $(".interaction-new-contact").hide();
           $(".interaction-existing-contact").show();
         });
-
-        $(".interaction-new-company-trigger").on("click", function() {
-          $(".interaction-new-company").show();
-          $(".interaction-existing-company").hide();
-        });
-
-        $(".interaction-existing-company-trigger").on("click", function() {
-          $(".interaction-new-company").hide();
-          $(".interaction-existing-company").show();
-        });
       })
       .fail(function() {
         alert("Failed to load New Interaction Modal");
@@ -183,16 +173,6 @@ $(document).ready(function() {
         $(".interaction-existing-contact-trigger").on("click", function() {
           $(".interaction-new-contact").hide();
           $(".interaction-existing-contact").show();
-        });
-
-        $(".interaction-new-company-trigger").on("click", function() {
-          $(".interaction-new-company").show();
-          $(".interaction-existing-company").hide();
-        });
-
-        $(".interaction-existing-company-trigger").on("click", function() {
-          $(".interaction-new-company").hide();
-          $(".interaction-existing-company").show();
         });
       })
       .fail(function() {

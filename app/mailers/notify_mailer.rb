@@ -11,7 +11,8 @@ class NotifyMailer < ApplicationMailer
 		@interaction = interaction
 		@url = "www.sangriaapp.tk/interactions/" + @interaction.id.to_s + "/followup"
 		@category = Interaction::get_category(@interaction.category)
-		message = 'Have you followed-up after ' + @interaction.title + '?'
+		@company = @interaction.application.company.name
+		message = @interaction.title + ' Follow-up Reminder'
 		mail(to: @user.email, subject: message)
 	end
 end
