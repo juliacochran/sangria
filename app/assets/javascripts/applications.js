@@ -12,14 +12,12 @@ var changing = 0;
 
 function inputChanged(form_class, input_id) {
 	if (icTO == null) {
-		// console.log("set timer");
 		clearTimeout(icTO);
 		icTO = window.setTimeout(function() {
 			icTO = null;
 			updateList(form_class, input_id);
 		}, 200);
 	} else {
-		// console.log("about to update..");
 	}
 }
 
@@ -50,14 +48,12 @@ function updateList(form_class, input_id) {
 
 	    	} else {
 	    		//found no employers
-	    		console.log("none");
 	    	}
 	    	changing = 0;
 	    },
 	    error: function(xhr) {
 	        //Do Something to handle error
 	        changing = 0;
-	        console.log(xhr);
 	    }
 	});
 }
@@ -69,16 +65,13 @@ function updateInfo(text, form_class) {
 	for (index in comp_list) {
 		var comp = comp_list[index];
 		var comp_name = comp["name"];
-		// console.log("comping:" + text + " " + comp_name);
 		if (compStr(text, comp_name)) {
 
-			console.log(comp);
 
 			var $form = $('.' + form_class).first();
 			var model = form_class.split('_')[1];
 
 			$form.find('#' + model + '_company_id').val(getCompanyId(comp));
-			//console.log($form.find('#application_company_id').value );
 			$form.find('#company_logo_img').css("display", "").attr('src', comp["logo"]);
 			$form.find('#company_logo').val(comp["logo"]);
 			$form.find('#company_location').val(comp["location"]);
@@ -131,7 +124,6 @@ function inCompList(comp) {
 }
 
 function eqStr(str1, str2) {
-	//console.log(str1 + " " + str2);
 	if (str1 == null || str2 == null) return false;
 	return str1.toLowerCase() == str2.toLowerCase();
 }
@@ -172,7 +164,6 @@ function addGDCompany(comp, form_class) {
 	$('.' + form_class + ' #company_list').append('<option value="' + emp_name + '" id="' + index + '">' + emp_name + '</option>');
 	comp_list.push(createCompany(comp));
 
-	//console.log("comped");
 }
 
 function addCompanies(companies, gd, form_class) {

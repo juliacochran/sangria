@@ -4,7 +4,6 @@ $(function() {
     $('.sortable').sortable({
         start: function(event, ui) {
             item = ui.item;
-	        //console.log(newList);
         },
         stop: function(event, ui) {
             //alert("Moved " + item.text() + " from " + oldList.attr('id') + " to " + newList.attr('id'));
@@ -17,9 +16,6 @@ $(function() {
     	    var stage = ui.item.parent().data('stage_num');
     	    var application_id = ui.item.data('application_id');
 
-    	    console.log(stage);
-    	    console.log(application_id);
-
             $.ajax({
                 method: "PATCH",
                 url: "/applications/" + application_id,
@@ -29,8 +25,6 @@ $(function() {
                     company: {}
                 }
             });
-
-    	    //TODO: update the stage
         },
         connectWith: ".sortable"
 
@@ -41,8 +35,8 @@ $(function() {
     }).disableSelection();
 });
 
-$('.drag').mousedown(function(){
+$(".drag").mousedown(function() {
     $(this).toggleClass("z-depth-4");
-}).mouseup(function(){
+}).mouseup(function() {
     $(this).toggleClass("z-depth-4");
 });
