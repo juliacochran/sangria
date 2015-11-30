@@ -22,9 +22,12 @@ a {
     color: color("cyan", "lighten-2");
 }
 
-.modal { 
-    max-height: 90%; 
-    max-width: 90%; 
+#application-new-modal { 
+    width: 80%;
+}
+
+#interaction-new-modal { 
+    width: 80%;
 }
 
 #board-change-modal .card-panel.selected {
@@ -37,9 +40,8 @@ a {
 }
 
 .modal-title-logo {
-    max-height: 150px;
-    max-width: 200px;
-    float: right;
+    max-height: 100px;
+    max-width: 100px;
 }
 
 .side-nav-trigger {

@@ -50,8 +50,6 @@ $(document).ready(function() {
     });
   });
 
-  // $(".application-new-modal-trigger").width($(".modal").width());
-
   $(".application-edit-modal-trigger").leanModal({
     in_duration: 200,
     out_duration: 200
