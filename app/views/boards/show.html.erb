@@ -1,166 +1,167 @@
 <% if flash[:notice] %>
-  <p id="notice"><%= flash[:notice] %></p>
+<p id="notice"><%= flash[:notice] %></p>
 <% end %>
 
 <div class="row center" style="margin: 0">
 	<div class="col s12 m6 l4 offset-l4 title-board" >
 		<%= form_for @board do |f| %>
-			<div class="title-icons">
-				<%= link_to 'add', "#board-new-modal", :class => "material-icons board-new-modal-trigger" %>
-				<%= link_to 'arrow_drop_down', "#board-change-modal", :class => "material-icons board-change-modal-trigger" %>
-				<%= link_to 'delete', @board, method: :delete, data: { confirm: 'Are you sure?' }, :class => "material-icons" %>
-			</div>
-			<%= f.text_field :title, :style => "font-size: 2rem; margin-top:1rem;", class: "center" %>
+		<div class="title-icons">
+			<%= link_to 'add', "#board-new-modal", :class => "material-icons board-new-modal-trigger" %>
+			<%= link_to 'arrow_drop_down', "#board-change-modal", :class => "material-icons board-change-modal-trigger" %>
+			<%= link_to 'delete', @board, method: :delete, data: { confirm: 'Are you sure?' }, :class => "material-icons" %>
+		</div>
+		<%= f.text_field :title, :style => "font-size: 2rem; margin-top:1rem;", class: "center" %>
 		<% end %>
 	</div>
 </div>
 
 <div class="row">
 	<% @applications.each_with_index do |stage, index| %>
-		<div class="col s12 m6 l3">
-			<div class="card sangria-accent">
-				<div class="card-content" style="padding: 0px 20px">
-					<span class="card-title"><%= @stages[index] %></span>
-					<a href="#application-new-modal" class="application-new-modal-trigger"  data-stage_num="<%= index+1 %>" data-board_id="<%= @board.id %>"><i class="material-icons card-title right tooltipped" data-position="top" data-delay="50" data-tooltip="Add Application">add</i></a>
-				</div>
+	<div class="col s12 m6 l3">
+		<div class="card sangria-accent">
+			<div class="card-content" style="padding: 0px 20px">
+				<span class="card-title"><%= @stages[index] %></span>
+				<a href="#application-new-modal" class="application-new-modal-trigger"  data-stage_num="<%= index+1 %>" data-board_id="<%= @board.id %>"><i class="material-icons card-title right tooltipped" data-position="top" data-delay="50" data-tooltip="Add Application">add</i></a>
 			</div>
+		</div>
 
-			<ul class="sortable" style="min-height: 100px;" data-stage_num="<%= index+1 %>">
-				<% stage.each do |application| %>
-					<li class="ui-state-default" data-application_id="<%= application.id %>">
-						<div class="card drag">
-							<a href="#application-show-modal" class="application-show-modal-trigger" data-application_id="<%= application.id %>">
+		<ul class="sortable" style="min-height: 100px;" data-stage_num="<%= index+1 %>">
+			<% stage.each do |application| %>
+			<li class="ui-state-default" data-application_id="<%= application.id %>">
+				<div class="card drag">
+					<a href="#application-show-modal" class="application-show-modal-trigger" data-application_id="<%= application.id %>">
+						<div class="card-content">
+							<span class="card-title">
 
-							<div class="card-content">
-
-								<span class="card-title">
-									<% if application.company && application.company.logo? %>
-										<img src="<%= application.company.logo %>" style="max-width:50px; max-height:50px; background-color: #ffffff; margin-top: 0.5em;" class="right" />
-										<span class="black-text"><%= application.company.name %></span>
-									<% else %>
-										<span class="black-text"><%= application.company.name %></span>
-									<% end %>
-								</span>
-								<p><%= application.company.location %></p>
-								<% if application.current_interaction != nil %>
-									<div class="divider" style="margin: 0.8em 0;"></div>
-									<h6 class="grey-text">Recent</h6>
-									<a href="#interaction-show-modal" class="interaction-show-modal-trigger" data-interaction_id="<%= application.current_interaction.id %>"><%= application.current_interaction.title %></a>
-									<span><%= truncate(application.current_interaction.details, length: 50, separator: " ") %></span>
+								<% if application.company && application.company.logo? %>
+								<img src="<%= application.company.logo %>" style="max-width:50px; max-height:50px; background-color: #ffffff; margin-top: 0.5em;" class="right" />
+								<span class="black-text"><%= application.company.name %></span>
+								<% else %>
+								<span class="black-text"><%= application.company.name %></span>
 								<% end %>
-							</div>
-							
-							<a href="#interaction-new-modal" class="interaction-new-modal-trigger right" style="padding-right: 1em; padding-bottom:0.3em;" data-application_id="<%= application.id %>"><i class="material-icons card-title black-text tooltipped" data-position="bottom" data-delay="50" data-tooltip="Add Interaction">add</i></a>
 
-							</a>
+							</span>
+							<p><%= application.company.location %></p>
+							<% if application.current_interaction != nil %>
+							<div class="divider" style="margin: 0.8em 0;"></div>
+							<h6 class="grey-text">Recent</h6>
+							<a href="#interaction-show-modal" class="interaction-show-modal-trigger" data-interaction_id="<%= application.current_interaction.id %>"><%= application.current_interaction.title %></a>
+							<span><%= truncate(application.current_interaction.details, length: 50, separator: " ") %></span>
+							<% end %>
 						</div>
-					</li>
-				<% end %>
+						
+						<a href="#interaction-new-modal" class="interaction-new-modal-trigger right" style="padding-right: 1em; padding-bottom:0.3em;" data-application_id="<%= application.id %>"><i class="material-icons card-title black-text tooltipped" data-position="bottom" data-delay="50" data-tooltip="Add Interaction">add</i></a>
+
+					</a>
+
+				</div>
+			</li>
+			<% end %>
 <!-- 				<li class="ui-state-default undraggable" >
 					<div style="height:100px;border-style: dashed;" /></div>
 				</li> -->
 			</ul>
 		</div>
-	<% end %>
-</div>
+		<% end %>
+	</div>
 
-<div id="side-panel">
-  <div id="slide-out" class="side-nav row sangria-accent">
-  	<div class="col s12 note-title">
-			<h5 class="strong white-text" style="display: inline-block;">Notes</h5>
-			<a href="#note-new-modal" class="note-new-modal-trigger white-text" data-board_id="<%= @board.id %>"><i class="material-icons right tooltipped" data-position="left" data-delay="50" data-tooltip="Add Note" style="margin-top: 1rem;">add</i></a>
-		</div>
-		<% @notes.each do |note| %>
-	  	<div class="col s12">
+	<div id="side-panel">
+		<div id="slide-out" class="side-nav row sangria-accent">
+			<div class="col s12 note-title">
+				<h5 class="strong white-text" style="display: inline-block;">Notes</h5>
+				<a href="#note-new-modal" class="note-new-modal-trigger white-text" data-board_id="<%= @board.id %>"><i class="material-icons right tooltipped" data-position="left" data-delay="50" data-tooltip="Add Note" style="margin-top: 1rem;">add</i></a>
+			</div>
+			<% @notes.each do |note| %>
+			<div class="col s12">
 				<div class="card">
 					<div class="card-content">
 						<div class="sangria-accent-text">
 							<% if note.remind_date.present? %>
-								<%= note.remind_date.strftime("%B %-d, %Y") %>
+							<%= note.remind_date.strftime("%B %-d, %Y") %>
 							<% end %>
 						</div>
 						<div>
 							<%= note.details %>
 						</div>
-			      <div class="right note-actions">
-			        <a href="#note-edit-modal" class="note-edit-modal-trigger" data-note_id="<%= note.id %>" data-board_id="<%= @board.id %>"><i class="material-icons">edit</i></a>
-			        <%= link_to 'delete', note, method: :delete, data: { confirm: 'Are you sure?' }, :class => "material-icons" %>
-			      </div>
+						<div class="right note-actions">
+							<a href="#note-edit-modal" class="note-edit-modal-trigger" data-note_id="<%= note.id %>" data-board_id="<%= @board.id %>"><i class="material-icons">edit</i></a>
+							<%= link_to 'delete', note, method: :delete, data: { confirm: 'Are you sure?' }, :class => "material-icons" %>
+						</div>
 					</div>
 				</div>
 			</div>
-		<% end %>
-  	<div class="col s12" style="height: 225px;">
-		  <a href="#note-new-modal" class="note-new-modal-trigger" data-board_id="<%= @board.id %>" style="padding: 0;">
-		    <div class="note-card empty">
-		      <div><i class="material-icons">add</i></div>
-		    </div>
-		  </a>
-	  </div>
-  </div>
-	<a href="#" data-activates="slide-out" class="button-collapse show-on-large side-nav-trigger">Notes</a>
-</div>
+			<% end %>
+			<div class="col s12" style="height: 225px;">
+				<a href="#note-new-modal" class="note-new-modal-trigger" data-board_id="<%= @board.id %>" style="padding: 0;">
+					<div class="note-card empty">
+						<div><i class="material-icons">add</i></div>
+					</div>
+				</a>
+			</div>
+		</div>
+		<a href="#" data-activates="slide-out" class="button-collapse show-on-large side-nav-trigger">Notes</a>
+	</div>
 
 
 
-<div id="board-change-modal" class="modal modal-fixed-footer">
-	<div class="modal-content center">
-		<h5 class="strong title">Change Boards</h5>
-		<% @boards.each do |board| %>
+	<div id="board-change-modal" class="modal modal-fixed-footer">
+		<div class="modal-content center">
+			<h5 class="strong title">Change Boards</h5>
+			<% @boards.each do |board| %>
 			<div>
 				<% klass = "card-panel light-grey waves-effect waves-teal " + ((board.id == @board.id) ? "selected" : "") %>
 				<%= link_to board.title, board, :class => klass %>
 			</div>
-		<% end %>
+			<% end %>
+		</div>
+		<div class="modal-footer actions">
+			<a href="#!" class="modal-action modal-close waves-effect waves-teal btn-flat ">Cancel</a>
+		</div>
 	</div>
-	<div class="modal-footer actions">
-		<a href="#!" class="modal-action modal-close waves-effect waves-teal btn-flat ">Cancel</a>
+
+
+
+	<div id="application-show-modal" class="modal modal-fixed-footer">
+		<div class="modal-content">
+		</div>
+		<div class="modal-footer actions">
+			<a href="#!" class="modal-action modal-close btn-flat">Exit</a>
+			<a href="#application-edit-modal" class="modal-action modal-close btn-flat application-edit-modal-trigger" data-application_id="">Edit</a>
+			<a href="#!" data-confirm="Are you sure?" class="modal-action modal-close btn-flat application-delete-modal-trigger" rel="nofollow" data-method="delete">Delete</a>
+		</div>
 	</div>
-</div>
 
+	<div id="application-new-modal" class="modal modal-fixed-footer"></div>
 
+	<div id="application-edit-modal" class="modal modal-fixed-footer"></div>
 
-<div id="application-show-modal" class="modal modal-fixed-footer">
-	<div class="modal-content">
+	<div id="interaction-show-modal" class="modal modal-fixed-footer">
+		<div class="modal-content">
+		</div>
+		<div class="modal-footer actions">
+			<a href="#!" class="modal-action modal-close btn-flat">Exit</a>
+			<a href="#interaction-edit-modal" class="modal-action modal-close btn-flat interaction-edit-modal-trigger" data-interaction_id="">Edit</a>
+			<a href="#!" data-confirm="Are you sure?" class="modal-action modal-close btn-flat interaction-delete-modal-trigger" rel="nofollow" data-method="delete">Delete</a>
+		</div>
 	</div>
-	<div class="modal-footer actions">
-	  <a href="#!" class="modal-action modal-close btn-flat">Exit</a>
-	  <a href="#application-edit-modal" class="modal-action modal-close btn-flat application-edit-modal-trigger" data-application_id="">Edit</a>
-	  <a href="#!" data-confirm="Are you sure?" class="modal-action modal-close btn-flat application-delete-modal-trigger" rel="nofollow" data-method="delete">Delete</a>
-	</div>
-</div>
 
-<div id="application-new-modal" class="modal modal-fixed-footer"></div>
+	<div id="interaction-new-modal" class="modal modal-fixed-footer"></div>
 
-<div id="application-edit-modal" class="modal modal-fixed-footer"></div>
-
-<div id="interaction-show-modal" class="modal modal-fixed-footer">
-	<div class="modal-content">
-	</div>
-	<div class="modal-footer actions">
-	  <a href="#!" class="modal-action modal-close btn-flat">Exit</a>
-	  <a href="#interaction-edit-modal" class="modal-action modal-close btn-flat interaction-edit-modal-trigger" data-interaction_id="">Edit</a>
-	  <a href="#!" data-confirm="Are you sure?" class="modal-action modal-close btn-flat interaction-delete-modal-trigger" rel="nofollow" data-method="delete">Delete</a>
-	</div>
-</div>
-
-<div id="interaction-new-modal" class="modal modal-fixed-footer"></div>
-
-<div id="interaction-edit-modal" class="modal modal-fixed-footer"></div>
+	<div id="interaction-edit-modal" class="modal modal-fixed-footer"></div>
 
 
-<div id="note-edit-modal" class="modal modal-fixed-footer"></div>
+	<div id="note-edit-modal" class="modal modal-fixed-footer"></div>
 
 
-<div id="board-new-modal" class="modal modal-fixed-footer"></div>
+	<div id="board-new-modal" class="modal modal-fixed-footer"></div>
 
-<div id="note-new-modal" class="modal modal-fixed-footer"></div>
+	<div id="note-new-modal" class="modal modal-fixed-footer"></div>
 
-<div id="datepicker_container"></div>
+	<div id="datepicker_container"></div>
 
-<script type="text/javascript">
-  window.onload = function(event){
-    var companies = <%= @companies.html_safe %>;
-    addCompanies(companies, false);
-  };
-</script>
+	<script type="text/javascript">
+		window.onload = function(event){
+			var companies = <%= @companies.html_safe %>;
+			addCompanies(companies, false);
+		};
+	</script>
