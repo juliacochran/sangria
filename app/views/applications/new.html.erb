@@ -29,23 +29,23 @@
         <%= f.hidden_field :company_id %>
       </div></div>
       <div class="col s12 m6">
-        <h5 class="title">Company Info</h5><br>
+        <h5 class="title">Company Info</h5>
         <%= fields_for :company do |company| %>
         <div class="input-field">
-          <%= company.label :name, :class => "active" %>
+          <%= company.label :name%>
           <%= f.combobox_tag('company[name]', [], :list_id => "company_list", :form_class => "new_application", :input_id => "company_name")%>
         </div>
 
         <div class="input-field">
-          <%= company.label :location, :class => "active" %>
+          <%= company.label :location%>
           <%= company.text_field :location %>
         </div>
         <div class="input-field">
-          <%= company.label :website, :class => "active" %>
+          <%= company.label :website%>
           <%= company.text_field :website %>
         </div>
         <div class="input-field">
-          <%= company.label :logo, "Logo url", :class=> "active" %><br>
+          <%= company.label :logo, "Logo url"%>
           <%= company.text_field :logo %>
           <%= image_tag("", :alt => "company_logo", :id => "company_logo_img", :style => "display: none;") %>
         </div>

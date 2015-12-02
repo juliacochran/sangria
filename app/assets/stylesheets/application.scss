@@ -34,14 +34,31 @@ a {
     width: 80%;
 }
 
-input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
-    border-bottom: 1px solid color("cyan", "lighten-2");
-    box-shadow: 0 1px 0 0 color("cyan", "lighten-2");
+#note-new-modal{
+    width: 50%;
 }
 
-#board-change-modal .card-panel.selected {
-    color: #ffffff;
-    background-color: color("cyan", "lighten-2");
+input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #871A50;
+    box-shadow: 0 1px 0 0 #871A50;
+}
+
+#board-new-modal {
+    width: 50%;
+    height: 250px;
+
+    > .modal-content{
+        overflow-y: none;
+    }
+}
+
+#board-change-modal {
+    width: 40%;
+
+    & .card-panel.selected {
+        color: #ffffff;
+        background-color: color("cyan", "lighten-2");
+    }
 }
 
 .block{
@@ -51,6 +68,10 @@ input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly
 .modal-title-logo {
     max-height: 80px;
     max-width: 80px;
+}
+
+.modal-content {
+    background-color: white;
 }
 
 .side-nav-trigger {
@@ -70,9 +91,10 @@ input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly
     margin-bottom: -1rem;
 }
 
-.note-title a {
+.note-title a{
     display: inline;
 }
+
 
 .sangria-accent {
     @extend .cyan.lighten-2;
@@ -138,7 +160,7 @@ textarea.materialize-textarea {
         border-bottom: 1px solid #ffffff;
 
         &:focus {
-            border-bottom: 1px solid color("cyan", "lighten-2");
+            border-bottom: 1px solid #871A50;
         }
     }
 }
@@ -207,7 +229,7 @@ textarea.materialize-textarea {
     border-radius: 3px;
     position: relative;
 
-    &.empty {
+    & .empty {
         height: 205px;
         width: 205px;
         border: 5px dashed white;
@@ -227,7 +249,7 @@ textarea.materialize-textarea {
             right: 0;
         }
 
-        & i.material-icons {
+        & > i.material-icons {
             font-size: 7rem;
             font-weight: bold;
             color: white;

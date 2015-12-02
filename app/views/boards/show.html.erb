@@ -8,7 +8,7 @@
 		<div class="title-icons">
 			<%= link_to 'add', "#board-new-modal", :class => "material-icons board-new-modal-trigger" %>
 			<%= link_to 'arrow_drop_down', "#board-change-modal", :class => "material-icons board-change-modal-trigger" %>
-			<%= link_to 'delete', @board, method: :delete, data: { confirm: 'Are you sure?' }, :class => "material-icons" %>
+			<%= link_to 'delete', @board, method: :delete, data: { confirm: 'Are you sure you want to delete this board?' }, :class => "material-icons" %>
 		</div>
 		<%= f.text_field :title, :style => "font-size: 2rem; margin-top:1rem;", class: "center" %>
 		<% end %>
@@ -49,8 +49,8 @@
 							<span><%= truncate(application.current_interaction.details, length: 50, separator: " ") %></span>
 							<% end %>
 						</div>
-						
-						<a href="#interaction-new-modal" class="interaction-new-modal-trigger right" style="padding-right: 1em; padding-bottom:0.3em;" data-application_id="<%= application.id %>"><i class="material-icons card-title black-text tooltipped" data-position="bottom" data-delay="50" data-tooltip="Add Interaction">add</i></a>
+
+						<a href="#interaction-new-modal" class="interaction-new-modal-trigger right" style="padding-right: 1em; padding-bottom:0.3em;" data-application_id="<%= application.id %>"><i class="material-icons card-title cyan-text tooltipped" data-position="bottom" data-delay="50" data-tooltip="Add Interaction">add</i></a>
 
 					</a>
 
@@ -91,13 +91,13 @@
 				</div>
 			</div>
 			<% end %>
-			<div class="col s12" style="height: 225px;">
+		<!-- 	<div class="col s12" style="height: 225px;">
 				<a href="#note-new-modal" class="note-new-modal-trigger" data-board_id="<%= @board.id %>" style="padding: 0;">
 					<div class="note-card empty">
 						<div><i class="material-icons">add</i></div>
 					</div>
 				</a>
-			</div>
+			</div> -->
 		</div>
 		<a href="#" data-activates="slide-out" class="button-collapse show-on-large side-nav-trigger">Notes</a>
 	</div>
@@ -109,7 +109,7 @@
 			<h5 class="strong title">Change Boards</h5>
 			<% @boards.each do |board| %>
 			<div>
-				<% klass = "card-panel light-grey waves-effect waves-teal " + ((board.id == @board.id) ? "selected" : "") %>
+				<% klass = "card-panel light-grey waves-effect waves-cyan " + ((board.id == @board.id) ? "selected" : "") %>
 				<%= link_to board.title, board, :class => klass %>
 			</div>
 			<% end %>
