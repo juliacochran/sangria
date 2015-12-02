@@ -4,12 +4,14 @@
     <div class="col s12 m6">
   <h5 class="strong title">Add New Interaction</h5>
       <div class="row">
-      <div class="col s3">
           <% if @application.company.present? && @application.company.logo.present? %>
-          <img class="modal-title-logo" src="<%= @application.company.logo %>" />
-          <% end %>
+      <div class="col s3">
+          <img class="modal-title-logo" style="padding-top:1rem" src="<%= @application.company.logo %>" />
         </div>
         <div class="col s9">
+        <% else %>
+        <div class ="col s12">
+          <% end %>
           <div class="input-field">
             <%= interaction.hidden_field :application_id, :value => @application.id %>
           </div>

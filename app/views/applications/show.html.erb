@@ -1,38 +1,44 @@
-<div class="section" style="padding-top: 0;">
-  <% if @application.company.present? && @application.company.logo.present? %>
-    <img class="modal-title-logo" src="<%= @application.company.logo %>" />
-  <% end %>
-  <h5 class="strong title"><%= @application.job || "" %></h5>
-  <div class="sangria-accent-text"><%= @application.company.name %><%= (@application.company.location.present?) ? (" - " + @application.company.location) : "" %></div>
-  <div><%= Application::get_category(@application.category) %> Position</div>
-</div>
-<div class="section">
-  <div>Stage: <span class="sangria-accent-text"><%= @stage || "" %></span></div>
-  <div>Date Applied: <span class="sangria-accent-text"><%= (@application.applied_date?) ? @application.applied_date.strftime("%B %-d, %Y") : "" %></span></div>
-  <div></div>
-</div>
-<div class="section">
-  <h5>Interactions</h5>
-  <% @interactions.each do |interaction| %>
-    <div class="application-interaction-card">
+<div class="row">
+  <div class="col s12 m4">
+    <div class="section">
+    <% if @application.company.present? && @application.company.logo.present? %>
+      <img class="modal-title-logo" src="<%= @application.company.logo %>" />
+    <% end %>
+    <h5 class="strong title"><%= @application.company.name %></h5>
+    <div class="sangria-accent-text"><%= (@application.company.location.present?) ? (@application.company.location) : "" %></div>
+    <span><%= @application.job || "" %> <br> <%= Application::get_category(@application.category) %> Position</span>
+    </div>
+    <div class="section">
+      <div>Stage: <span class="sangria-accent-text"><%= @stage || "" %></span></div>
+      <div>Date Applied: <span class="sangria-accent-text"><%= (@application.applied_date?) ? @application.applied_date.strftime("%B %-d, %Y") : "" %></span></div>
+      <div></div>
+    </div>
+  </div>
+  <div class="col s12 m8">
+    <h5>Interactions</h5>
+    <% @interactions.each do |interaction| %>
+      <div class="application-interaction-card">
 
-      <h5 class="strong sangria-accent-text" style="margin: 0;">
-        <a href="#interaction-show-modal" class="interaction-show-modal-trigger" data-interaction_id="<%= interaction.id %>"><%= interaction.title %></a>
-      </h5>
-      <div class="left-side">
-        <div><%= (interaction.category.present?) ? Interaction::get_category(interaction.category) : "" %></div>
-        <div><%= (interaction.date.present?) ? interaction.date.strftime("%B %-d, %Y") : "" %></div>
-        <div><%= (interaction.details.present?) ? truncate(interaction.details, length: 75) : "" %></div>
+        <h5 class="strong sangria-accent-text" style="margin: 0;">
+          <a href="#interaction-show-modal" class="interaction-show-modal-trigger" data-interaction_id="<%= interaction.id %>"><%= interaction.title %></a>
+        </h5>
+        <div class="left-side">
+          <div><%= (interaction.category.present?) ? Interaction::get_category(interaction.category) : "" %></div>
+          <div><%= (interaction.date.present?) ? interaction.date.strftime("%B %-d, %Y") : "" %></div>
+          <div><%= (interaction.details.present?) ? truncate(interaction.details, length: 75) : "" %></div>
+        </div>
+        <div class="right-side interaction-actions">
+          <a href="#interaction-edit-modal" class="interaction-edit-modal-trigger" data-interaction_id="<%= interaction.id %>"><i class="material-icons">edit</i></a>
+          <%= link_to 'delete', interaction, method: :delete, data: { confirm: 'Are you sure?' }, :class => "material-icons" %>
+        </div>
       </div>
-      <div class="right-side interaction-actions">
-        <a href="#interaction-edit-modal" class="interaction-edit-modal-trigger" data-interaction_id="<%= interaction.id %>"><i class="material-icons">edit</i></a>
-        <%= link_to 'delete', interaction, method: :delete, data: { confirm: 'Are you sure?' }, :class => "material-icons" %>
+    <% end %>
+    <a href="#interaction-new-modal" class="interaction-new-modal-trigger" data-application_id="<%= @application.id %>">
+      <div class="application-interaction-card empty">
+        <div><i class="material-icons">add</i></div>
       </div>
-    </div>
-  <% end %>
-  <a href="#interaction-new-modal" class="interaction-new-modal-trigger" data-application_id="<%= @application.id %>">
-    <div class="application-interaction-card empty">
-      <div><i class="material-icons">add</i></div>
-    </div>
-  </a>
+    </a>
+  </div>
+
 </div>
+

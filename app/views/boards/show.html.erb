@@ -21,7 +21,7 @@
 			<div class="card sangria-accent">
 				<div class="card-content" style="padding: 0px 20px">
 					<span class="card-title"><%= @stages[index] %></span>
-					<a href="#application-new-modal" class="application-new-modal-trigger" data-stage_num="<%= index+1 %>" data-board_id="<%= @board.id %>"><i class="material-icons card-title right">add</i></a>
+					<a href="#application-new-modal" class="application-new-modal-trigger"  data-stage_num="<%= index+1 %>" data-board_id="<%= @board.id %>"><i class="material-icons card-title right tooltipped" data-position="top" data-delay="50" data-tooltip="Add Application">add</i></a>
 				</div>
 			</div>
 
@@ -35,24 +35,23 @@
 
 								<span class="card-title">
 									<% if application.company && application.company.logo? %>
-										<img src="<%= application.company.logo %>" style="max-width:100px; max-height:100px; background-color: #ffffff; padding: 0.1em;" />
+										<img src="<%= application.company.logo %>" style="max-width:50px; max-height:50px; background-color: #ffffff; margin-top: 0.5em;" class="right" />
+										<span class="black-text"><%= application.company.name %></span>
 									<% else %>
-										<%= application.company.name %>
+										<span class="black-text"><%= application.company.name %></span>
 									<% end %>
 								</span>
-								<p class="teal-text text-darken-4"><%= application.company.location %></p>
+								<p><%= application.company.location %></p>
 								<% if application.current_interaction != nil %>
-									<div class="divider" style="margin: 1em 0;"></div>
-									<h6>Most Current Interaction</h6>
+									<div class="divider" style="margin: 0.8em 0;"></div>
+									<h6 class="grey-text">Recent</h6>
 									<a href="#interaction-show-modal" class="interaction-show-modal-trigger" data-interaction_id="<%= application.current_interaction.id %>"><%= application.current_interaction.title %></a>
-									<p class="teal-text text-darken-4"><%= truncate(application.current_interaction.details, length: 50, separator: " ") %></p>
+									<span><%= truncate(application.current_interaction.details, length: 50, separator: " ") %></span>
 								<% end %>
 							</div>
+							
+							<a href="#interaction-new-modal" class="interaction-new-modal-trigger right" style="padding-right: 1em; padding-bottom:0.3em;" data-application_id="<%= application.id %>"><i class="material-icons card-title black-text tooltipped" data-position="bottom" data-delay="50" data-tooltip="Add Interaction">add</i></a>
 
-							<div class="card-action" style="text-align: right;">
-								<!-- <a href="#application-edit-modal" class="application-edit-modal-trigger" data-application_id="<%= application.id %>"><i class="material-icons card-title">edit</i></a> -->
-								<a href="#interaction-new-modal" class="interaction-new-modal-trigger" style="margin-right: 0;" data-application_id="<%= application.id %>"><i class="material-icons card-title black-text">add</i></a>
-							</div>
 							</a>
 						</div>
 					</li>
@@ -69,7 +68,7 @@
   <div id="slide-out" class="side-nav row sangria-accent">
   	<div class="col s12 note-title">
 			<h5 class="strong white-text" style="display: inline-block;">Notes</h5>
-			<a href="#note-new-modal" class="note-new-modal-trigger white-text" data-board_id="<%= @board.id %>"><i class="material-icons right" style="margin-top: 1rem;">add</i></a>
+			<a href="#note-new-modal" class="note-new-modal-trigger white-text" data-board_id="<%= @board.id %>"><i class="material-icons right tooltipped" data-position="left" data-delay="50" data-tooltip="Add Note" style="margin-top: 1rem;">add</i></a>
 		</div>
 		<% @notes.each do |note| %>
 	  	<div class="col s12">
