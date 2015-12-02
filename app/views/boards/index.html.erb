@@ -1,17 +1,17 @@
-<p id="notice"><%= notice %></p>
+<p class="center" id="notice"><%= notice %></p>
 <div class="content container">
   <div class="row">
     <div class="col s12">
       <a href="#board-new-modal" class="board-new-modal-trigger">
       <div class="card">
-        <div class="card-content center" style="font-size:1.4rem">
+        <div class="card-content center " style="font-size:1.4rem">
          Create A New Board
         </div>
       </div>
       </a>
     </div>
-
-    <% @boards.each do |board| %>
+   <hr />
+   <% @boards.each do |board| %>
     <div class="col s12 m6 l4">
       <a href="<%= board_path(board)%>">
         <div class="card">
@@ -23,7 +23,6 @@
       </a>
     </div>
     <% end %>
-
   </div>
 </div>
 

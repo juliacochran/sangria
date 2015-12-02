@@ -38,7 +38,14 @@
         <% end %>
       </ul>
       <ul id="nav-mobile" class="side-nav">
-        <li><a href="#">Login</a></li>
+        <% if current_user %>
+          <!-- Now defaults to the last created board -->
+            <!-- Dropdown Trigger -->
+            <li><a class="dropdown-button" href="#!" data-activates="profile_options"><%= current_user.name %><i class="material-icons right">arrow_drop_down</i></a></li>
+        <% else %>
+            <li><%= link_to "Login with Google", "/auth/google_oauth2" %></li>
+            <li><%= link_to "Login with Facebook", "/auth/facebook" %></li>
+        <% end %>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>

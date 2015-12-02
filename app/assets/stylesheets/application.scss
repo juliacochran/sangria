@@ -65,6 +65,10 @@ input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly
     }
 }
 
+hr  {
+    border-top: 1px solid color("cyan", "lighten-2");
+}
+
 .block{
     display: block;
 }
