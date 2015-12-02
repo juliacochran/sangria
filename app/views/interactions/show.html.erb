@@ -1,60 +1,62 @@
-<div class="section" style="padding-top: 0;">
-  <% if @application.company.present? && @application.company.logo.present? %>
+<div class="row" style="padding-top: 0;">
+  <div class="col s12 m6">
+    <% if @application.company.present? && @application.company.logo.present? %>
     <img class="modal-title-logo" src="<%= @application.company.logo %>" />
-  <% end %>
-  <h5 class="strong title"><%= @interaction.title || "" %></h5>
-  <div class="sangria-accent-text"><%= Interaction::get_category(@interaction.category) || "" %></div>
-</div>
-<div class="section">
-  <% if @interaction.date.present? %>
-    <div><%= @interaction.date.strftime("%B %-d, %Y") %></div>
-    <% if @interaction.date.blank? || (@interaction.date < Date.today && @interaction.followup.blank?) %>
+    <% end %>
+    <h5 class="strong title"><%= @interaction.title || "" %></h5>
+    <div class="sangria-accent-text"><%= Interaction::get_category(@interaction.category) || "" %></div>
+
+    <div class="section">
+      <% if @interaction.date.present? %>
+      <span class="sangria-accent-text"><%= @interaction.date.strftime("%B %-d, %Y") %></span>
+      <% if @interaction.date.blank? || (@interaction.date < Date.today && @interaction.followup.blank?) %>
       <div>
         <% followup_text = '' %>
         <% if @interaction.contact.present? %>
-          <% if @interaction.contact.name.present? && @interaction.contact.email.present? %>
-            <% followup_text = ' to <a href="mailto:' + @interaction.contact.email + '">' + @interaction.contact.name + '</a>' %>
-          <% end %>
-          <% if @interaction.contact.name.present? && @interaction.contact.email.blank? %>
-            <% followup_text = ' to ' + @interaction.contact.name %>
-          <% end %>
-          <% if @interaction.contact.name.blank? && @interaction.contact.email.present? %>
-            <% followup_text = ' to <a href="mailto:' + @interaction.contact.email + '">' + @interaction.contact.email + '</a>' %>
-          <% end %>
+        <% if @interaction.contact.name.present? && @interaction.contact.email.present? %>
+        <% followup_text = ' to <a href="mailto:' + @interaction.contact.email + '">' + @interaction.contact.name + '</a>' %>
+        <% end %>
+        <% if @interaction.contact.name.present? && @interaction.contact.email.blank? %>
+        <% followup_text = ' to ' + @interaction.contact.name %>
+        <% end %>
+        <% if @interaction.contact.name.blank? && @interaction.contact.email.present? %>
+        <% followup_text = ' to <a href="mailto:' + @interaction.contact.email + '">' + @interaction.contact.email + '</a>' %>
+        <% end %>
         <% end %>
         <%= 'Remember to send a followup' %>
         <%= followup_text.html_safe %>
         <br />
         <%= link_to 'Click here once you\'ve sent a followup!', '/interactions/' + @interaction.id.to_s + '/followed_up' %>
       </div>
-    <% end %>
-    <br />
-    <div><%= @interaction.details || "" %></div>
-  <% end %>
-</div>
-<div class="section">
-  <h5>Contact</h5>
-  <% if @interaction.contact.present? %>
+      <% end %>
+      <br />
+      <div><%= @interaction.details || "" %></div>
+      <% end %>
+    </div>
+  </div>
+  <div class="col s12 m6">
+    <h5>Contact</h5>
+    <% if @interaction.contact.present? %>
     <div class="application-interaction-card">
 
       <h5 class="strong sangria-accent-text" style="margin: 0;"><%= @interaction.contact.name %></h5>
       <div class="left-side">
         <% if @interaction.contact.company.present? && @interaction.contact.company.present? && @interaction.contact.company.name.present? %>
-          <% company = @interaction.contact.company %>
-          <div class="sangria-accent-text">
-            <% if company.website.present? %>
-              <% company = '<a href="' + company.website + '" target="_blank">' + company.name + '</a>' %>
-            <% else %>
-              <% company = company.name %>
-            <% end %>
-            <%= company.html_safe %>
-          </div>
+        <% company = @interaction.contact.company %>
+        <div class="sangria-accent-text">
+          <% if company.website.present? %>
+          <% company = '<a href="' + company.website + '" target="_blank">' + company.name + '</a>' %>
+          <% else %>
+          <% company = company.name %>
+          <% end %>
+          <%= company.html_safe %>
+        </div>
         <% end %>
         <% if @interaction.contact.email.present? %>
-          <div>
-            <% email_link = '<a href="mailto:' + @interaction.contact.email + '">' + @interaction.contact.email + '</a>'%>
-            <%= email_link.html_safe %>
-          </div>
+        <div>
+          <% email_link = '<a href="mailto:' + @interaction.contact.email + '">' + @interaction.contact.email + '</a>'%>
+          <%= email_link.html_safe %>
+        </div>
         <% end %>
         <div><%= (@interaction.contact.phone_number.present?) ? @interaction.contact.phone_number : "" %></div>
         <div><%= (@interaction.contact.role.present?) ? @interaction.contact.role : "" %></div>
@@ -65,12 +67,14 @@
       </div>
 
     </div>
-  <% else %>
+    <% else %>
     <a href="#interaction-edit-modal" class="contact-new-modal-trigger" data-interaction_id="<%= @interaction.id %>">
       <div class="application-interaction-card empty">
         <div><i class="material-icons">add</i></div>
       </div>
     </a>
-  <% end %>
+    <% end %>
+  </div>
 </div>
+
 <br />

@@ -2,97 +2,97 @@
 <div class="modal-content">
   <div class="row">
     <div class="col s12 m6">
-  <h5 class="strong title">Add New Interaction</h5>
+      <h5 class="strong title">Add New Interaction</h5>
       <div class="row">
-          <% if @application.company.present? && @application.company.logo.present? %>
-      <div class="col s3">
-          <img class="modal-title-logo" style="padding-top:1rem" src="<%= @application.company.logo %>" />
+        <% if @application.company.present? && @application.company.logo.present? %>
+        <div class="col s3">
+        <img class="modal-title-logo" style="margin-top:2.5rem" src="<%= @application.company.logo %>" />
         </div>
         <div class="col s9">
-        <% else %>
-        <div class ="col s12">
+          <% else %>
+          <div class ="col s12">
+            <% end %>
+            <div class="input-field">
+              <%= interaction.hidden_field :application_id, :value => @application.id %>
+            </div>
+            <div class="clear-left">
+              <div class="input-field">
+                <%= interaction.label :title %>
+                <%= interaction.text_field :title %>
+              </div>
+            </div>
+            <div class="clear-left">
+              <div class="input-field">
+                <%= interaction.label :date %>
+                <%= date_field :interaction, :date, :class => "datepicker" %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="clear-left">
+          <div class="input-field">
+            <%= interaction.label :category, :class => "active" %>
+            <%= interaction.select(:category, options_for_select(Interaction.categories_for_select), {}, {class: "materialize-select"}) %>
+          </div>
+        </div>
+        <div class="">
+          <div class="input-field">
+            <%= interaction.label :details %>
+            <%= interaction.text_area :details, :class => "materialize-textarea" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12 m6">
+        Want to add a <a class="interaction-new-contact-trigger" href="#!">new contact?</a> Or maybe an <a class="interaction-existing-contact-trigger" href="#!">existing contact?</a>
+
+        <div class="interaction-new-contact" style="display: none;">
+          <%= fields_for :contact do |contact| %>
+          <h5 class="center">Add New Contact</h5>
+          <div class="col s12 m6">
+            <div class="input-field">
+              <%= contact.hidden_field :company_id, :value => @application.company.id %>
+            </div>
+            <div class="input-field">
+              <%= contact.label :name %>
+              <%= contact.text_field :name %>
+            </div>
+            <div class="input-field">
+              <%= contact.label :email %>
+              <%= contact.text_field :email %>
+            </div>
+          </div>
+          <div class="col s12 m6">
+            <div class="input-field">
+              <%= contact.label :phone_number %>
+              <%= contact.text_field :phone_number %>
+            </div>
+            <div class="input-field">
+              <%= contact.label :role %>
+              <%= contact.text_field :role %>
+            </div>
+          </div>
+
+          <div class="actions" style="display: none;">
+            <%= contact.submit %>
+          </div>
           <% end %>
-          <div class="input-field">
-            <%= interaction.hidden_field :application_id, :value => @application.id %>
-          </div>
-          <div class="clear-left">
+        </div>
+
+        <div class="interaction-existing-contact" style="display: none;">
+          <h5 class="center">Add Existing Contact</h5>
+          <div class="col s12">
             <div class="input-field">
-              <%= interaction.label :title %>
-              <%= interaction.text_field :title %>
-            </div>
-          </div>
-          <div class="clear-left">
-            <div class="input-field">
-              <%= interaction.label :date %>
-              <%= date_field :interaction, :date, :class => "datepicker" %>
+              <%= interaction.label :contact_id, "Existing Contact", :class => "active" %>
+              <%= interaction.select(:contact_id, options_for_select(@user.contacts_for_select), {}, {class: "materialize-select"}) %>
             </div>
           </div>
         </div>
       </div>
-      <div class="clear-left">
-        <div class="input-field">
-          <%= interaction.label :category, :class => "active" %>
-          <%= interaction.select(:category, options_for_select(Interaction.categories_for_select), {}, {class: "materialize-select"}) %>
-        </div>
-      </div>
-      <div class="">
-        <div class="input-field">
-          <%= interaction.label :details %>
-          <%= interaction.text_area :details, :class => "materialize-textarea" %>
-        </div>
-      </div>
+
     </div>
-
-    <div class="col s12 m6">
-      Want to add a <a class="interaction-new-contact-trigger" href="#!">new contact?</a> Or maybe an <a class="interaction-existing-contact-trigger" href="#!">existing contact?</a>
-
-      <div class="interaction-new-contact" style="display: none;">
-        <%= fields_for :contact do |contact| %>
-        <h5 class="center">Add New Contact</h5>
-        <div class="col s12 m6">
-          <div class="input-field">
-            <%= contact.hidden_field :company_id, :value => @application.company.id %>
-          </div>
-          <div class="input-field">
-            <%= contact.label :name %>
-            <%= contact.text_field :name %>
-          </div>
-          <div class="input-field">
-            <%= contact.label :email %>
-            <%= contact.text_field :email %>
-          </div>
-        </div>
-        <div class="col s12 m6">
-          <div class="input-field">
-            <%= contact.label :phone_number %>
-            <%= contact.text_field :phone_number %>
-          </div>
-          <div class="input-field">
-            <%= contact.label :role %>
-            <%= contact.text_field :role %>
-          </div>
-        </div>
-
-        <div class="actions" style="display: none;">
-          <%= contact.submit %>
-        </div>
-        <% end %>
-      </div>
-
-      <div class="interaction-existing-contact" style="display: none;">
-        <h5 class="center">Add Existing Contact</h5>
-        <div class="col s12">
-          <div class="input-field">
-            <%= interaction.label :contact_id, "Existing Contact", :class => "active" %>
-            <%= interaction.select(:contact_id, options_for_select(@user.contacts_for_select), {}, {class: "materialize-select"}) %>
-          </div>
-        </div>
-      </div>
-    </div>
-
   </div>
-</div>
-<div class="modal-footer actions">
-  <%= interaction.submit :id => "interaction-new-submit", :class => "modal-action modal-close btn-flat" %>
-</div>
-<% end %>
+  <div class="modal-footer actions">
+    <%= interaction.submit :id => "interaction-new-submit", :class => "modal-action modal-close btn-flat" %>
+  </div>
+  <% end %>

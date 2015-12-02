@@ -9,6 +9,7 @@
 html{
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 300;
+    overflow-x:none;
 }
 
 body {
@@ -22,23 +23,13 @@ a {
     color: color("cyan", "lighten-2");
 }
 
-#application-new-modal { 
+#application-new-modal, #interaction-new-modal, 
+#application-show-modal, #interaction-show-modal,
+#application-edit-modal, #interaction-edit-modal { 
     width: 80%;
 }
 
-#interaction-new-modal { 
-    width: 80%; 
-}
-
-#application-show-modal {
-    width: 80%;
-}
-
-#note-new-modal{
-    width: 50%;
-}
-
-#note-edit-modal{
+#note-new-modal, #note-edit-modal{
     width: 50%;
 }
 
