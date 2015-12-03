@@ -22,18 +22,13 @@
 <nav class="sangria-accent" role="navigation">
     <!-- Dropdown Structure for profile options -->
 
-    <ul id="profile_options" class="dropdown-content">
-      <li><a href="#!">Settings</a></li>
-      <li class="divider"></li>
-      <li><%= link_to "Log out", logout_path, method: :delete %></li>
-    </ul>
-
     <div class="nav-wrapper"><a id="logo-container" href="/" class="brand-logo"><span><%= image_tag("SangriaLogo-03.png", height: '65px', width: '195px') %></span></a>
       <ul class="right hide-on-med-and-down">
         <% if current_user %>
           <!-- Now defaults to the last created board -->
             <!-- Dropdown Trigger -->
-            <li><a class="dropdown-button" href="#!" data-activates="profile_options"><%= current_user.name %><i class="material-icons right">arrow_drop_down</i></a></li>
+            <li><%= link_to current_user.name, current_user.boards.last %></li>
+            <li><%= link_to "Log out", logout_path, method: :delete %></li>
         <% else %>
             <li><%= link_to "Login with Google", "/auth/google_oauth2" %></li>
             <li><%= link_to "Login with Facebook", "/auth/facebook" %></li>
