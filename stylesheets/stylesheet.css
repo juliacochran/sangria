@@ -469,12 +469,30 @@ header h1 {
 header h2 {
   width: 540px;
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: 10;
   font-size: 26px;
   font-weight: normal;
   line-height: 1.3;
   color: #9ddcff;
   letter-spacing: 0;
+}
+
+header h3 {
+  margin: 10px 20px 5px 0px;
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 1.3;
+  color: #000;
+  letter-spacing: 0;
+  float:left;
+}
+
+header h3:hover {
+  color: #fff;
+}
+
+header h3 .active {
+  color: #fff;
 }
 
 .inner {
@@ -544,6 +562,7 @@ aside a.button {
   font-size: 21px;
   background: transparent url(../images/download-button.png) 0 0 no-repeat;
 }
+
 
 code, pre {
   margin-bottom: 30px;
@@ -680,14 +699,13 @@ h4:before {
 #main-content h5 {
   margin-bottom: 8px;
   font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
-  font-size: 14px;
+  font-size: 15px;
   color: #474747;
   text-indent: 3px;
 }
 h5:before {
   padding-right: 0.3em;
   margin-left: -3.2em;
-  content: "/////";
   color: #9ddcff;
 }
 
