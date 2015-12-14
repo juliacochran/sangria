@@ -12,7 +12,7 @@ every 1.days do
 end
 
 every 1.days do 
-	runner "RemindersController.send_followup_reminders"
+	#runner "RemindersController.send_followup_reminders"
 end
 
 
